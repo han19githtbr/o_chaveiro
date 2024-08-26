@@ -1,0 +1,84 @@
+<button
+  mat-icon-button
+  class="bg-orange mb-5"
+  color="primary"
+  (click)="location.back()"
+  matTooltip="Voltar"
+>
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
+<h2 class="text-3xl font-medium mb-3">{{ userId ? 'Editar' : 'Novo' }} colaborador</h2>
+<section class="details">
+  <app-card-section text="Dados cadastrais">
+    <form class="text-sm pb-10" [formGroup]="adminForm" (submit)="onSubmit()">
+      <div class="row ">
+        <mat-form-field class="field-name " appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="name" placeholder="Nome do colaborador" apenasLetras>
+          <mat-error>Campo obrigatório</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field-image" appearance="fill">
+          <mat-label>URL da Imagem</mat-label>
+          <input matInput formControlName="imageUrl" />
+        </mat-form-field>
+      </div>
+
+      <p class="title">Acesso</p>
+      <div class="row">
+        <mat-form-field class="field-email " appearance="fill">
+          <mat-label>E-mail</mat-label>
+          <mat-icon matPrefix>person_outline</mat-icon>
+          <input type="text" matInput formControlName="email" />
+          <mat-error>Campo obrigatório</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field-password " appearance="fill">
+          <mat-label>Senha</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
+          <mat-icon matPrefix>lock_open</mat-icon>
+          <mat-icon matSuffix (click)="hide = !hide">{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          <mat-error>Campo obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+      <p class="title">Permissões</p>
+
+      <ul class="mt-5 grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <li class="border border-gray-200 px-3 py-2 flex justify-between items-center" *ngFor="let item of permissions">
+          <label [htmlFor]="item.title">{{ item.title| titlecase }}</label>
+          <mat-checkbox [disabled]="false"
+            [id]="item.title"
+            [checked]="item.checked"
+            (change)="togglePermission(item.id)"
+          >
+          </mat-checkbox>
+        </li>
+      </ul>
+
+      <p class="text-red-500 text-sm" *ngIf="!permissions.length">
+        Selecione ao menos uma permissão
+      </p>
+
+    </form>
+  </app-card-section>
+
+  <div class="actions">
+    <app-button
+      type="outline"
+      (click)="location.back()"
+    >
+      Cancelar
+    </app-button>
+    <app-button
+      type="fill"
+      (click)="onSubmit()"
+      [disabled]="adminForm.invalid || !permissions.length"
+      *ngIf="showSaveButton"
+    >
+      Salvar
+    </app-button>
+  </div>
+
+</section>
+<!--<pre>{{ adminForm.value | json  }}</pre>-->

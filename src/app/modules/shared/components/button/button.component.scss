@@ -1,0 +1,37 @@
+@import "../../styles/variables.scss";
+
+.button {
+  height: 50px;
+  min-width: 50px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+  background-color: $primary;
+  color: #fff;
+  padding: 0 16px;
+
+  &:hover,
+  &.outline {
+    color: $primary;
+    background-color: transparent;
+    border: 1px solid $primary;
+  }
+
+  &.error {
+    color: $color-white;
+    background-color: $error;
+    border: 1px solid $error;
+
+    &:hover {
+      color: $error;
+      background-color: transparent;
+      border: 1px solid $error;
+    }
+  }
+
+  &.full-size {
+    width: 100%;
+  }
+}

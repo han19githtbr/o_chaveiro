@@ -1,0 +1,17 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" [mode]="(isMobile$ | async) ? 'over' :  'side'" [opened]="!(isMobile$ | async)">
+    <app-menu-side-nav [menusToShow]="menus"></app-menu-side-nav>
+  </mat-drawer>
+
+  <div class="content">
+    <div class="header">
+      <app-bread-crumb [title]="title" [subtitle]="subtitle" (toggleDrawerEvent)="drawer.toggle()">
+      </app-bread-crumb>
+      <app-toolbar></app-toolbar>
+    </div>
+
+    <div class="main-content" [class.blur]="drawer.opened && (isMobile$ | async)">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</mat-drawer-container>

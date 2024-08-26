@@ -1,0 +1,50 @@
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.form {
+  width: 900px;
+  padding-top: 100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+button {
+  align-self: flex-end;
+}
+
+.texto_voltar {
+  color: #59cf50;
+  font-size: 15px;
+  transition: transform 0.5s;
+}
+
+.texto_voltar:hover {
+  transform: scale(1.2);
+}
+
+.link_voltar {
+  list-style: none;
+  text-decoration: none;
+}
+
+.link_voltar a {
+  text-decoration: none;
+}
+
+.voltar {
+  display: inline-flex;
+  gap: 10px;
+}

@@ -1,0 +1,19 @@
+<div class="dashboard">
+  <div class="cards">
+    <app-dashboard-card
+      [number]="formatNumber(totalUsers)"
+      [description]="'Total de usuários'"
+      [icon]="'person_outline'"
+      [iconContainerColor]="'#004D7C'"
+    >
+    </app-dashboard-card>
+    <app-dashboard-card
+      [number]="(totalRecebido | currency:'BRL') ?? ''"
+      [description]="'Total de cashbacks'"
+      [icon]="'attach_money'"
+      [iconContainerColor]="'#004D7C'"
+    >
+    </app-dashboard-card>
+  </div>
+
+</div>

@@ -1,0 +1,109 @@
+@mixin flex{
+  display: flex;
+}
+
+@mixin flex-column{
+  @include flex;
+  flex-direction: column;
+}
+
+.upload-container {
+  margin-top: 8px;
+  > .preview-image-upload{
+    @include flex-column;
+    align-items: center;
+    border: 1px dashed #00000080;
+    padding: 30px;
+    cursor: pointer;
+    position: relative;
+    gap: 8px;
+    border-radius: 12px;
+
+    > img{
+      width: 140px;
+    }
+
+    > span{
+      font: normal normal 300 18px/20px 'Poppins', 'sans-serif';
+      text-align: center;
+      font-weight: bold;
+    }
+
+    > p{
+      text-align: center;
+    }
+
+    > input {
+      display: none;
+    }
+
+    .actions {
+      opacity: 0;
+      transition: all ease 0.4s;
+      cursor: pointer;
+      position: absolute;
+      align-items: center;
+      gap: 10px;
+      display: grid;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      top: 0;
+      justify-items: center;
+
+      &:hover {
+        background: #000a;
+        opacity: 1;
+      }
+
+      > span {
+        font: normal normal 300 14px/21px 'Gilroy-Light','sans-serif';
+        color: #FFF
+      }
+    }
+  }
+
+  > .check-image-upload > .image-uploaded {
+    @include flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 16px;
+    margin-top: 16px;
+    min-height: 40px;
+    border-radius: 6px;
+    background: #F5F5F5;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    gap: 8px;
+
+    > span {    
+      word-break: break-all;
+      font: normal normal 300 14px/21px 'Poppins','sans-serif';
+    }
+
+    .mat-actions {
+      @include flex();
+      gap: 4px;
+      > .check{
+        color: #70C72D;
+        border: 1px solid #c2f29d;
+        background: #c2f29d;
+        border-radius: 50%;
+      }
+
+      > .delete {
+        color: #ff0000;
+        border: 1px solid #f8b1b1;
+        background: #f8b1b1;
+        border-radius: 50%;
+      }
+    }
+
+    &:hover{
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      @include flex-column;
+    }
+  }
+}

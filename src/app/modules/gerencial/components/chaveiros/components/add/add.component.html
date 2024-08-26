@@ -1,0 +1,33 @@
+<section class="details">
+  <app-card-section text="Dados do usuário">
+    <section class="wrapper" body>
+      <div class="row">
+        <mat-form-field appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input matInput apenasLetras />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>CPF</mat-label>
+          <input matInput mask="000000000-00" />
+        </mat-form-field>
+      </div>
+
+      <p class="title">Acesso</p>
+      <div class="row">
+        <mat-form-field appearance="fill">
+          <mat-label>E-mail</mat-label>
+          <mat-icon matPrefix>person_outline</mat-icon>
+          <input type="text" matInput />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Telefone</mat-label>
+          <input matInput mask="(00) 00000-0000" />
+        </mat-form-field>
+      </div>
+    </section>
+  </app-card-section>
+
+  <app-form-actions />
+</section>

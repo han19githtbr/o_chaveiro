@@ -1,0 +1,165 @@
+@import "../../styles/variables.scss";
+
+span {
+  font-family: "Poppins";
+  font-weight: 800;
+  font-size: 14px;
+}
+
+@mixin flex {
+  display: flex !important;
+}
+
+@mixin flex-column {
+  @include flex;
+  flex-direction: column !important;
+}
+
+.menu {
+  > .container {
+    margin-top: 16px;
+    @include flex-column;
+    > .logo {
+      @include flex;
+      justify-content: center;
+      align-items: center;
+
+      > img {
+        height: 36px;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+::ng-deep mat-list {
+  @include flex-column;
+  padding-top: 24px !important;
+
+  > .mat-mdc-list-item {
+    @include flex;
+    max-height: 45px !important;
+    gap: 8px;
+    cursor: pointer !important;
+    margin-bottom: 4px;
+
+    .mat-mdc-list-item-unscoped-content {
+      display: flex;
+      gap: 8px;
+      padding: 0;
+      color: #4b4b4b;
+      //text-transform: uppercase;
+      white-space: wrap !important;
+      transition: .2s;
+
+      &:hover {
+        color: #fff !important;
+      }
+    }
+
+    &.router-link-active {
+      .mat-mdc-list-item-unscoped-content {
+        color: $primary !important;
+
+        &:hover {
+          color: #fff !important;
+        }
+      }
+    }
+  }
+
+  > ::ng-deep mat-accordion {
+    mat-expansion-panel {
+      box-shadow: none !important;
+      border-radius: 0px !important;
+
+      > mat-expansion-panel-header {
+        height: 40px !important;
+        padding: 0 16px !important;
+
+        .mat-content mat-panel-title {
+          @include flex;
+          gap: 8px;
+        }
+      }
+    }
+
+    mat-expansion-panel:hover {
+      background-color: lightgray;
+    }
+
+    mat-expansion-panel .mat-expansion-panel-content {
+      .mat-expansion-panel-body:hover {
+        cursor: pointer;
+      }
+      .mat-expansion-panel-body {
+        padding: 0 24px;
+
+        mat-list-item {
+          height: 30px !important;
+
+          .mat-list-item-content {
+            gap: 8px;
+
+            > li .child {
+              font-size: 12px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  > .router-link-active::before {
+    content: "";
+    height: 48px;
+    width: 7px;
+    background: $primary;
+    position: absolute;
+    left: 0px;
+    border-radius: 0px 2px 2px 0px;
+  }
+
+  .menu-item {
+    color: #4b4b4b;
+    position: relative; // Manter posição relativa para os sub-itens
+
+    mat-list-item {
+      display: flex;
+      align-items: center;
+      height: 45px;
+      //padding-left: 16px;
+      cursor: pointer;
+      margin-bottom: 8px;
+
+      &:hover {
+        background-color: $primary;
+        color: white;
+      }
+    }
+
+    .submenu {
+      display: none;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      width: 100%;
+      z-index: 1;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      mat-list-item {
+        height: 30px !important;
+        padding-left: 32px;
+      }
+    }
+
+    &:hover .submenu {
+      display: block;
+    }
+  }
+
+
+  > ::ng-deep mat-list-item:hover {
+    background-color: $primary;
+  }
+}

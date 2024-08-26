@@ -1,0 +1,10 @@
+<button
+  type="button"
+  class="button"
+  [class]="type"
+  [class.full-size]="fullSize"
+  (click)="clickEvent.emit()"
+  [disabled]="disabled"
+>
+  <ng-content></ng-content>
+</button>

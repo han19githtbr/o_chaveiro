@@ -1,0 +1,49 @@
+<section class="sign-in">
+  <article class="header">
+    <p class="welcome">Seja bem-vindo(a)!</p>
+    <p class="description">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+      incididunt ut labore et dolore magna aliqua.
+    </p>
+  </article>
+
+  <form class="form" [formGroup]="signinForm" >
+    <mat-form-field appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input type="text" matInput formControlName="credential"/>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Senha</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'"  formControlName="password"/>
+      <mat-icon matSuffix (click)="hide = !hide">{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </mat-form-field>
+    
+    <p class="primary">
+      Esqueceu sua senha?
+
+      <span
+        class="--bold"
+        [routerLink]="['../forgot']"
+      >
+      Clique aqui!
+      </span>
+    </p>
+
+  </form>
+  <app-button
+    [fullSize]="true"
+    (click)="submit()"
+    [disabled]="signinForm.invalid"
+  >
+    Entrar
+  </app-button>
+
+  <p class="container_cadastro">
+    <span class="card_cadastro ">
+      <span class="texto-cadastro ">Ainda não tem Cadastro?</span>
+      <li class="link_cadastro">
+        <a><span [routerLink]="['../../criar-conta']" class="clique_aqui">Clique aqui!</span></a>
+      </li>
+    </span>
+  </p>
+</section>

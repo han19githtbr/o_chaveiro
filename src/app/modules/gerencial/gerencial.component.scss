@@ -1,0 +1,31 @@
+@import '../../modules/shared/styles/variables.scss';
+
+.container {
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  height: 100vh;
+
+  .sidenav {
+    width: 235px;
+    background:$color-background ;
+  }
+
+  ::ng-deep mat-drawer-content {
+    background-color: $color-white;
+    .content{
+      padding: 24px;
+
+      .header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 32px;
+      }
+    }
+  }
+
+  .main-content{
+    &.blur{
+      filter: blur(2px);
+    }
+  }
+}

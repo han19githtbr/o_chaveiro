@@ -2,8 +2,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strict": true,
+    "paths": {
+      "@env": ["src/environments/environment"],
+      "@shared/*": ["app/modules/shared/*"],
+      "@core/*": ["app/modules/core/*"]
+    },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,

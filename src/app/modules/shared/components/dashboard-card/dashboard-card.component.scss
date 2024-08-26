@@ -1,0 +1,32 @@
+.card{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  max-height: 164px;
+  padding: 30px;
+  box-shadow: rgba(50, 50, 93, 0) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -52px;
+  border-radius: 12px;
+
+  .value{    
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 24px;
+    color: #3b3b3b;
+    font-weight: bold;
+  }
+
+  .icon-wrapper{
+    border-radius: 50%;
+    width: 54px;
+    height: 54px;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .description{
+    color: #8598AD;
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,48 @@
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  .search-container {
+    display: flex;
+    gap: 8px;
+
+    @media (max-width: 720px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .input-container {
+      display: flex;
+      gap: 8px;
+      min-width: 300px;
+      align-items: center;
+
+      &.fullSearch {
+        min-width: 100%;
+      }
+
+      .search-icon {
+        cursor: pointer;
+        height: 40px;
+        min-width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border-radius: 5px;
+        border: lightgray 0.5px solid;
+      }
+    }
+  }
+
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+  }
+
+  .action {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+}

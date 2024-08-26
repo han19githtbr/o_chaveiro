@@ -1,0 +1,56 @@
+::ng-deep .mat-mdc-table {
+  margin-top: 32px;
+  width: 100%;
+
+  thead th{
+    font: normal normal 300 14px/19px 'Gilroy-Light';
+    color: #181819;
+  }
+
+  tbody tr {    
+    font: normal normal 300 14px/19px 'Gilroy-Light';
+    color: #181819;
+    cursor: pointer;
+  }
+
+  tbody tr:hover {
+    background-color: lightgray;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+.custom-color{
+  padding: 4px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.cards{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+
+  .card-wrapper{
+    padding: 12px;
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    background: #FFF;
+
+    .columns{
+      display: flex;
+      justify-content: space-between;
+      font: normal normal 300 14px/19px "Gilroy-Light";
+
+      .description{
+        font-weight: bold;
+      }
+    }
+  }
+}

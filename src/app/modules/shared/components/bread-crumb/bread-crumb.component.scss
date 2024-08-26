@@ -1,0 +1,28 @@
+.breadcrumb-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .title-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    ::ng-deep mat-icon{
+      cursor: pointer;
+      min-width: 24px;
+    }
+
+    .title{
+      font-size: 14px;
+      color: #000000;
+      font-weight: 500;
+      opacity: 0.50;
+    }
+  }
+
+  > .subtitle{
+    font-size: 32px;
+    color:#000;
+  }
+}

@@ -1,0 +1,40 @@
+<section class="search">
+  <div class="search-container">
+    <div class="input-container" [class.fullSearch]="fullSearch">
+      <mat-form-field appearance="outline">
+        <mat-label>Buscar</mat-label>
+        <input matInput [(ngModel)]="textSearch" (ngModelChange)="search()" />
+      </mat-form-field>
+
+      <div
+        class="search-icon"
+        (click)="search()"
+        *ngIf="!useOptions && !fullSearch"
+      >
+        <mat-icon>filter_list</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="row gap-8">
+    <ng-content select="[before]"></ng-content>
+
+    <div class="row" *ngIf="useButton">
+      <ng-container *ngIf="routerLinkAction; else clickEvent">
+        <div class="action">
+          <div [routerLink]="[routerLinkAction]">
+            <app-button>{{ buttonLabel }}</app-button>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #clickEvent>
+        <div class="action">
+          <div (click)="clickButtonEvent.emit()">
+            <app-button>{{ buttonLabel }}</app-button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</section>

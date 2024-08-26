@@ -1,0 +1,8 @@
+<app-list-table
+  [listTable]="users"
+  [displayedColumns]="headers"
+  [useButton]="true"
+  buttonLabel="Criar usuário"
+  [routerLinkAction]="'/gerencial/users/new'"
+  (clickRowEvent)="goToDetails($event)">
+</app-list-table>

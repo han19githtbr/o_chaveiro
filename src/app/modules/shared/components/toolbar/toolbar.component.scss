@@ -1,0 +1,14 @@
+.toolbar{
+  gap: 12px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  border: 1px solid lightgray;
+  padding: 0px 20px;
+  border-radius: 12px;
+  box-shadow: rgba(50, 50, 93, 0) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -52px;
+
+  img{
+    border-radius: 50%;
+  }
+}
