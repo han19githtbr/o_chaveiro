@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RegisterService } from './register.service';
+import { LoadingService } from '../shared/services/loading.service';
+import { LoadingEffectComponent } from "../shared/components/loading-effect/loading-effect.component";
 
 
 @Component({
@@ -16,6 +18,7 @@ import { RegisterService } from './register.service';
     CommonModule,
     MaterialModule,
     RouterModule,
+    LoadingEffectComponent,
     ReactiveFormsModule
   ],
   templateUrl: './criar-conta.component.html',
@@ -30,6 +33,7 @@ export default class CriarContaComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registerService: RegisterService,
+    private loadingService: LoadingService,
     private snackBar: MatSnackBar
   ) {
     this.registerForm = this.fb.group({
@@ -47,8 +51,10 @@ export default class CriarContaComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(): void {
+
+  /*onSubmit(): void {
     if (this.registerForm.valid) {
+
       const registerData: CreateRegisterDto = this.registerForm.value;
       console.log('Dados a serem enviados:', registerData);
 
@@ -56,6 +62,26 @@ export default class CriarContaComponent implements OnInit {
         response => {
           this.snackBar.open('Conta criada com sucesso!', 'Fechar', { duration: 3000 });
           this.registerForm.reset();
+        }
+      );
+    }
+  }*/
+
+    
+  onSubmit(): void {
+    if (this.registerForm.valid) {
+      this.loadingService.showLoading();
+
+      const registerData: CreateRegisterDto = this.registerForm.value;
+      console.log('Dados a serem enviados:', registerData);
+
+      this.registerService.createRegister(registerData).subscribe(
+        response => {
+          setTimeout(() => {
+            this.loadingService.hideLoading();
+            this.snackBar.open('Conta criada com sucesso!', 'Fechar', { duration: 3000 });
+            this.registerForm.reset();
+          }, 3000);
         },
       );
     }

@@ -1,19 +1,21 @@
 <div class="dashboard">
+  <div class="search">
+    <app-search></app-search>
+  </div>
   <div class="cards">
     <app-dashboard-card
-      [number]="formatNumber(totalUsers)"
-      [description]="'Total de usuários'"
+      [number]="formatNumber(totalChaveiros)"
+      [description]="'Chaveiros encontrados'"
       [icon]="'person_outline'"
       [iconContainerColor]="'#004D7C'"
     >
     </app-dashboard-card>
     <app-dashboard-card
       [number]="(totalRecebido | currency:'BRL') ?? ''"
-      [description]="'Total de cashbacks'"
+      [description]="'Menor preço'"
       [icon]="'attach_money'"
       [iconContainerColor]="'#004D7C'"
     >
     </app-dashboard-card>
   </div>
-
 </div>

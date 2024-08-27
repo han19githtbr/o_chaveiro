@@ -6,8 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SideImageControllerService {
   public image$: BehaviorSubject<string> = new BehaviorSubject<string>('assets/images/login-1.png');
-  
-  public setImage(imageSource: string = 'assets/images/background-login.png'): void {
-    Promise.resolve().then(() => {this.image$.next(imageSource)});    
+
+  public setImage(imageSource: string = 'assets/images/key_banner_1.jpg'): void {
+    Promise.resolve().then(() => {this.image$.next(imageSource)});
   }
 }

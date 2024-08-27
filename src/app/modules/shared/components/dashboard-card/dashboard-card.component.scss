@@ -2,11 +2,12 @@
   display: grid;
   grid-template-columns: 1fr auto;
   max-height: 164px;
+  width: 400px;
   padding: 30px;
-  box-shadow: rgba(50, 50, 93, 0) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -52px;
+  box-shadow: rgba(14, 14, 39, 0) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -12px;
   border-radius: 12px;
 
-  .value{    
+  .value{
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -26,7 +27,7 @@
   }
 
   .description{
-    color: #8598AD;
+    color: #2675cf;
     font-size: 15px;
   }
 }

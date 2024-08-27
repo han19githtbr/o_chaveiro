@@ -1,19 +1,18 @@
 <section class="home">
-  <div class="home-components">
-    <div class="content">
-      <img src="assets/images/logo.png" width="212"/>
-      <router-outlet></router-outlet>
-    </div>
-    <ul>
-      <li>TERMOS DE USO</li>
-      <li>POLÍTICAS DE PRIVACIDADE</li>
-      <li>CONTATO</li>
-    </ul>
-  </div>
   <div class="side-image">
     <img
       [src]="(image$ | async)"
       alt="Login"
     />
+  </div>
+  <div class="home-components">
+    <div class="content">
+      <img src="assets/images/keys_logo_2.png" width="170"/>
+      <p class="container-logomarca">
+        <span class="logo_marca">KEY +</span><br>
+        Faça a sua chave conosco
+      </p>
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </section>

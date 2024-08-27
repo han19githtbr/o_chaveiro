@@ -10,6 +10,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import ButtonComponent from '../../shared/components/button/button.component';
 import { AuthService } from '../signin/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoadingService } from '../../shared/services/loading.service';
+import { LoadingEffectComponent } from "../../shared/components/loading-effect/loading-effect.component";
+
 
 @Component({
   selector: 'app-forgot-password',
@@ -19,6 +22,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MaterialModule,
     RouterModule,
     ReactiveFormsModule,
+    LoadingEffectComponent,
     ButtonComponent
   ],
   templateUrl: './forgot-password.component.html',
@@ -39,20 +43,30 @@ export default class ForgotPasswordComponent implements AfterContentInit {
 
   constructor(
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private loadingService: LoadingService
   ) {
     this.forgotForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
     });
   }
 
-
   public ngAfterContentInit(): void {
     this.image$ = this.sideImageService.image$.pipe(takeUntilDestroyed(this.destroy));
-    this.sideImageService.setImage('assets/images/background-login-2.png');
+    this.sideImageService.setImage('assets/images/keys_logo_2.png');
   }
 
   public forgotPassword(): void {
+    this.loadingService.showLoading();
+
+    setTimeout(() => {
+      this.loadingService.hideLoading();
+      this.router.navigate(['../reset'], { relativeTo: this.route });
+    }, 3000);
+  }
+
+
+  /*public forgotPassword(): void {
     if (this.forgotForm.valid) {
       this.authService.forgotPassword({ credential: this.forgotForm.value.email }).subscribe(
         (response) => {
@@ -68,5 +82,5 @@ export default class ForgotPasswordComponent implements AfterContentInit {
         }
       )
     }
-  }
+  }*/
 }

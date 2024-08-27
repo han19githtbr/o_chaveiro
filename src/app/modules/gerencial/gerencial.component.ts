@@ -32,7 +32,7 @@ export default class GerencialComponent implements OnInit {
     },
     {
       label: 'Serviços',
-      icon: 'shop',
+      icon: 'key',
       router: 'servicos',
     },
     {

@@ -4,7 +4,7 @@ import DashboardCardComponent from 'src/app/modules/shared/components/dashboard-
 import { CardSectionComponent } from 'src/app/modules/shared/components/card-section/card-section.component';
 import { MaterialModule } from 'src/app/material.module';
 import { DashboardService } from './dashboard.service';
-
+import { SearchComponent } from 'src/app/modules/shared/components/search/search.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,17 +15,17 @@ import { DashboardService } from './dashboard.service';
     DashboardCardComponent,
     CommonModule,
     CardSectionComponent,
+    SearchComponent,
     MaterialModule
   ],
 })
 export default class DashboardComponent {
-  public totalUsers: number = 0;
+  public totalChaveiros: number = 0;
   public totalRecebido: number = 0;
 
-  constructor(
-    private dashboardService: DashboardService,
+  constructor(private dashboardService: DashboardService) {}
 
-  ) {
+  ngOnInit() {
 
   }
 

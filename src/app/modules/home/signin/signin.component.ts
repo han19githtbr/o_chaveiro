@@ -18,6 +18,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { StorageService } from '../../core/auth/storage.service';
 import { UpdateRegisterDto } from '../../shared/models/register.dto';
 import { MatRadioChange } from '@angular/material/radio';
+import { LoadingService } from '../../shared/services/loading.service';
+import { LoadingEffectComponent } from "../../shared/components/loading-effect/loading-effect.component";
+
 
 @Component({
   selector: 'app-signin',
@@ -28,7 +31,8 @@ import { MatRadioChange } from '@angular/material/radio';
     RouterModule,
     ReactiveFormsModule,
     ButtonComponent,
-  ],
+    LoadingEffectComponent
+],
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
 })
@@ -47,6 +51,7 @@ export default class SigninComponent implements AfterContentInit {
     private authService: AuthService,
     private storageService: StorageService,
     private snackBar: MatSnackBar,
+    private loadingService: LoadingService
   ) {}
 
   public hide: boolean = true;
@@ -64,6 +69,16 @@ export default class SigninComponent implements AfterContentInit {
   }
 
   public submit(): void {
+    this.loadingService.showLoading();
+
+    setTimeout(() => {
+      this.loadingService.hideLoading();
+      this.router.navigate(['gerencial/dashboard']);
+    }, 3000);
+  }
+
+
+  /*public submit(): void {
     if (this.signinForm.invalid) {
       this.snackBar.open('Por favor, preencha todos os campos corretamente.', '', { duration: 3000 });
       return;
@@ -82,13 +97,9 @@ export default class SigninComponent implements AfterContentInit {
         this.router.navigate(['cliente/dashboard']);
         this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
       }
-      /*this.authService.fetchUserData(auth.account.id).subscribe((user: UpdateRegisterDto )=> {
-        this.storageService.saveUserDetails(user);
 
-        this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
-      },(err) => this.snackBar.open(err.error.error, '', { duration: 2000 }));*/
       },
       error: (err) => this.snackBar.open(err.error.error, '', { duration: 2000 })
     });
-  }
+  }*/
 }

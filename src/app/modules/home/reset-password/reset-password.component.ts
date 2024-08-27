@@ -9,6 +9,9 @@ import { AuthService } from '../signin/auth.service';
 import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import ButtonComponent from '../../shared/components/button/button.component';
+import { LoadingService } from '../../shared/services/loading.service';
+import { LoadingEffectComponent } from "../../shared/components/loading-effect/loading-effect.component";
+
 
 @Component({
   selector: 'app-reset-password',
@@ -18,7 +21,8 @@ import ButtonComponent from '../../shared/components/button/button.component';
     MaterialModule,
     RouterModule,
     ReactiveFormsModule,
-    ButtonComponent
+    ButtonComponent,
+    LoadingEffectComponent
   ],
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss'],
@@ -35,7 +39,11 @@ export default class ResetPasswordComponent implements AfterContentInit {
   private authService: AuthService = inject(AuthService);
 
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {
+  constructor(
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private loadingService: LoadingService
+  ) {
     this.resetForm = this.fb.group({
       credential: ['', [Validators.required, Validators.email]],
       code: ['', Validators.required],
@@ -46,10 +54,20 @@ export default class ResetPasswordComponent implements AfterContentInit {
 
   public ngAfterContentInit(): void {
     this.image$ = this.sideImageService.image$.pipe(takeUntilDestroyed(this.destroy));
-    this.sideImageService.setImage('assets/images/background-login-3.png');
+    this.sideImageService.setImage('assets/images/key_banner_1.jpg');
   }
 
   public resetPassword(): void {
+    this.loadingService.showLoading();
+
+    setTimeout(() => {
+      this.loadingService.hideLoading();
+      this.router.navigate(['/home/login']);
+    }, 3000);
+  }
+
+
+  /*public resetPassword(): void {
     if (this.resetForm.valid) {
       const { credential, code, password, confirmPassword } = this.resetForm.value;
 
@@ -72,5 +90,5 @@ export default class ResetPasswordComponent implements AfterContentInit {
         }
       );
     }
-  }
+  }*/
 }
