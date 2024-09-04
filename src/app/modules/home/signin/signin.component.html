@@ -1,6 +1,15 @@
 <section class="sign-in">
   <article class="header">
-    <p class="welcome">Seja bem-vindo(a)!</p>
+    <p class="welcome">
+      <mat-icon
+        class="animated-icon"
+        color="primary"
+        style="vertical-align: middle; margin-right: 8px;"
+      >
+        waving_hand
+      </mat-icon>
+      Bem-vindo(a)!
+    </p>
     <p class="description">
       Digite as tuas credenciais aqui para logar no sistema
     </p>
@@ -9,22 +18,31 @@
   <form class="form" [formGroup]="signinForm" >
     <mat-form-field appearance="fill">
       <mat-label class="font">E-mail</mat-label>
+      <mat-icon matPrefix color="primary">email</mat-icon>
       <input type="text" matInput formControlName="credential"/>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label class="font">Senha</mat-label>
+      <mat-icon matPrefix color="primary">lock</mat-icon>
       <input matInput [type]="hide ? 'password' : 'text'"  formControlName="password"/>
       <mat-icon matSuffix (click)="hide = !hide">{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
     </mat-form-field>
 
     <p class="primary">
-      Esqueceu sua senha?
+      <mat-icon
+        class="animated-icon"
+        color="primary"
+        style="vertical-align: middle; margin-right: 8px;"
+      >
+        help_outline
+      </mat-icon>
+      Esqueceu a senha de acesso?
 
       <span
         class="--bold"
         [routerLink]="['../forgot']"
       >
-      Clique aqui!
+      Clique aqui para redefinir!!
       </span>
     </p>
 
@@ -34,17 +52,10 @@
     (click)="submit()"
     [disabled]="signinForm.invalid"
   >
-    Entrar
+    <mat-icon color="white" style="vertical-align: middle; margin-right: 8px;">door_front</mat-icon>
+    ENTRAR
   </app-button>
 
-  <p class="container_cadastro">
-    <span class="card_cadastro ">
-      <span class="texto-cadastro ">Ainda não tem Cadastro?</span>
-      <li class="link_cadastro">
-        <a><span [routerLink]="['../../criar-conta']" class="clique_aqui">Clique aqui!</span></a>
-      </li>
-    </span>
-  </p>
 
   <app-loading-effect></app-loading-effect>
 

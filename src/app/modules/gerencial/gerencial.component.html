@@ -5,7 +5,11 @@
 
   <div class="content">
     <div class="header">
-      <app-bread-crumb [title]="title" [subtitle]="subtitle" (toggleDrawerEvent)="drawer.toggle()">
+      <app-bread-crumb
+        [title]="title"
+        [subtitle]="subtitle"
+        (toggleDrawerEvent)="drawer.toggle()"
+      >
       </app-bread-crumb>
       <app-toolbar></app-toolbar>
     </div>

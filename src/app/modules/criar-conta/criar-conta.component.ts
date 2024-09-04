@@ -41,8 +41,9 @@ export default class CriarContaComponent implements OnInit {
       email: ['', [Validators.required, Validators.email, Validators.maxLength(512)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(512)]],
       role: ['', Validators.required],
+      status: ['ativo', Validators.required],
       imageUrl: [''],
-      birthday: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
+      birthDate: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
       cpf: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(14)]],
       phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(512)]],
     });
@@ -52,22 +53,6 @@ export default class CriarContaComponent implements OnInit {
   ngOnInit(): void {}
 
 
-  /*onSubmit(): void {
-    if (this.registerForm.valid) {
-
-      const registerData: CreateRegisterDto = this.registerForm.value;
-      console.log('Dados a serem enviados:', registerData);
-
-      this.registerService.createRegister(registerData).subscribe(
-        response => {
-          this.snackBar.open('Conta criada com sucesso!', 'Fechar', { duration: 3000 });
-          this.registerForm.reset();
-        }
-      );
-    }
-  }*/
-
-    
   onSubmit(): void {
     if (this.registerForm.valid) {
       this.loadingService.showLoading();
@@ -77,11 +62,13 @@ export default class CriarContaComponent implements OnInit {
 
       this.registerService.createRegister(registerData).subscribe(
         response => {
+          const delay = Math.random() * (5000 - 1000) + 1000;
+
           setTimeout(() => {
             this.loadingService.hideLoading();
             this.snackBar.open('Conta criada com sucesso!', 'Fechar', { duration: 3000 });
             this.registerForm.reset();
-          }, 3000);
+          }, delay);
         },
       );
     }

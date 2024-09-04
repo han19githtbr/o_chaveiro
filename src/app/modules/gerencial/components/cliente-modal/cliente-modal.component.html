@@ -1,0 +1,12 @@
+<!-- cliente-modal.component.html -->
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>CLIENTE</h2>
+    <button class="close-button" (click)="closeModal()">x</button>
+    <img [src]="cliente.imageUrl" alt="Cliente Image" class="modal-image" />
+    <h2>{{ cliente.name }}</h2>
+    <p><strong>Status:</strong> {{ cliente.status }}</p>
+    <p><strong>Telefone:</strong> {{ cliente.phone }}</p>
+    <p><strong>Endereço:</strong> {{ cliente.endereco }}</p>
+  </div>
+</div>

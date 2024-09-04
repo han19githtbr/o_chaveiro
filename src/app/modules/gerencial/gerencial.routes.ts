@@ -14,7 +14,12 @@ export default [
   },
   {
     path: 'servicos',
-    loadChildren: () => import('./components/servicos/servicos.component'),
+    loadChildren: () => import('./components/servicos/servicos.routes'),
+    data: { useBreadcrumb: true },
+  },
+  {
+    path: 'chaveiros',
+    loadChildren: () => import('./components/chaveiros/chaveiros.routes'),
     data: { useBreadcrumb: true },
   },
   {

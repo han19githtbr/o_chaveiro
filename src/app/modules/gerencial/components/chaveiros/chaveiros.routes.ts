@@ -5,16 +5,16 @@ export default [
   {
     path: 'lista',
     loadComponent: () => import('././components/list/list.component'),
-    data: { useBreadcrumb: true, breadcrumb: 'Chaveiros', description: 'Usuários' }
+    data: { useBreadcrumb: true, breadcrumb: 'Chaveiros', description: 'Chaveiros' }
   },
   {
     path: 'details/:id',
     loadComponent: () => import('././components/details/details.component'),
-    data: { useBreadcrumb: true, breadcrumb: 'Chaveiros', description: 'Detalhes do usuário' }
+    data: { useBreadcrumb: true, breadcrumb: 'Chaveiros', description: 'Detalhes do chaveiro' }
   },
   {
     path: 'new',
     loadComponent: () => import('././components/add/add.component'),
-    data: { useBreadcrumb: true, breadcrumb: 'Chaveiros', description: 'Novo usuário' }
+    data: { useBreadcrumb: true, breadcrumb: 'Chaveiros', description: 'Novo chaveiro' }
   },
 ] as Routes

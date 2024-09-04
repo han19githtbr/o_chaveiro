@@ -14,12 +14,10 @@ export interface UserAdminResponse {
 
 export interface UserAdmin {
   id: number;
-  name: string;
-  email: string;
-  status: string;
-  role: 'User' | 'Admin';
-  imageUrl: string | null;
-  permissions: Permission[];
+  name?: string;
+  email?: string;
+  status?: string;
+  role?: 'User' | 'Admin';
+  imageUrl?: string;
+  permissions?: Permission[];
 }
-
-

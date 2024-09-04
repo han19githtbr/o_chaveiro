@@ -1,13 +1,17 @@
 @import '../../modules/shared/styles/variables.scss';
 
+.search-bar {
+  margin-top: 80px;
+  width: 100px;
+}
+
 .container {
   border-right: 1px solid rgba(0, 0, 0, 0.5);
   height: 100vh;
 
   .sidenav {
     width: 235px;
-    //background:$color-background ;
-    background: #bfe1ff;
+    background: #000000;
   }
 
   ::ng-deep mat-drawer-content {

@@ -1,9 +1,9 @@
 @import "../../styles/variables.scss";
 
 span {
-  font-family: "Poppins";
+  font-family: 'Times New Roman', Times, serif;
   font-weight: 800;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 @mixin flex {
@@ -25,7 +25,7 @@ span {
       align-items: center;
 
       > img {
-        margin-top: 40px;
+        margin-top: 10px;
         width: 106px;
         height: 136px;
         object-fit: cover;
@@ -49,8 +49,8 @@ span {
       display: flex;
       gap: 8px;
       padding: 0;
-      color: #4b4b4b;
-      //text-transform: uppercase;
+      color: #ffffffad;
+      //color: #000000;
       white-space: wrap !important;
       transition: .2s;
 
@@ -61,8 +61,8 @@ span {
 
     &.router-link-active {
       .mat-mdc-list-item-unscoped-content {
-        color: $primary !important;
-
+        //color: $primary !important;
+        color: #1869e3;
         &:hover {
           color: #fff !important;
         }
@@ -115,8 +115,9 @@ span {
   > .router-link-active::before {
     content: "";
     height: 48px;
-    width: 7px;
-    background: $primary;
+    width: 9px;
+    background: #ffffffb0;
+    //background: $primary;
     position: absolute;
     left: 0px;
     border-radius: 0px 2px 2px 0px;
@@ -162,6 +163,7 @@ span {
 
 
   > ::ng-deep mat-list-item:hover {
-    background-color: $primary;
+    //background-color: $primary;
+    background-color: #0000ff;
   }
 }

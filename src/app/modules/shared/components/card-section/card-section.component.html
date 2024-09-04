@@ -14,6 +14,7 @@
         </ng-container>
       </div>
     </ng-container>
+
     <div class="row items-center" *ngIf="useEdit || useToggle || useDelete">
       <ng-container *ngIf="useEdit">
         <mat-icon>edit</mat-icon>
@@ -26,28 +27,7 @@
       </ng-container>
     </div>
   </div>
+
   <ng-content></ng-content>
+
 </div>
-
-<!--<div class="card-section">
-  <div class="card-section-header row" [class.items-center]="!!(buttons?.length)">
-    <strong>{{ text }}</strong>
-
-    <ng-content select="[header]"></ng-content>
-
-    <ng-container *ngIf="buttons?.length">
-      <div class="actions">
-        <ng-container *ngFor="let button of buttons">
-          <app-button
-            [type]="button.type"
-            [fullSize]="!!button?.fullSize"
-            (clickEvent)="button?.event()"
-          >
-            {{ button?.text }}</app-button
-          >
-        </ng-container>
-      </div>
-    </ng-container>
-  </div>
-  <ng-content></ng-content>
-</div>-->

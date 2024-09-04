@@ -2,13 +2,15 @@
 
 .button {
   height: 50px;
+  width: 250px;
   min-width: 50px;
-  border-radius: 8px;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
   transition: 0.3s;
   font-weight: bold;
-  background-color: $primary;
+  background-color: #1a1aff;
+  //background-color: $primary;
   color: #fff;
   padding: 0 16px;
 

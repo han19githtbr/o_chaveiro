@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UpdateRegisterDto } from '../../shared/models/register.dto';
 import { UserAdmin } from '../../shared/models/userAdmin';
-//import { UserDetailsDto } from '../../shared/models/register.dto';
 
 
 const KEY = 'authToken';

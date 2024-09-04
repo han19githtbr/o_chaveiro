@@ -45,4 +45,25 @@
   .clique_aqui:hover {
     cursor: pointer;
   }
+
+  .animated-icon {
+    display: inline-block;
+    animation: shake 1.5s infinite;
+  }
+
+  @keyframes shake {
+    0%, 100% {
+      transform: rotate(0);
+    }
+    25% {
+      transform: rotate(5deg);
+    }
+    50% {
+      transform: rotate(-5deg);
+    }
+    75% {
+      transform: rotate(5deg);
+    }
+  }
+
 }

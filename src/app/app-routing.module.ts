@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'criar-conta',
     loadComponent: () => import('../app/modules/criar-conta/criar-conta.component'),
   },
+  /*{
+    path: 'criar-conta',
+    loadComponent: () => import('./modules/home/criar-conta/criar-conta.component'),
+  },*/
   {
     path: 'gerencial',
     loadChildren: () => import('../app/modules/gerencial/gerencial.routes'),

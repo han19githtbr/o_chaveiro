@@ -1,0 +1,49 @@
+<section class="details">
+  <app-card-section text="Informações do serviço">
+    <section class="wrapper" body>
+      <div class="row">
+        <mat-form-field appearance="fill">
+          <mat-label>Nome Cliente</mat-label>
+          <input matInput apenasLetras />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Preço</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="fill">
+          <mat-label>Serviço</mat-label>
+          <input matInput apenasLetras />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Data pedido</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="fill">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" required>
+            <mat-option value="ativo">Pronto</mat-option>
+            <mat-option value="inativo">Em andamento</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Telefone</mat-label>
+          <input matInput mask="(00) 00000-0000" />
+        </mat-form-field>
+      </div>
+    </section>
+  </app-card-section>
+
+  <div class="buttons">
+    <app-form-actions />
+  </div>
+
+</section>

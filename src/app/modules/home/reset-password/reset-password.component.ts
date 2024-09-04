@@ -57,17 +57,28 @@ export default class ResetPasswordComponent implements AfterContentInit {
     this.sideImageService.setImage('assets/images/key_banner_1.jpg');
   }
 
+  /*next: (auth) => {
+      this.storageService.saveToken(auth.token)
+
+      const delay = Math.random() * (5000 - 1000) + 1000;
+
+      setTimeout(() => {
+        this.loadingService.hideLoading();
+        this.router.navigate(['gerencial/dashboard']);
+        this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
+      }, delay);
+    },
+    error: (err) => {
+      this.loadingService.hideLoading();
+      this.snackBar.open(err.error.error, '', { duration: 2000 });
+    }*/
+
+
+
   public resetPassword(): void {
+
     this.loadingService.showLoading();
 
-    setTimeout(() => {
-      this.loadingService.hideLoading();
-      this.router.navigate(['/home/login']);
-    }, 3000);
-  }
-
-
-  /*public resetPassword(): void {
     if (this.resetForm.valid) {
       const { credential, code, password, confirmPassword } = this.resetForm.value;
 
@@ -78,17 +89,24 @@ export default class ResetPasswordComponent implements AfterContentInit {
 
       this.authService.resetPassword({ credential: credential, code, password, confirmPassword }).subscribe(
         (response) => {
-          this.successMessage = response.message;
-          this.errorMessage = '';
-          this.router.navigate(['/home/login']);
-          this.snackBar.open('Senha redefinida com sucesso.', '', { duration: 3000 });
-          return;
+
+          const delay = Math.random() * (5000 - 1000) + 1000;
+
+          setTimeout(() => {
+            this.successMessage = response.message;
+            this.errorMessage = '';
+            this.loadingService.hideLoading();
+            this.router.navigate(['/home/login']);
+            this.snackBar.open('Senha redefinida com sucesso.', '', { duration: 3000 });
+            return;
+          });
         },
         (error) => {
+          this.loadingService.hideLoading();
           this.errorMessage = error.error.message || 'Erro durante a redefinição de senha.';
           this.successMessage = '';
         }
       );
     }
-  }*/
+  }
 }

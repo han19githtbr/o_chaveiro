@@ -10,7 +10,13 @@ import ButtonComponent from '../button/button.component';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, MaterialModule, FormsModule, ButtonComponent]
+  imports: [
+    CommonModule,
+    RouterModule,
+    MaterialModule,
+    FormsModule,
+    ButtonComponent
+  ]
 })
 export class SearchComponent {
 
@@ -21,6 +27,7 @@ export class SearchComponent {
   @Input() public routerLinkAction!: string;
   @Input() public textSearch!: string;
   @Output() public textSearchChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public filterClick: EventEmitter<void> = new EventEmitter<void>();
   @Input() public fullSearch: boolean = false;
   @Output() public clickButtonEvent: EventEmitter<any> = new EventEmitter<any>();
 
@@ -29,4 +36,9 @@ export class SearchComponent {
   public search(): void {
     this.textSearchChange.emit(this.textSearch);
   }
+
+  public onFilterClick(): void {
+    this.filterClick.emit();
+  }
+
 }

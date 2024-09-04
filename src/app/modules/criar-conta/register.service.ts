@@ -10,11 +10,16 @@ import { RegisterDto, CreateRegisterDto, UpdateRegisterDto } from "../shared/mod
 })
 export class RegisterService {
 
-  private apiUrl = 'https://freelifeconect.app.br:8080/registers';
+  //private apiUrl = 'https://freelifeconect.app.br:8080/registers';
 
+  private apiUrl = 'http://localhost:3000/registers';
 
   constructor(private http: HttpClient) {}
 
+
+  public login(credentials: any): Observable<any> {
+    return this.http.post(`${environment.api}/auth/login/adm`, credentials);
+  }
 
   createRegister(data: CreateRegisterDto): Observable<{ token: string, account: RegisterDto }> {
     return this.http.post<{ token: string, account: RegisterDto }>(this.apiUrl, data);

@@ -1,5 +1,5 @@
 <section class="details">
-  <app-card-section text="Dados do usuário">
+  <app-card-section text="Dados do chaveiro">
     <section class="wrapper" body>
       <div class="row">
         <mat-form-field appearance="fill">
@@ -8,17 +8,18 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-          <mat-label>CPF</mat-label>
-          <input matInput mask="000000000-00" />
+          <mat-label>Endereço</mat-label>
+          <input matInput />
         </mat-form-field>
       </div>
 
-      <p class="title">Acesso</p>
       <div class="row">
         <mat-form-field appearance="fill">
-          <mat-label>E-mail</mat-label>
-          <mat-icon matPrefix>person_outline</mat-icon>
-          <input type="text" matInput />
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" required>
+            <mat-option value="ativo">Disponível</mat-option>
+            <mat-option value="inativo">Indisponível</mat-option>
+          </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -29,5 +30,8 @@
     </section>
   </app-card-section>
 
-  <app-form-actions />
+  <div class="buttons">
+    <app-form-actions />
+  </div>
+
 </section>

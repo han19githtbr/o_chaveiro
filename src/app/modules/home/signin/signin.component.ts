@@ -42,8 +42,8 @@ export default class SigninComponent implements AfterContentInit {
   public image$!: Observable<string>;
 
   public signinForm: FormGroup = new FormGroup({
-    credential: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    credential: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
   });
 
 
@@ -68,38 +68,33 @@ export default class SigninComponent implements AfterContentInit {
     this.sideImageService.setImage();
   }
 
+
   public submit(): void {
-    this.loadingService.showLoading();
-
-    setTimeout(() => {
-      this.loadingService.hideLoading();
-      this.router.navigate(['gerencial/dashboard']);
-    }, 3000);
-  }
-
-
-  /*public submit(): void {
     if (this.signinForm.invalid) {
       this.snackBar.open('Por favor, preencha todos os campos corretamente.', '', { duration: 3000 });
       return;
     }
 
-    const signin: SigninCredentials = this.signinForm.value as SigninCredentials;
-    console.log('Enviando credenciais:', signin);
+    this.loadingService.showLoading();
 
-    this.authService.loginAsAdmin(signin).subscribe({
-    next: (auth) => {
-      this.storageService.saveToken(auth.token);
-      if (auth.account.role === 'admin') {
-        this.router.navigate(['gerencial/dashboard']);
-        this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
-      } else {
-        this.router.navigate(['cliente/dashboard']);
-        this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
-      }
+    const signin : SigninCredentials = this.signinForm.value as SigninCredentials;
 
+    this.authService.login(signin).subscribe({
+      next: (auth) => {
+        this.storageService.saveToken(auth.token)
+
+        const delay = Math.random() * (5000 - 1000) + 1000;
+
+        setTimeout(() => {
+          this.loadingService.hideLoading();
+          this.router.navigate(['gerencial/dashboard']);
+          this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
+        }, delay);
       },
-      error: (err) => this.snackBar.open(err.error.error, '', { duration: 2000 })
+      error: (err) => {
+        this.loadingService.hideLoading();
+        this.snackBar.open(err.error.error, '', { duration: 2000 });
+      }
     });
-  }*/
+  }
 }

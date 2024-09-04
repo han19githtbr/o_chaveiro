@@ -2,16 +2,17 @@
   <div class="search-container">
     <div class="input-container" [class.fullSearch]="fullSearch">
       <mat-form-field appearance="outline">
-        <mat-label>Buscar</mat-label>
+        <mat-label class="text-search">Buscar</mat-label>
+        <mat-icon matPrefix color="primary">search</mat-icon>
         <input matInput [(ngModel)]="textSearch" (ngModelChange)="search()" />
       </mat-form-field>
 
       <div
         class="search-icon"
-        (click)="search()"
+        (click)="onFilterClick()"
         *ngIf="!useOptions && !fullSearch"
       >
-        <mat-icon>filter_list</mat-icon>
+        <mat-icon matPrefix color="primary">filter_list</mat-icon>
       </div>
     </div>
   </div>

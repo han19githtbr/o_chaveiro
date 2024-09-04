@@ -1,8 +1,8 @@
 <div class="toolbar">
-  <img *ngIf="user?.imageUrl" [src]="user?.imageUrl" height="50" width="50">
+  <img *ngIf="admin?.imageUrl" [src]="admin?.imageUrl" height="50" width="70">
   <div class="welcome">
-    <small class="small">Seja bem vindo!</small>
-    <p>{{ user?.name }}</p>
+    <small class="welcome small">Seja bem vindo!!</small>
+    <p> {{ admin?.name }}</p>
   </div>
   <mat-icon mat-button [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
 </div>

@@ -5,16 +5,28 @@ import { MaterialModule } from 'src/app/material.module';
 import { ActivatedRoute, Data, Router, RouterModule } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { MatSelectModule } from '@angular/material/select';
 import BreadCrumbComponent from '../shared/components/bread-crumb/bread-crumb.component';
 import MenuSideNavComponent from '../shared/components/menu-side-nav/menu-side-nav.component';
 import { ToolbarComponent } from '../shared/components/toolbar/toolbar.component';
+import { MatMenuModule, MatMenuPanel } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+
 
 const angularModules = [CommonModule, RouterModule];
 const components = [
   BreadCrumbComponent,
   MenuSideNavComponent,
+  MatSelectModule,
+  FormsModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatMenuModule,
   ToolbarComponent,
 ];
+
 
 @Component({
   selector: 'app-gerencial',
@@ -24,6 +36,7 @@ const components = [
   styleUrls: ['./gerencial.component.scss'],
 })
 export default class GerencialComponent implements OnInit {
+
   public menus: Menu[] = [
     {
       label: 'Dashboard',
@@ -41,11 +54,17 @@ export default class GerencialComponent implements OnInit {
       router: 'keys',
     },
     {
-      label: 'Configurações',
-      icon: 'settings',
+      label: 'Desenvolvimento',
+      icon: 'work',
+      router: 'works',
+    },
+    {
+      label: 'Controle de acesso',
+      icon: 'door_front',
       router: 'settings',
     },
   ];
+
 
   public isMobile$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
@@ -84,4 +103,5 @@ export default class GerencialComponent implements OnInit {
       this.activatedRoute?.firstChild?.snapshot.data
     );
   }
+
 }

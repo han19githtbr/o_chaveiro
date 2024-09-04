@@ -1,3 +1,16 @@
+type TableData = 'commom' | 'currency' | 'document' | 'phone' | 'longText' | 'date' |'custom-color' | 'actions';
+
+
+export type TableColumns = {
+  column: string;
+  text?: string;
+  key: string;
+  type?: TableData;
+  typeColumn?: TypeColumn;
+  checkCustomColor?: boolean;
+  actions?: DisplayAction[];
+};
+
 export class DisplayColumns {
   public text!: string;
   public key!: string;

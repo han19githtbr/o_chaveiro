@@ -1,8 +1,8 @@
 <app-list-table
-  [listTable]="users"
+  [listTable]="chaveiros"
   [displayedColumns]="headers"
   [useButton]="true"
-  buttonLabel="Criar usuário"
-  [routerLinkAction]="'/gerencial/users/new'"
+  buttonLabel="Adicionar chaveiro"
+  [routerLinkAction]="'/gerencial/chaveiros/new'"
   (clickRowEvent)="goToDetails($event)">
 </app-list-table>

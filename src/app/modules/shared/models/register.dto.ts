@@ -1,21 +1,13 @@
 export interface CreateRegisterDto {
-  role: 'admin' | 'user';
-  type: "app";
+  role?: 'admin' | 'user';
   name: string;
   email: string;
   password: string;
-  status: 'ativo' | 'inativo' | 'pendente';
+  status: 'ativo' | 'inativo';
   imageUrl?: string;
-  birthday: string;
-  creci: number;
+  birthDate: string;
   cpf: string;
-  permissions: Permission[];
   phone: string;
-}
-
-export interface Permission {
-  id: number;
-  title: string;
 }
 
 export interface UserDetailsDto {
@@ -25,35 +17,27 @@ export interface UserDetailsDto {
 
 export interface RegisterDto {
   id: number;
-  birthday: string;
+  birthDate: string;
   cpf: string;
-  type: string;
   phone: string;
   email: string;
   name: string;
-  creci: number;
   imageUrl: string | null;
-  role: string;
-  status: string;
-  code: number;
-  permissions: Permission[];
-  codeExpiresIn: string;
+  role: 'admin' | 'user';
+  status: 'ativo' | 'inativo';
   createdAt: Date;
   updatedAt: Date;
 }
 
-
 export interface UpdateRegisterDto {
   id: number;
   role?: 'admin' | 'user';
-  type: "app";
-  name: string;
-  email: string;
-  password: string;
-  status: 'ativo' | 'inativo' | 'pendente';
+  name?: string;
+  email?: string;
+  password?: string;
+  status?: 'ativo' | 'inativo';
   imageUrl?: string;
-  birthday: string;
-  creci: number;
-  cpf: string;
-  phone: string;
+  birthDate?: string;
+  cpf?: string;
+  phone?: string;
 }

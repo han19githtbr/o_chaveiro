@@ -56,31 +56,32 @@ export default class ForgotPasswordComponent implements AfterContentInit {
     this.sideImageService.setImage('assets/images/keys_logo_2.png');
   }
 
+
+
   public forgotPassword(): void {
+
     this.loadingService.showLoading();
 
-    setTimeout(() => {
-      this.loadingService.hideLoading();
-      this.router.navigate(['../reset'], { relativeTo: this.route });
-    }, 3000);
-  }
-
-
-  /*public forgotPassword(): void {
     if (this.forgotForm.valid) {
       this.authService.forgotPassword({ credential: this.forgotForm.value.email }).subscribe(
         (response) => {
-          this.successMessage = response.message;
-          this.errorMessage = '';
-          this.router.navigate(['../reset'], { relativeTo: this.route });
-          this.snackBar.open('O código foi enviado para o seu email.', '', { duration: 3000 });
-          return;
+          const delay = Math.random() * (5000 - 1000) + 1000;
+
+          setTimeout(() => {
+            this.successMessage = response.message;
+            this.errorMessage = '';
+            this.loadingService.hideLoading();
+            this.router.navigate(['../reset'], { relativeTo: this.route });
+            this.snackBar.open('O código foi enviado para o seu email.', '', { duration: 3000 });
+            return;
+          }, delay);
         },
         (error) => {
+          this.loadingService.hideLoading();
           this.errorMessage = error.error.message || 'Erro durante a recuperação de senha.';
           this.successMessage = '';
         }
       )
     }
-  }*/
+  }
 }

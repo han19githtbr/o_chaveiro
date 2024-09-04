@@ -8,7 +8,7 @@ import { MaterialModule } from 'src/app/material.module';
   standalone: true,
   imports: [MaterialModule]
 })
-export default class DashboardCardComponent { 
+export default class DashboardCardComponent {
   @Input() number!: string;
   @Input() icon!: string;
   @Input() iconContainerColor: string = "#000";
