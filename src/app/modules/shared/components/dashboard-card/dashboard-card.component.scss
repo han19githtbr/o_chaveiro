@@ -2,6 +2,9 @@
   display: grid;
   grid-template-columns: 1fr auto;
   max-height: 164px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
   width: 400px;
   padding: 30px;
   box-shadow: rgba(14, 14, 39, 0) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -12px;
@@ -12,22 +15,27 @@
     overflow: hidden;
     white-space: nowrap;
     font-size: 24px;
-    color: #3b3b3b;
+    color: #000000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: oblique;
     font-weight: bold;
   }
 
   .icon-wrapper{
     border-radius: 50%;
-    width: 54px;
-    height: 54px;
-    color: #FFF;
+    width: 64px;
+    height: 64px;
+    color: #efe055;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .description{
-    color: #2675cf;
+    color: #1b18dd;
     font-size: 15px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: oblique;
   }
 }

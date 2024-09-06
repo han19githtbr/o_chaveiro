@@ -1,9 +1,21 @@
 import { Observable} from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SideImageControllerService } from '../shared/services/side-image-controller.service';
+import { MatDialog } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MaterialModule } from 'src/app/material.module';
+import { MatMenuModule, MatMenuPanel } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { UserAdmin } from '../shared/models/userAdmin';
+import SigninComponent from './signin/signin.component';
+import { ClienteFormComponent } from '../gerencial/components/cliente-form/cliente-form.component';
+
 
 @Component({
   selector: 'app-home',
@@ -12,11 +24,19 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [
     RouterModule,
-    CommonModule
+    CommonModule,
+    MatMenuModule,
+    MatInputModule,
+    MaterialModule,
+    ClienteFormComponent,
+    SigninComponent,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    FormsModule
   ]
 })
 export default class HomeComponent implements OnInit {
-  public image$: Observable<string> = this.sideImageService.image$.pipe(takeUntilDestroyed());
+  //public image$: Observable<string> = this.sideImageService.image$.pipe(takeUntilDestroyed());
 
   phrases: string[] = [
     "Melhores preços do mercado",
@@ -28,9 +48,18 @@ export default class HomeComponent implements OnInit {
 
   displayedText: string = "Faça a sua chave conosco";
   currentPhraseIndex: number = 0;
+  selectedUser: UserAdmin[] = [];
+  searchText: string = '';
+  //users: UserAdmin[] = [];
+
+  services: string[] = ['Cópia', 'Conserto'];
+  selectedService: string | null = null;
+
 
   constructor(
-    private sideImageService: SideImageControllerService
+    private sideImageService: SideImageControllerService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +72,38 @@ export default class HomeComponent implements OnInit {
       this.displayTypingEffect(this.phrases[this.currentPhraseIndex]);
       this.currentPhraseIndex = (this.currentPhraseIndex + 1) % this.phrases.length;
     }, 5000);
+  }
+
+  /*get selectedServiceText(): string {
+    const count = this.services.length;
+    return `Selecione`
+  }*/
+
+  onSelectionChange(event: any): void {
+    this.selectedUser = event.value;
+  }
+
+  onServiceChange(event: any): void {
+    this.selectedService = event.value;
+    this.openClienteFormModal();
+    //this.selectedServiceText;
+    //console.log('papel', this.selectedService);
+  }
+
+
+  openClienteFormModal(): void {
+    const dialogRef = this.dialog.open(ClienteFormComponent, {
+      width: '300px',
+      data: { name: '', endereco: '', imageUrl: '', phone: '', service: this.selectedService }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Dados do cliente recebidos:', result);
+        // Aqui você pode adicionar lógica para enviar esses dados para o servidor ou atualizar o estado do front-end
+        this.showNotification("Pedido recebido");
+      }
+    });
   }
 
   displayTypingEffect(text: string) {
@@ -58,4 +119,20 @@ export default class HomeComponent implements OnInit {
       }
     }, 100);
   }
+
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Fechar', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      panelClass: ['custom-snackbar']
+    });
+  }
+
+
+  onNewOrderReceived(): void {
+    this.showNotification('Pedido recebido');
+  }
+
 }

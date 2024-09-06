@@ -1,5 +1,25 @@
 @import '../../shared/styles/shared.scss';
 
+.restriction {
+  color: red;
+  font-weight: lighter;
+  text-align: center;
+  margin-bottom: 30px;
+  font-family:'Times New Roman', Times, serif;
+  animation: infiniteZoom 0.6s infinite;
+}
+
+
+@keyframes infiniteZoom {
+  70% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1.02);
+  }
+
+}
+
 .sign-in{
   .header{
     display: flex;
@@ -13,8 +33,11 @@
     }
 
     .description{
-      font-size: calc($font-size - 2px);
-      color: #fff;
+      font-size: 18px;
+      color: #d6d6d6;
+      margin-top: 10px;
+      margin-bottom: -12px;
+      font-family: 'Times New Roman', Times, serif;
     }
   }
 

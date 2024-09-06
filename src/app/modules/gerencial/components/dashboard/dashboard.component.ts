@@ -1,3 +1,4 @@
+import { ClienteFormComponent } from './../cliente-form/cliente-form.component';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import DashboardCardComponent from 'src/app/modules/shared/components/dashboard-card/dashboard-card.component';
@@ -13,6 +14,9 @@ import { FormsModule } from '@angular/forms';
 import { Chaveiro } from 'src/app/modules/shared/models/chaveiro';
 import { Service } from 'src/app/modules/shared/models/service';
 import { ClienteModalComponent } from '../cliente-modal/cliente-modal.component';
+import { NotificationService } from 'src/app/modules/shared/services/notification.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -30,6 +34,7 @@ import { ClienteModalComponent } from '../cliente-modal/cliente-modal.component'
     CardSectionComponent,
     ClienteToastComponent,
     ClienteModalComponent,
+    ClienteFormComponent,
     SearchComponent,
     MaterialModule
   ],
@@ -45,6 +50,7 @@ export default class DashboardComponent {
   public clientes: any[] = [];
   selectedServices: Service[] = [];
   searchText: string = '';
+  notifications: any[] = [];
 
   page: number = 0;
   size: number = 10;
@@ -52,16 +58,47 @@ export default class DashboardComponent {
   services: Service[] = [];
 
   constructor(
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private notificationService: NotificationService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.loadChaveiros();
     this.updateTotalClientes();
     this.showRandomCliente();
-    this.loadClientesPaginados();
     this.loadServices();
+
+    this.notificationService.notifications$.subscribe((notification) => {
+      this.notifications.push(notification);
+      this.showNotification(notification.message, 'Ver detalhes', notification.data);
+      console.log('Notificaçao', notification)
+    });
   }
+
+
+  showNotification(message: string, action: string, data: any) {
+    const snackBarRef = this.snackBar.open(message, action, {
+      duration: undefined,
+      panelClass: 'custom-snackbar'
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+      this.openOrderDetailsModal(data);
+    });
+
+    console.log('Dados', data);
+  }
+
+
+  openOrderDetailsModal(data: any) {
+    this.dialog.open(ClienteModalComponent, {
+      width: '400px',
+      data: data
+    });
+  }
+
 
   private loadServices() {
     this.dashboardService.getAllServices().subscribe(
@@ -72,6 +109,24 @@ export default class DashboardComponent {
         console.error('Erro ao carregar os serviços:', error);
       }
     );
+  }
+
+
+  notifyNewOrder(orderData: any) {
+    this.notificationService.showNotification('Novo pedido', 'Ver detalhes', orderData);
+  }
+
+
+  simulateNewOrder() {
+    const exampleOrderData = {
+      name: 'João Silva',
+      endereco: 'Rua ABC, 123',
+      imageUrl: 'https://example.com/photo.jpg',
+      phone: '912345678',
+      service: 'Cópia'
+    };
+
+    this.notifyNewOrder(exampleOrderData);
   }
 
 
@@ -127,20 +182,8 @@ export default class DashboardComponent {
     this.selectedCliente = null;
   }
 
-
   removeCliente(index: number) {
     this.clientesToasts.splice(index, 1);
-  }
-
-  loadClientesPaginados() {
-    this.dashboardService.getClientesPaginados(this.page, this.size).subscribe(data => {
-      this.clientes = this.clientes.concat(data.clientes); // Adiciona novos clientes à lista existente
-    });
-  }
-
-  loadMoreClientes() {
-    this.page++; // Incrementa a página
-    this.loadClientesPaginados(); // Carrega mais clientes
   }
 
   get selectedServicesText(): string {

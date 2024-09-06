@@ -22,7 +22,6 @@ export default class ListComponent implements OnInit{
   public headers: DisplayColumns[] = [
     { key: 'cliente', text: 'Nome Cliente' },
     { key: 'service', text: 'Serviço' },
-    { key: 'pedidoDate', text: 'Data pedido' },
     { key: 'value', text: 'Preço' },
     { key: 'status', text: 'Status' },
   ];

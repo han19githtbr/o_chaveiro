@@ -1,38 +1,33 @@
-<section class="menu">
+<mat-toolbar class="menu">
   <div class="container">
     <div class="logo">
-      <img src="assets/images/keys_logo_2.png" >
+      <img src="assets/images/keys_logo_2.png">
     </div>
 
-    <mat-list role="list">
+    <mat-toolbar-row>
       <ng-container *ngFor="let menu of menusToShow" [ngTemplateOutlet]="!menu?.childrens ? singleMenu : dropdown" [ngTemplateOutletContext]="{ menu: menu }"></ng-container>
-    </mat-list>
+    </mat-toolbar-row>
+    <app-toolbar></app-toolbar>
   </div>
-</section>
-
+</mat-toolbar>
 
 <ng-template #singleMenu let-menu="menu">
-  <mat-list-item
-    (click)="runEvent(menu)"
-    *ngIf="!menu.childrens; else dropdown"
-    [routerLink]="[menu?.router]"
-    routerLinkActive="router-link-active"
-  >
+  <button mat-button (click)="runEvent(menu)" *ngIf="!menu.childrens; else dropdown" [routerLink]="[menu?.router]" routerLinkActive="router-link-active">
     <mat-icon [ngClass]="{ 'pagamentos-icon': menu.label === 'Pagamentos' }">{{menu.icon}}</mat-icon>
     <span>{{menu.label}}</span>
-  </mat-list-item>
+  </button>
 </ng-template>
 
 <ng-template #dropdown let-menu="menu">
   <div class="menu-item" (mouseenter)="showSubmenu = true" (mouseleave)="showSubmenu = false">
-    <mat-list-item>
+    <button mat-button>
       <mat-icon>{{menu.icon}}</mat-icon>
       <span>{{menu.label}}</span>
-    </mat-list-item>
+    </button>
     <div class="submenu" *ngIf="showSubmenu">
-      <mat-list-item *ngFor="let child of menu.childrens" [routerLink]="[child?.router]" routerLinkActive="router-link-active">
+      <button mat-menu-item *ngFor="let child of menu.childrens" [routerLink]="[child?.router]" routerLinkActive="router-link-active">
         <span>{{child.label}}</span>
-      </mat-list-item>
+      </button>
     </div>
   </div>
 </ng-template>

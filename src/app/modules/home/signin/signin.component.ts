@@ -1,5 +1,5 @@
 import { MaterialModule } from 'src/app/material.module';
-import { AfterContentInit, Component, DestroyRef, inject } from '@angular/core';
+import { AfterContentInit, Component, DestroyRef, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import {
@@ -20,6 +20,7 @@ import { UpdateRegisterDto } from '../../shared/models/register.dto';
 import { MatRadioChange } from '@angular/material/radio';
 import { LoadingService } from '../../shared/services/loading.service';
 import { LoadingEffectComponent } from "../../shared/components/loading-effect/loading-effect.component";
+import HomeComponent from '../home.component';
 
 
 @Component({
@@ -31,12 +32,22 @@ import { LoadingEffectComponent } from "../../shared/components/loading-effect/l
     RouterModule,
     ReactiveFormsModule,
     ButtonComponent,
+    HomeComponent,
     LoadingEffectComponent
 ],
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
 })
 export default class SigninComponent implements AfterContentInit {
+
+  //@Input() role: 'User' | 'Admin' | null = null;
+
+  isFormDisabled(): boolean {
+    return this.selectedRole === 'User';
+    
+  }
+
+  @Input() selectedRole: 'User' | 'Admin' | undefined;
 
   private readonly destroy: DestroyRef = inject(DestroyRef);
   public image$!: Observable<string>;
@@ -57,15 +68,20 @@ export default class SigninComponent implements AfterContentInit {
   public hide: boolean = true;
   public router: Router = inject(Router);
 
-  public sideImageService: SideImageControllerService = inject(
+  /*public sideImageService: SideImageControllerService = inject(
     SideImageControllerService
-  );
+  );*/
 
   public ngAfterContentInit(): void {
-    this.image$ = this.sideImageService.image$.pipe(
+    /*this.image$ = this.sideImageService.image$.pipe(
       takeUntilDestroyed(this.destroy)
     );
-    this.sideImageService.setImage();
+    this.sideImageService.setImage();*/
+    if (this.selectedRole === 'User') {
+      this.signinForm.disable();
+    } else {
+      this.signinForm.enable();
+    }
   }
 
 

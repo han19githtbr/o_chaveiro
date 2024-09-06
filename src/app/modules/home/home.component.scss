@@ -1,7 +1,9 @@
 @import '../../modules/shared/styles/shared.scss';
+
+
 .home{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   align-items: center;
   background-color: $color-black;
   color: $primary;
@@ -13,6 +15,33 @@
     gap: 16px;
   }
 
+  .field-description {
+    margin-top: 20px;
+    width: 93%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+  }
+
+  .select-role {
+    margin-bottom: 12px;
+    color:#c2c2c2;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .custom-select {
+    margin-left: 5px;
+    padding: 10px 10px;
+    color: #efe055;
+    border-radius: 50%;
+    background-color: #000000;
+  }
+
+  .custom-snackbar {
+    background-color: #007bff;
+    color: #fff;
+  }
+
   .home-components{
     display: grid;
     padding: 0 32px;
@@ -21,11 +50,12 @@
     height: 100%;
 
     .content img {
+      margin-top: -100px;
       margin-bottom: -20px;
     }
 
     .content{
-      width: 100%;
+      width: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;

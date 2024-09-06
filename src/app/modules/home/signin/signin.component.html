@@ -1,3 +1,5 @@
+<h2 class="restriction">Acesso restrito somente à administradores do sistema</h2>
+
 <section class="sign-in">
   <article class="header">
     <p class="welcome">
@@ -15,11 +17,12 @@
     </p>
   </article>
 
+
   <form class="form" [formGroup]="signinForm" >
     <mat-form-field appearance="fill">
       <mat-label class="font">E-mail</mat-label>
       <mat-icon matPrefix color="primary">email</mat-icon>
-      <input type="text" matInput formControlName="credential"/>
+      <input type="text" matInput formControlName="credential" />
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label class="font">Senha</mat-label>
@@ -37,26 +40,19 @@
         help_outline
       </mat-icon>
       Esqueceu a senha de acesso?
-
-      <span
-        class="--bold"
-        [routerLink]="['../forgot']"
-      >
-      Clique aqui para redefinir!!
+      <span class="bold" [routerLink]="['../forgot']">
+        Clique aqui para redefinir!!
       </span>
     </p>
-
   </form>
   <app-button
     [fullSize]="true"
     (click)="submit()"
-    [disabled]="signinForm.invalid"
+    [disabled]="signinForm.invalid || isFormDisabled()"
   >
     <mat-icon color="white" style="vertical-align: middle; margin-right: 8px;">door_front</mat-icon>
     ENTRAR
   </app-button>
 
-
   <app-loading-effect></app-loading-effect>
-
 </section>

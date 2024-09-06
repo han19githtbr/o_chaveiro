@@ -19,7 +19,7 @@
 
 
   <mat-form-field appearance="outline" class="custom-select">
-    <mat-icon matPrefix color="primary">key</mat-icon>
+    <mat-icon matPrefix class="key_service">key</mat-icon>
     <mat-select [(ngModel)]="selectedServices" multiple (selectionChange)="onSelectionChange($event)">
       <mat-option *ngFor="let service of services" [value]="service">
         {{ service.service }}
@@ -53,35 +53,17 @@
   </div>
 
 
-  <!-- Adicionando uma tabela para exibir clientes paginados -->
-  <!--<div class="clientes-list">
-    <h2 class="nossos-clientes">Nossos clientes</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Endereço</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cliente of clientes">
-          <td>{{ cliente.id }}</td>
-          <td>{{ cliente.name }}</td>
-          <td>{{ cliente.endereco }}</td>
-          <td>{{ cliente.status }}</td>
-        </tr>
-      </tbody>
-    </table>-->
-
-    <!-- Botão para carregar mais clientes -->
-    <!--<button class="load-more-button" (click)="loadMoreClientes()">Carregar mais</button>-->
-
-
-  <!-- Exibindo os toasts de clientes -->
   <div *ngFor="let clienteToast of clientesToasts">
     <app-cliente-toast [cliente]="clienteToast" (remove)="removeCliente(clienteToast)"></app-cliente-toast>
+  </div>
+
+  <div class="notification-container">
+    <ng-container *ngFor="let notification of notifications">
+      <div class="notification" (click)="openOrderDetailsModal(notification.data)">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ notification.message }}</span>
+      </div>
+    </ng-container>
   </div>
 
 </div>

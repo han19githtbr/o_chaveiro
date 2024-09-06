@@ -1,9 +1,25 @@
 <section class="home">
-  <div class="side-image">
+  <!--<div class="side-image">
     <img
       [src]="(image$ | async)"
       alt="Login"
     />
+  </div>-->
+  <div class="field-description">
+
+    <div class="pedido">
+      <h2 class="select-role">Solicite um serviço . . .</h2>
+      <mat-form-field appearance="fill">
+        <mat-icon class="custom-select" matPrefix>key</mat-icon>
+        <mat-select [(ngModel)]="selectedService" multiple (selectionChange)="onServiceChange($event)">
+          <mat-option *ngFor="let service of services" [value]="service">
+            {{ service }}
+          </mat-option>
+        </mat-select>
+        <mat-label>{{ selectedService }}</mat-label>
+      </mat-form-field>
+    </div>
+
   </div>
   <div class="home-components">
     <div class="content">
