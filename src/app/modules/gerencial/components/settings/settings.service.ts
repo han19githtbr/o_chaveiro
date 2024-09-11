@@ -8,7 +8,7 @@ import { UserAdminResponse } from 'src/app/modules/shared/models/userAdmin';
   providedIn: 'root'
 })
 export class SettingsService {
-  private baseUrl = 'https://freelifeconect.app.br:8080';
+  private baseUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 

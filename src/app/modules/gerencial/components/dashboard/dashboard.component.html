@@ -57,12 +57,10 @@
     <app-cliente-toast [cliente]="clienteToast" (remove)="removeCliente(clienteToast)"></app-cliente-toast>
   </div>
 
+
   <div class="notification-container">
-    <ng-container *ngFor="let notification of notifications">
-      <div class="notification" (click)="openOrderDetailsModal(notification.data)">
-        <mat-icon>error_outline</mat-icon>
-        <span>{{ notification.message }}</span>
-      </div>
+    <ng-container *ngFor="let notificationToast of notificationToasts">
+      <app-notification-toast [notification]="notificationToast" (remove)="removeNotification(notificationToast)"></app-notification-toast>
     </ng-container>
   </div>
 

@@ -8,6 +8,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthenticationInterceptor } from './modules/core/interceptors/authentication.interceptor';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 
 @NgModule({
@@ -19,6 +23,7 @@ import { AuthenticationInterceptor } from './modules/core/interceptors/authentic
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SocketIoModule.forRoot(config),
     ToastrModule.forRoot()
   ],
   providers: [

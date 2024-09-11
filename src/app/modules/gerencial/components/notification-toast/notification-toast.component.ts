@@ -1,44 +1,30 @@
 // cliente-toast.component.ts
 import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
-import { ClienteModalComponent } from '../cliente-modal/cliente-modal.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/modules/shared/services/notification.service';
 import { Subscription } from 'rxjs';
 import { ClienteModalNotificationComponent } from '../cliente-modal-notification/cliente-modal-notification.component';
 
 
 @Component({
-  selector: 'app-cliente-toast',
+  selector: 'app-notification-toast',
   standalone: true,
   template: `
-    <div class="cliente-toast" (click)="openModal()"> <!-- Adicionado evento de clique -->
+    <div class="notification-toast" (click)="openModal()"> <!-- Adicionado evento de clique -->
       <!-- Adicionando o aviso de status -->
-      <div class="status-badge" [ngClass]="{
-        'pendente': cliente.status === 'pendente',
-        'servido': cliente.status === 'servido',
-        'novo': cliente.status === 'novo'
-      }">
-        <mat-icon *ngIf="cliente.status === 'pendente'">error</mat-icon>
-        <mat-icon *ngIf="cliente.status === 'servido'">check_circle</mat-icon>
-        <mat-icon *ngIf="cliente.status === 'novo'">fiber_new</mat-icon>
-        {{ cliente.status | titlecase }}
+      <img [src]="notification.imageUrl" alt="Cliente Image" class="cliente-image" />
+      <div class="status-badge" [ngClass]="{ 'novo': notification.status === 'novo'}">
+        <mat-icon class="fiber_new" *ngIf="notification.status === 'novo'">fiber_new</mat-icon>
       </div>
 
-
-      <img [src]="cliente.imageUrl" alt="Cliente Image" class="cliente-image" />
       <div class="container-cliente">
-        <span class="cliente-name">{{ cliente.name }}</span>
-        <span class="cliente-phone">{{ cliente.phone }}</span>
+        <span class="cliente-name">{{ notification.name }}</span>
+        <span class="cliente-phone">{{ notification.phone }}</span>
       </div>
     </div>
 
-    <!-- Adiciona o componente modal e controla sua visibilidade com isModalOpen -->
-    <app-cliente-modal
-      *ngIf="isModalOpen"
-      [cliente]="cliente"
-      (close)="closeModal()"
-    ></app-cliente-modal>
   `,
   styles: [
     `
@@ -46,25 +32,28 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         display: flex;
         flex-direction: column;
       }
-      .cliente-toast {
+      .notification-toast {
         display: flex;
         align-items: center;
         padding: 10px;
         background: rgba(41, 213, 170, 0.725);
         box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
-        position: relative;
-        top: 300px;
+        position: fixed;
         bottom: 20px;
         width: 200px;
-        left: 20px;
+        right: 20px;
         z-index: 1000;
         border-radius: 5px;
         cursor: pointer;
       }
+      .notification-toast:hover {
+        cursor: pointer;
+      }
+
       .cliente-image {
-        width: 50px;
+        width: 100px;
         height: 50px;
-        border-radius: 50%;
+        border-radius: 4px;
         margin-right: 10px;
       }
       .cliente-name {
@@ -77,7 +66,7 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
 
       .status-badge {
         display: flex;
-        align-items: left;
+        align-items: center;
         padding: 2px 6px;
         margin-left: -10px;
         border-radius: 4px;
@@ -88,83 +77,86 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         gap: 5px;
         width: fit-content;
       }
-      .status-badge.pendente {
-        background-color: #ea1e0d;
-        color: black;
+
+      .fiber_new {
+        margin: 0 auto;
+        animation: infiniteZoom 0.5s infinite;
       }
-      .status-badge.servido {
-        background-color: #11ea26;
-        color: black;
+
+      @keyframes infiniteZoom {
+        70% {
+          transform: scale(1);
+        }
+        70% {
+          transform: scale(1.17);
+        }
       }
+
       .status-badge.novo {
-        background-color: #1e90ff;
+        background-color: #edb116;
+        width: 50px;
         color: black;
       }
     `,
   ],
   imports: [
-    ClienteModalComponent,
     CommonModule,
     MatIconModule,
     ClienteModalNotificationComponent
   ],
 })
-export default class ClienteToastComponent implements OnInit, OnDestroy {
-  @Input() cliente: any;
+export default class NotificationToastComponent implements OnInit, OnDestroy {
+  @Input() notification: any;
   isModalOpen: boolean = false;
+
   @Output() remove = new EventEmitter<void>();
 
   private notificationSubscription: Subscription | undefined;
-  private dismissTimeout: any; // Variável para armazenar o timeout
 
-  constructor(private notificationService: NotificationService) {}
+  constructor(
+    private notificationService: NotificationService,
+    private dialog: MatDialog
+  ) {}
 
 
   ngOnInit() {
     this.notificationSubscription = this.notificationService.getNotifications()
       .subscribe((notification: string | { message: string; data?: any }) => {
         if (typeof notification !== 'string' && notification.data) {
-          this.cliente.status = notification.data.status;
+          this.notification.status = notification.data.status;
         }
+        this.dismiss();
       });
 
-    this.startDismissTimer();
+    setTimeout(() => {
+      this.dismiss();
+    }, 5000);
   }
 
   ngOnDestroy() {
     if (this.notificationSubscription) {
       this.notificationSubscription.unsubscribe();
     }
-    this.clearDismissTimer();
   }
 
-
-  // Inicia o temporizador para ocultar a toast
-  startDismissTimer() {
-    this.dismissTimeout = setTimeout(() => {
-      this.dismiss();
-    }, 8000);
-  }
-
-  // Limpa o temporizador
-  clearDismissTimer() {
-    if (this.dismissTimeout) {
-      clearTimeout(this.dismissTimeout);
-      this.dismissTimeout = null;
-    }
-  }
 
   dismiss() {
     this.remove.emit();
   }
 
-  openModal() {
+  /*openModal() {
     this.isModalOpen = true;
-    this.clearDismissTimer(); // Cancela o temporizador quando o modal é aberto
+  }*/
+
+  openModal() {
+    this.dialog.open(ClienteModalNotificationComponent, {
+      width: '400px',
+      data: this.notification
+    });
   }
+
 
   closeModal() {
     this.isModalOpen = false;
   }
-
 }

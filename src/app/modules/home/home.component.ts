@@ -38,13 +38,13 @@ import { ClienteFormComponent } from '../gerencial/components/cliente-form/clien
 export default class HomeComponent implements OnInit {
   //public image$: Observable<string> = this.sideImageService.image$.pipe(takeUntilDestroyed());
 
-  phrases: string[] = [
+  /*phrases: string[] = [
     "Melhores preços do mercado",
     "Aqui você encontra a chave que procura",
     "Entregamos um serviço de qualidade",
     "Rapidez e eficiência garantidas",
     "A chave perfeita para você"
-  ]
+  ]*/
 
   displayedText: string = "Faça a sua chave conosco";
   currentPhraseIndex: number = 0;
@@ -64,19 +64,14 @@ export default class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.sideImageService.setImage();
-    this.startTextRotation();
+    //this.startTextRotation();
   }
 
-  startTextRotation() {
+  /*startTextRotation() {
     setInterval(() => {
       this.displayTypingEffect(this.phrases[this.currentPhraseIndex]);
       this.currentPhraseIndex = (this.currentPhraseIndex + 1) % this.phrases.length;
     }, 5000);
-  }
-
-  /*get selectedServiceText(): string {
-    const count = this.services.length;
-    return `Selecione`
   }*/
 
   onSelectionChange(event: any): void {
@@ -86,8 +81,6 @@ export default class HomeComponent implements OnInit {
   onServiceChange(event: any): void {
     this.selectedService = event.value;
     this.openClienteFormModal();
-    //this.selectedServiceText;
-    //console.log('papel', this.selectedService);
   }
 
 

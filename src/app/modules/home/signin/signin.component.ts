@@ -40,11 +40,9 @@ import HomeComponent from '../home.component';
 })
 export default class SigninComponent implements AfterContentInit {
 
-  //@Input() role: 'User' | 'Admin' | null = null;
 
   isFormDisabled(): boolean {
     return this.selectedRole === 'User';
-    
   }
 
   @Input() selectedRole: 'User' | 'Admin' | undefined;
@@ -62,7 +60,8 @@ export default class SigninComponent implements AfterContentInit {
     private authService: AuthService,
     private storageService: StorageService,
     private snackBar: MatSnackBar,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+
   ) {}
 
   public hide: boolean = true;
@@ -113,4 +112,9 @@ export default class SigninComponent implements AfterContentInit {
       }
     });
   }
+
+
+  /*isFormDisabled(): boolean {
+    return this.signinForm.invalid;
+  }*/
 }

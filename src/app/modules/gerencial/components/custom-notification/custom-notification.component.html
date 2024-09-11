@@ -1,0 +1,10 @@
+<div class="notification-content">
+  <h4>{{ data.message }}</h4>
+  <div *ngIf="data?.cliente">
+    <p><strong>Nome:</strong> {{ data.cliente.name }}</p>
+    <p><strong>Endereço:</strong> {{ data.cliente.endereco }}</p>
+    <p><strong>Telefone:</strong> {{ data.cliente.phone }}</p>
+    <img *ngIf="data.cliente.imageUrl" [src]="data.cliente.imageUrl" alt="Imagem do cliente" width="100" />
+  </div>
+</div>
+

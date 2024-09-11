@@ -1,4 +1,5 @@
 export interface Cliente {
+  status: string;
   id?: number;
   name?: string;
   endereco?:string;
