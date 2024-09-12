@@ -41,11 +41,10 @@ export class DashboardService {
   }
 
   updateClientStatus(clientId: number, newStatus: string): Observable<Cliente> {
-    const url = `http://locahost:3080/clientes/${clientId}/update-status`;
+    const url = `http://localhost:3080/clientes/${clientId}/update-status`;
     const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
     return this.http.patch<Cliente>(url, body);
   }
-
 
   getClientById(clientId: number): Observable<any>{
     return this.http.get(`${this.apiUrlCliente}/${clientId}`);

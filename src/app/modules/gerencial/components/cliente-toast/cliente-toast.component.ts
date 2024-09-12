@@ -17,11 +17,11 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
       <div class="status-badge" [ngClass]="{
         'pendente': cliente.status === 'pendente',
         'servido': cliente.status === 'servido',
-        'novo': cliente.status === 'novo'
+
       }">
         <mat-icon *ngIf="cliente.status === 'pendente'">error</mat-icon>
         <mat-icon *ngIf="cliente.status === 'servido'">check_circle</mat-icon>
-        <mat-icon *ngIf="cliente.status === 'novo'">fiber_new</mat-icon>
+
         {{ cliente.status | titlecase }}
       </div>
 
@@ -50,7 +50,8 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         display: flex;
         align-items: center;
         padding: 10px;
-        background: rgba(41, 213, 170, 0.725);
+        //background: rgba(41, 213, 170, 0.725);
+        background: #4d4dff;
         box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
         position: relative;
         top: 300px;
@@ -93,13 +94,10 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         color: black;
       }
       .status-badge.servido {
-        background-color: #11ea26;
+        background-color: #0fce22;
         color: black;
       }
-      .status-badge.novo {
-        background-color: #1e90ff;
-        color: black;
-      }
+
     `,
   ],
   imports: [

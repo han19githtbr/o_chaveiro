@@ -1,6 +1,6 @@
 export interface Cliente {
-  status: string;
   id?: number;
+  status?: string;
   name?: string;
   endereco?:string;
   imageUrl?: string;
@@ -11,6 +11,7 @@ export interface Cliente {
 
 export interface CreateCliente {
   id?: number;
+  status?: string;
   name?: string;
   endereco?:string;
   imageUrl?: string;
@@ -21,6 +22,7 @@ export interface CreateCliente {
 
 export interface UpdateCliente {
   id?: number;
+  status?: string;
   name?: string;
   endereco?:string;
   imageUrl?: string;

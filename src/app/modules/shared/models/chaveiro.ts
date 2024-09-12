@@ -1,8 +1,8 @@
 export interface Chaveiro {
-  id?: number;
+  //id: number;
   name: string;
   endereco:string;
-  imageUrl?: string;
+  imageUrl: string;
   status: 'disponivel' | 'indisponivel';
   phone: number;
   createdAt?: string;
@@ -10,10 +10,10 @@ export interface Chaveiro {
 }
 
 export interface CreateChaveiro {
-  id?: number;
+  //id: number;
   name: string;
   endereco:string;
-  imageUrl?: string;
+  imageUrl: string;
   status: 'disponivel' | 'indisponivel';
   phone: number;
   createdAt?: string;
@@ -21,10 +21,10 @@ export interface CreateChaveiro {
 }
 
 export interface UpdateChaveiro {
-  id?: number;
+  //id: number;
   name: string;
   endereco:string;
-  imageUrl?: string;
+  imageUrl: string;
   status: 'disponivel' | 'indisponivel';
   phone: number;
   createdAt?: string;

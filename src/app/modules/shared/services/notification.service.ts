@@ -8,12 +8,12 @@ import { tap } from 'rxjs/operators';
 import { CustomNotificationComponent } from '../../gerencial/components/custom-notification/custom-notification.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { Notification } from '../models/notification';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-
   //private apiUrl = 'http://localhost:3000/notifications';
   private apiUrl = `${environment.api}/notifications`;
   private socketUrl = environment.api;
@@ -57,7 +57,6 @@ export class NotificationService {
     this.notificationsSubject.next({ message, data });
   }
 
-
   showNewNotification(message: string, action: string, data: any) {
     const snackBarRef = this.snackBar.openFromComponent(CustomNotificationComponent, {
       data: { message, cliente: data },
@@ -74,6 +73,11 @@ export class NotificationService {
     this.notificationsSubject.next({ message, data });
   }
 
+  updateNotificationStatus(notificationId: number, newStatus: string): Observable<Notification> {
+    const url = `http://localhost:3000/notifications/${notificationId}/update-status`;
+    const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
+    return this.http.patch<Notification>(url, body);
+  }
 
   createNotification(notification: any): Observable<any> {
     console.log('Enviando notificação:', notification); // Adicione este log
@@ -97,7 +101,7 @@ export class NotificationService {
     });
   }*/
 
-  fetchNotificationById(id: string): Observable<{ message: string; data?: any }> {
+  fetchNotificationById(id: number): Observable<{ message: string; data?: any }> {
     return this.http.get<{ message: string; data?: any }>(`${this.apiUrl}/${id}`);
   }
 

@@ -62,7 +62,6 @@ export default class DashboardComponent implements OnDestroy {
   public clientes: any[] = [];
   selectedServices: Service[] = [];
   searchText: string = '';
-  //notifications: any[] = [];
   notifications: Array<{ message: string; data?: any }> = [];
   private socket: Socket;
   newMessageNotification: boolean = false;
@@ -233,7 +232,7 @@ export default class DashboardComponent implements OnDestroy {
   private showRandomNotification() {
       setInterval(() => {
         // Gera um ID aleatório para buscar uma notificação (ajuste conforme necessário)
-        const randomId = this.generateRandomId(); // Você precisará de uma lógica para gerar um ID válido ou ajustar conforme sua lógica de backend
+        const randomId = Number(this.generateRandomId()); // Você precisará de uma lógica para gerar um ID válido ou ajustar conforme sua lógica de backend
         this.notificationService.fetchNotificationById(randomId).subscribe(notification => {
           this.notificationToasts.push(notification);
           setTimeout(() => {

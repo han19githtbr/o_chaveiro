@@ -1,10 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Cliente } from 'src/app/modules/shared/models/cliente';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-cliente-modal',
@@ -30,9 +32,8 @@ export class ClienteModalComponent {
   constructor(
     private dashboardService: DashboardService,
     private route: ActivatedRoute,
-  ) {
 
-  }
+  ) {}
 
 
   ngOnInit(): void {
@@ -50,7 +51,6 @@ export class ClienteModalComponent {
 
       this.dashboardService.updateClientStatus(this.cliente.id, newStatus).subscribe(
         response => {
-
           this.cliente = response;
         },
         error => {
@@ -65,4 +65,7 @@ export class ClienteModalComponent {
   closeModal() {
     this.close.emit();
   }
+  /*closeModal(): void {
+    this.dialogRef.close();
+  }*/
 }

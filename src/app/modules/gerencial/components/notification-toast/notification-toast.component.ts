@@ -36,7 +36,8 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         display: flex;
         align-items: center;
         padding: 10px;
-        background: rgba(41, 213, 170, 0.725);
+        //background: rgba(41, 213, 170, 0.725);
+        background: #4d4dff;
         box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
         position: fixed;
         bottom: 20px;
