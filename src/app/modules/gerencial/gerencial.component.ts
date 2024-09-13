@@ -37,6 +37,13 @@ const components = [
 })
 export default class GerencialComponent implements OnInit {
 
+
+  isMenuOpen = false;
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
   public menus: Menu[] = [
     {
       label: 'Dashboard',
@@ -53,7 +60,7 @@ export default class GerencialComponent implements OnInit {
       icon: 'person_outline',
       router: 'keys',
     },
-    
+
     {
       label: 'Controle de acesso',
       icon: 'door_front',

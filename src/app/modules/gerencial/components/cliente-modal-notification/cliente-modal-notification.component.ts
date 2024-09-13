@@ -13,7 +13,7 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
         <div class="card-section">
           <div class="row items-center">
             <ng-container>
-              <mat-icon>edit</mat-icon>
+              <mat-icon class="edit_button">edit</mat-icon>
             </ng-container>
             <ng-container>
               <mat-slide-toggle
@@ -71,6 +71,11 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
 
     .row {
       padding-bottom: 20px;
+    }
+
+    .edit_button:hover {
+      color: #0000ff;
+      cursor: pointer;
     }
 
     .modal-overlay {

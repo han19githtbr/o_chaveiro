@@ -5,10 +5,17 @@
       <div class="card-section">
         <div class="row items-center">
           <ng-container>
-            <mat-icon>edit</mat-icon>
+            <mat-icon class="edit_button" matTooltip="Editar" (click)="openEditModal()">edit</mat-icon>
           </ng-container>
           <ng-container>
-            <mat-slide-toggle color="primary"></mat-slide-toggle>
+            <mat-slide-toggle
+              color="primary"
+              matTooltip="Alterar status"
+              [checked]="service?.status === 'pronto'"
+              (change)="toggleServiceStatus()"
+            >
+
+            </mat-slide-toggle>
           </ng-container>
           <ng-container>
             <mat-icon>delete_outline</mat-icon>
@@ -25,8 +32,7 @@
       <div class="buttons">
         <app-form-actions></app-form-actions>
       </div>
-
+      <!--<button mat-button (click)="closeModal()" class="close-button">Fechar</button>-->
     </div>
-
   </div>
 </div>

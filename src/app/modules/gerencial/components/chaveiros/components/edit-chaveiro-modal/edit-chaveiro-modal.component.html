@@ -1,0 +1,50 @@
+<div class="modal-container">
+  <form [formGroup]="chaveiroForm" (ngSubmit)="onSubmit()">
+    <div class="row col">
+      <app-card-section>
+        <!-- Dados da empresa -->
+        <div class="row items-center">
+          <div class="row col gap-8 w-full">
+            <h3>Dados do chaveiro</h3>
+            <mat-form-field class="w-full">
+              <mat-label>Nome do chaveiro</mat-label>
+              <mat-icon matPrefix>person</mat-icon>
+              <input id="name" formControlName="name" type="text" matInput autocomplete="name" />
+            </mat-form-field>
+            <mat-form-field class="field-image" appearance="outline">
+              <mat-label>URL da Imagem</mat-label>
+              <mat-icon matPrefix>image</mat-icon>
+              <input matInput formControlName="imageUrl" type="text" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Outros dados do chaveiro -->
+        <div class="row">
+          <mat-form-field class="w-full">
+            <mat-label>Telefone</mat-label>
+            <mat-icon matPrefix>phone</mat-icon>
+            <input id="phone" formControlName="phone" type="text" matInput autocomplete="phone" />
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="w-full">
+            <mat-label>Endereço</mat-label>
+            <mat-icon matPrefix>person_pin_circle</mat-icon>
+            <input id="endereco" formControlName="endereco" type="text" matInput autocomplete="place" />
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Status</mat-label>
+            <mat-icon matPrefix>info</mat-icon>
+            <input id="status" formControlName="status" type="text" matInput autocomplete="status" />
+          </mat-form-field>
+        </div>
+
+      </app-card-section>
+
+      <button class="save_button" type="submit">Salvar</button>
+    </div>
+  </form>
+</div>

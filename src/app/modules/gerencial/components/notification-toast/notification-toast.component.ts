@@ -145,10 +145,6 @@ export default class NotificationToastComponent implements OnInit, OnDestroy {
     this.remove.emit();
   }
 
-  /*openModal() {
-    this.isModalOpen = true;
-  }*/
-
   openModal() {
     this.dialog.open(ClienteModalNotificationComponent, {
       width: '400px',

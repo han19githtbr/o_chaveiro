@@ -19,6 +19,22 @@ app-menu-side-nav {
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
+
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.hamburger mat-icon {
+  color: #fff;
+}
+
 .content {
   flex: 1;
   display: flex;
@@ -46,7 +62,35 @@ app-menu-side-nav {
 }
 
 
+@media (max-width: 768px) {
+  :host {
+    height: 150vh;
+  }
 
+  .search-bar {
+    width: 100%; /* Faz a barra de pesquisa ocupar toda a largura */
+  }
+
+  .header {
+    flex-direction: column; /* Empilha os elementos verticalmente */
+    align-items: flex-start; /* Alinha itens ao início */
+  }
+
+  .main-content {
+    padding: 16px; /* Reduz o padding */
+  }
+
+  .content {
+    margin-left: 0;
+  }
+
+}
+
+
+/* Mostrar o menu quando o estado isMenuOpen é verdadeiro */
+.app-menu-side-nav.menu-open {
+  display: block;
+}
 
 /*@import '../../modules/shared/styles/variables.scss';
 

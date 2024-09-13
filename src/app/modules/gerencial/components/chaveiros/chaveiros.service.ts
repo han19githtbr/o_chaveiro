@@ -21,11 +21,6 @@ export class ChaveiroService {
     return this.http.get<Chaveiro>(`${this.apiUrlChaveiro}/${chaveiroId}`);
   }
 
-  /*createChaveiro(data: CreateChaveiro): Observable<{chaveiro: Chaveiro}> {
-    return this.http.post<{ chaveiro: Chaveiro }>(`${this.apiUrlChaveiro}`, data);
-    console.log('chaveiro criado', data);
-  }*/
-
   createChaveiro(chaveiroData: any): Observable<Chaveiro> {
     return this.http.post<Chaveiro>(`${this.apiUrlChaveiro}`, chaveiroData);
   }
@@ -34,8 +29,10 @@ export class ChaveiroService {
     return this.http.put<Chaveiro>(`${this.apiUrlChaveiro}/${id}`, chaveiroData);
   }
 
-  /*createChaveiro(chaveiro: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrlChaveiro}`, chaveiro);
-  }*/
+  updateChaveiroStatus(chaveiroId: number, newStatus: string): Observable<Chaveiro> {
+    const url = `http://localhost:3000/chaveiro/${chaveiroId}/update-status`;
+    const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
+    return this.http.patch<Chaveiro>(url, body);
+  }
 
 }

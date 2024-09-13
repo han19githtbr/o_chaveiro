@@ -12,6 +12,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chaveiro } from 'src/app/modules/shared/models/chaveiro';
 import { HttpClient } from '@angular/common/http';
+import { LoadingEffectComponent } from 'src/app/modules/shared/components/loading-effect/loading-effect.component';
+import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 
 
 @Component({
@@ -39,6 +41,7 @@ export default class AddComponent {
   constructor(
     private fb: FormBuilder,
     private chaveiroService: ChaveiroService,
+    private loadingService: LoadingService,
     private snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute,
@@ -82,28 +85,50 @@ export default class AddComponent {
     if (this.chaveiroForm.valid) {
       const formData: CreateChaveiro = this.chaveiroForm.value;
 
+      // Mostra o efeito de loading
+      this.loadingService.hideLoading();
+
+      // Define um delay aleatório entre 1 e 5 segundos
+      const delay = Math.random() * (5000 - 1000) + 1000;
+
       if (this.chaveiroId) {
         // Atualização
         this.chaveiroService.updateChaveiro(this.chaveiroId, formData).subscribe(
           () => {
-            this.router.navigate(['/gerencial/chaveiros']);
-            this.snackBar.open('Chaveiro atualizado com sucesso.', '', { duration: 3000 });
+            setTimeout(() => {
+              // Esconde o efeito de loading
+              this.loadingService.showLoading();
+              this.router.navigate(['/gerencial/chaveiros']);
+              this.snackBar.open('Chaveiro atualizado com sucesso.', '', { duration: 3000 });
+            }, delay);
           },
           (error) => {
-            console.error('Erro ao atualizar chaveiro:', error);
-            this.snackBar.open('Erro ao atualizar chaveiro.', '', { duration: 3000 });
+            setTimeout(() => {
+              // Esconde o efeito de loading
+              this.loadingService.showLoading();
+              console.error('Erro ao atualizar chaveiro:', error);
+              this.snackBar.open('Erro ao atualizar chaveiro.', '', { duration: 3000 });
+            }, delay);
           }
         );
       } else {
         // Criação
         this.chaveiroService.createChaveiro(formData).subscribe(
           () => {
-            this.router.navigate(['/gerencial/chaveiros']);
-            this.snackBar.open('Chaveiro criado com sucesso.', '', { duration: 3000 });
+            setTimeout(() => {
+              // Esconde o efeito de loading
+              this.loadingService.showLoading();
+              this.router.navigate(['/gerencial/chaveiros']);
+              this.snackBar.open('Chaveiro criado com sucesso.', '', { duration: 3000 });
+            }, delay);
           },
           (error) => {
-            console.error('Erro ao criar chaveiro:', error);
-            this.snackBar.open('Erro ao criar chaveiro.', '', { duration: 3000 });
+            setTimeout(() => {
+              // Esconde o efeito de loading
+              this.loadingService.showLoading();
+              console.error('Erro ao criar chaveiro:', error);
+              this.snackBar.open('Erro ao criar chaveiro.', '', { duration: 3000 });
+            }, delay);
           }
         );
       }
@@ -111,4 +136,5 @@ export default class AddComponent {
       this.snackBar.open('Por favor, preencha todos os campos obrigatórios.', 'Fechar', { duration: 3000 });
     }
   }
+
 }

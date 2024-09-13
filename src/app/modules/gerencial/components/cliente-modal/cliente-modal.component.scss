@@ -11,6 +11,11 @@
   z-index: 2000;
 }
 
+.edit_button:hover {
+  color: #0000ff;
+  cursor: pointer;
+}
+
 .modal-content {
   background: rgb(255, 255, 255);
   padding: 20px;

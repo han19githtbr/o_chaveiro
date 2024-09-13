@@ -53,7 +53,7 @@
   </div>
 
 
-  <div *ngFor="let clienteToast of clientesToasts">
+  <div class="client-toast-container" *ngFor="let clienteToast of clientesToasts">
     <app-cliente-toast [cliente]="clienteToast" (remove)="removeCliente(clienteToast)"></app-cliente-toast>
   </div>
 

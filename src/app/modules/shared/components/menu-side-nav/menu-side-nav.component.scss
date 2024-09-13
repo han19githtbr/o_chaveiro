@@ -68,3 +68,15 @@ button.mat-button {
 .router-link-active {
   color: #ffcc00; // cor de destaque para o item ativo
 }
+
+
+@media (max-width: 1250px) {
+  .container {
+    flex-direction: column;
+  }
+
+  mat-toolbar-row {
+    margin: 0 auto;
+    align-items: center;
+  }
+}

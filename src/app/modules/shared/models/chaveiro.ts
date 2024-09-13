@@ -1,32 +1,36 @@
 export interface Chaveiro {
-  //id: number;
+  id?: number;
   name: string;
   endereco:string;
   imageUrl: string;
-  status: 'disponivel' | 'indisponivel';
+  status: 'ativo' | 'inativo';
   phone: number;
   createdAt?: string;
   updatedAt?: string;
 }
 
 export interface CreateChaveiro {
-  //id: number;
+  id?: number;
   name: string;
   endereco:string;
   imageUrl: string;
-  status: 'disponivel' | 'indisponivel';
+  status: 'ativo' | 'inativo';
   phone: number;
   createdAt?: string;
   updatedAt?: string;
 }
 
 export interface UpdateChaveiro {
-  //id: number;
+  id?: number;
   name: string;
   endereco:string;
   imageUrl: string;
-  status: 'disponivel' | 'indisponivel';
+  status: 'ativo' | 'inativo';
   phone: number;
   createdAt?: string;
   updatedAt?: string;
+}
+
+export interface UpdateChaveiro extends CreateChaveiro {
+  id?: number;
 }

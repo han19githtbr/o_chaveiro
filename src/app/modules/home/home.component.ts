@@ -50,7 +50,7 @@ export default class HomeComponent implements OnInit {
   currentPhraseIndex: number = 0;
   selectedUser: UserAdmin[] = [];
   searchText: string = '';
-  //users: UserAdmin[] = [];
+
 
   services: string[] = ['Cópia', 'Conserto'];
   selectedService: string | null = null;
@@ -66,13 +66,6 @@ export default class HomeComponent implements OnInit {
     this.sideImageService.setImage();
     //this.startTextRotation();
   }
-
-  /*startTextRotation() {
-    setInterval(() => {
-      this.displayTypingEffect(this.phrases[this.currentPhraseIndex]);
-      this.currentPhraseIndex = (this.currentPhraseIndex + 1) % this.phrases.length;
-    }, 5000);
-  }*/
 
   onSelectionChange(event: any): void {
     this.selectedUser = event.value;

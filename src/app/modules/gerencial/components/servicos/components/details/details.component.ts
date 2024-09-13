@@ -7,7 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Service } from 'src/app/modules/shared/models/service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatDialog } from '@angular/material/dialog';
+import { EditServiceModalComponent } from '../edit-service-modal/edit-service-modal.component';
 
 
 @Component({
@@ -31,7 +32,10 @@ export default class DetailsComponent implements OnInit {
   @Input() public useDelete!: boolean;
   public service: Service | undefined
 
-  constructor( private servicoService: ServicosService ) {}
+  constructor(
+    private servicoService: ServicosService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.loadServiceById();
@@ -44,6 +48,42 @@ export default class DetailsComponent implements OnInit {
       console.log('Detalhes do serviço', this.service);
     })
   }
+
+  openEditModal(): void {
+    if (this.service) {
+      const dialogRef = this.dialog.open(EditServiceModalComponent, {
+        data: { service: this.service },
+        panelClass: 'custom-dialog-container',
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          // Recarregue os dados da empresa após a edição, se necessário
+          this.ngOnInit();
+        }
+      });
+    }
+  }
+
+
+  toggleServiceStatus(): void {
+    if (this.service && this.service.id) {
+      const newStatus = this.service.status === 'pronto' ? 'andando' : 'pronto';
+
+      this.servicoService.updateServiceStatus(this.service.id, newStatus).subscribe(
+        response => {
+
+          this.service = response;
+        },
+        error => {
+          console.error('Erro ao atualizar o status do serviço', error);
+        }
+      );
+    } else {
+      console.error('Chaveiro não encontrado');
+    }
+  }
+
 
   closeModal() {
     this.close.emit();

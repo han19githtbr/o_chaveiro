@@ -1,4 +1,4 @@
-<form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="serviceForm">
   <section class="details">
     <app-card-section text="Informações do serviço">
       <section class="wrapper" body>
@@ -18,7 +18,7 @@
           <mat-form-field class="field-image" appearance="outline">
             <mat-label>URL da Imagem</mat-label>
             <mat-icon matPrefix>image</mat-icon>
-            <input id="imageUrl" matInput formControlName="imageUrl" />
+            <input id="imageUrl" matInput formControlName="imageUrl" type="text" />
           </mat-form-field>
 
         </div>
@@ -35,19 +35,18 @@
         <div class="row">
           <mat-form-field appearance="outline">
             <mat-label>Status</mat-label>
-            <mat-icon matPrefix>status</mat-icon>
+            <mat-icon matPrefix>info</mat-icon>
             <mat-select formControlName="status" required>
-              <mat-option value="ativo">Pronto</mat-option>
-              <mat-option value="inativo">Em andamento</mat-option>
+              <mat-option value="pronto">Pronto</mat-option>
+              <mat-option value="andando">Em andamento</mat-option>
             </mat-select>
           </mat-form-field>
-
         </div>
       </section>
     </app-card-section>
 
     <div class="buttons">
-      <app-form-actions />
+      <app-form-actions (clickSaveEvent)="onSubmit()"></app-form-actions>
     </div>
 
   </section>

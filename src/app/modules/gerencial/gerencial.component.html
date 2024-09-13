@@ -1,4 +1,14 @@
-<app-menu-side-nav [menusToShow]="menus"></app-menu-side-nav>
+<!-- Botão hamburger para telas pequenas -->
+<button class="hamburger" (click)="toggleMenu()">
+  <mat-icon>menu</mat-icon>
+</button>
+
+<!-- Barra de navegação (menu lateral) -->
+<app-menu-side-nav
+  [menusToShow]="menus"
+  [ngClass]="{'menu-open': isMenuOpen}"
+>
+</app-menu-side-nav>
 
 <div class="content">
   <div class="header">
@@ -7,7 +17,6 @@
       [subtitle]="subtitle"
     >
     </app-bread-crumb>
-    <!--<app-toolbar></app-toolbar>-->
   </div>
 
   <div class="main-content">

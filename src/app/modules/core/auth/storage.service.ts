@@ -47,6 +47,16 @@ export class StorageService {
     return admin ? JSON.parse(admin) as UserAdmin : null;
   }*/
 
+  // Exemplo de função para armazenar o ID do administrador no localStorage após login
+  storeAdminId(adminId: number): void {
+    localStorage.setItem('adminId', adminId.toString());
+  }
+
+  getAdminId(): number | null {
+    const adminId = localStorage.getItem('adminId');
+    return adminId ? Number(adminId): null;
+  }
+
   getAdminDetails(id: number): Observable<UserAdmin> {
     return this.http.get<UserAdmin>(`${this.apiUrl}/${id}`);
   }

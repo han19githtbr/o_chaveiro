@@ -32,7 +32,6 @@ export class ClienteModalComponent {
   constructor(
     private dashboardService: DashboardService,
     private route: ActivatedRoute,
-
   ) {}
 
 

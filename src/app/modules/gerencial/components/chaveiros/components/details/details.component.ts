@@ -9,6 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { Chaveiro } from 'src/app/modules/shared/models/chaveiro';
 import { ChaveiroService } from '../../chaveiros.service';
 import { ActivatedRoute } from '@angular/router';
+import { EditChaveiroModalComponent } from '../edit-chaveiro-modal/edit-chaveiro-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 const components = [
   CardSectionComponent,
@@ -40,11 +43,20 @@ export default class DetailsComponent implements OnInit {
     }
   ]
 
-  constructor(private chaveiroService: ChaveiroService) {
+  constructor(
+    private chaveiroService: ChaveiroService,
+    private dialog: MatDialog
+  ) {
 
   }
 
   ngOnInit(): void {
+    const chaveiroId = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.chaveiroService.getChaveiroById(chaveiroId).subscribe((data) => {
+      this.chaveiro = data;
+    });
+
     this.loadChaveiroById();
   }
 
@@ -55,6 +67,41 @@ export default class DetailsComponent implements OnInit {
       this.chaveiro = response;
       console.log('Detalhes do serviço', this.chaveiro);
     })
+  }
+
+
+  openEditModal(): void {
+    if (this.chaveiro) {
+      const dialogRef = this.dialog.open(EditChaveiroModalComponent, {
+        data: { chaveiro: this.chaveiro },
+        panelClass: 'custom-dialog-container',
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          // Recarregue os dados da empresa após a edição, se necessário
+          this.ngOnInit();
+        }
+      });
+    }
+  }
+
+  toggleChaveiroStatus(): void {
+    if (this.chaveiro && this.chaveiro.id) {
+      const newStatus = this.chaveiro.status === 'ativo' ? 'inativo' : 'ativo';
+
+      this.chaveiroService.updateChaveiroStatus(this.chaveiro.id, newStatus).subscribe(
+        response => {
+
+          this.chaveiro = response;
+        },
+        error => {
+          console.error('Erro ao atualizar o status do chaveiro', error);
+        }
+      );
+    } else {
+      console.error('Chaveiro não encontrado');
+    }
   }
 
   closeModal() {
