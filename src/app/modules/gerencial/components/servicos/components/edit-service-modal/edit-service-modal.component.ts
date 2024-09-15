@@ -53,18 +53,29 @@ export class EditServiceModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { service: Service }
   ) {
     this.serviceForm = this.fb.group({
-      cliente: [''],
-      value: [''],
-      imageUrl: [''],
-      service: [''],
-      status: [''],
+      cliente: ['', Validators.required], // Campo obrigatório
+      value: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]], // Valor numérico em string
+      imageUrl: ['', [Validators.required, Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/)]], // URL válida de imagem
+      service: ['', Validators.required], // Campo obrigatório
+      status: ['', Validators.required], // Status obrigatório
     });
   }
 
 
   ngOnInit(): void {
+    /*if (this.data?.service?.id) {
+      this.serviceId = this.data.service.id;
+    }*/
     if (this.data?.service?.id) {
-      this.serviceId = this.data.service.id; // Atribua o id do chaveiro a partir dos dados injetados
+      this.serviceId = this.data.service.id;
+      // Preencher o formulário com os dados recebidos do serviço
+      this.serviceForm.patchValue({
+        cliente: this.data.service.cliente || '',
+        value: this.data.service.value || 0,
+        imageUrl: this.data.service.imageUrl || '',
+        service: this.data.service.service || '',
+        status: this.data.service.status || ''
+      });
     }
   }
 
@@ -87,17 +98,16 @@ export class EditServiceModalComponent implements OnInit {
 
   onSubmit(): void {
     if (this.serviceForm.valid) {
-      const serviceData: CreateService = this.serviceForm.value;
-
-      const updatedServiceData: UpdateService = {
-        cliente: serviceData.cliente || '',  // Forneça um valor padrão vazio se estiver undefined
-        value: Number(serviceData.value) || 0,
-        imageUrl: serviceData.imageUrl || '',
-        service: serviceData.service || '',
-        status: serviceData.status || ''
+      const formValues = this.serviceForm.value;
+      const serviceData: UpdateService = {
+        cliente: formValues.cliente || this.data.service.cliente,
+        value: formValues.value || this.data.service.value,
+        imageUrl: formValues.imageUrl || this.data.service.imageUrl,
+        service: formValues.service || this.data.service.service,
+        status: formValues.status || this.data.service.status,
       };
 
-      this.servicoService.updateService(this.serviceId, updatedServiceData).subscribe(
+      this.servicoService.updateService(this.serviceId, serviceData).subscribe(
         (response) => {
           this.snackBar.open('Serviço atualizado com sucesso!', 'Fechar', { duration: 3000 });
         },

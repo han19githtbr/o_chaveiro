@@ -38,6 +38,12 @@ export default class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const serviceId = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.servicoService.getServiceById(serviceId).subscribe((data) => {
+      this.service = data;
+    })
+
     this.loadServiceById();
   }
 
@@ -68,7 +74,7 @@ export default class DetailsComponent implements OnInit {
 
   toggleServiceStatus(): void {
     if (this.service && this.service.id) {
-      const newStatus = this.service.status === 'pronto' ? 'andando' : 'pronto';
+      const newStatus = this.service.status === 'ativo' ? 'inativo' : 'ativo';
 
       this.servicoService.updateServiceStatus(this.service.id, newStatus).subscribe(
         response => {

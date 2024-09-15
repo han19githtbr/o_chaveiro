@@ -41,7 +41,7 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
         position: fixed;
         bottom: 20px;
-        width: 200px;
+        width: 240px;
         right: 20px;
         z-index: 1000;
         border-radius: 5px;

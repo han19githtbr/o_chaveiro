@@ -51,3 +51,34 @@
   background-color: #ff8a8a;
   cursor: pointer;
 }
+
+.button-status {
+  &.ativo {
+    background-color: #28f42e; /* Verde para ativo */
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  &.inativo {
+    background-color: #f44336; /* Vermelho para inativo */
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  &.pendente {
+    background-color: #ff9800; /* Laranja para pendente */
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  &:hover {
+    opacity: 0.7; /* Leve transparência ao passar o mouse */
+    cursor: pointer;
+  }
+
+  /* Ajustes de padding e borda */
+  padding: 2px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 18px;
+}

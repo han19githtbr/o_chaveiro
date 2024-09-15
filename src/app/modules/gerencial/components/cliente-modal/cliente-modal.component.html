@@ -7,14 +7,27 @@
           <mat-icon class="edit_button">edit</mat-icon>
         </ng-container>
         <ng-container>
-          <mat-slide-toggle
+          <!--<mat-slide-toggle
             color="primary"
             matTooltip="Alterar status"
-            [checked]="cliente?.status === 'servido'"
+            [checked]="cliente?.status === 'ativo'"
             (change)="toggleClientStatus()"
           >
 
-          </mat-slide-toggle>
+          </mat-slide-toggle>-->
+          <button
+            mat-button
+            (click)="toggleClientStatus()"
+            matTooltip="Alterar status"
+            [ngClass]="{
+              'button-status': true,
+              'ativo': cliente?.status === 'ativo',
+              'inativo': cliente?.status === 'inativo',
+              'pendente': cliente?.status === 'pendente'
+            }"
+          >
+            {{ getStatusLabel(cliente?.status || '') }}
+          </button>
         </ng-container>
         <ng-container>
           <mat-icon>delete_outline</mat-icon>
@@ -27,7 +40,7 @@
       <img [src]="cliente?.imageUrl" alt="Cliente Image" class="modal-image" />
       <h2>{{ cliente?.name }}</h2>
       <p>
-        <strong>Status:</strong> {{ cliente?.status }}
+        <strong>Status:</strong> {{ getStatusLabel(cliente?.status || '') }}
       </p>
       <p>
         <strong>Telefone:</strong> {{ cliente?.phone }}

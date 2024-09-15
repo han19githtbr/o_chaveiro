@@ -44,7 +44,6 @@ export default class ListComponent implements OnInit{
     );
   }
 
-
   public goToDetails(user: any): void {
     this.router.navigate(['../details', user.id], { relativeTo: this.route });
   }

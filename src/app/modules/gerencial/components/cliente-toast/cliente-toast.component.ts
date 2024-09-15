@@ -14,15 +14,17 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
   template: `
     <div class="cliente-toast" (click)="openModal()"> <!-- Adicionado evento de clique -->
       <!-- Adicionando o aviso de status -->
+      <!--'pendente': cliente.status === 'pendente',-->
       <div class="status-badge" [ngClass]="{
+        'ativo': cliente.status === 'ativo',
         'pendente': cliente.status === 'pendente',
-        'servido': cliente.status === 'servido',
-
+        'inativo': cliente.status === 'inativo',
       }">
         <mat-icon *ngIf="cliente.status === 'pendente'">error</mat-icon>
-        <mat-icon *ngIf="cliente.status === 'servido'">check_circle</mat-icon>
+        <mat-icon *ngIf="cliente.status === 'ativo'">check_circle</mat-icon>
+        <mat-icon *ngIf="cliente.status === 'inativo'">cancel</mat-icon>
 
-        {{ cliente.status | titlecase }}
+        {{ getStatusLabel(cliente.status) | titlecase }}
       </div>
 
 
@@ -90,11 +92,15 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         width: fit-content;
       }
       .status-badge.pendente {
-        background-color: #ea1e0d;
+        background-color: #eedf22;
         color: black;
       }
-      .status-badge.servido {
+      .status-badge.ativo {
         background-color: #0fce22;
+        color: black;
+      }
+      .status-badge.inativo {
+        background-color: #ea1e0d;
         color: black;
       }
 
@@ -134,6 +140,19 @@ export default class ClienteToastComponent implements OnInit, OnDestroy {
       this.notificationSubscription.unsubscribe();
     }
     this.clearDismissTimer();
+  }
+
+  getStatusLabel(status: string): string {
+    switch (status) {
+      case 'ativo':
+        return 'servido';
+      case 'inativo':
+        return 'cancelado';
+      case 'pendente':
+        return 'pendente';
+      default:
+        return status;
+    }
   }
 
 

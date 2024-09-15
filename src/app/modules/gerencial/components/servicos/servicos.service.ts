@@ -35,7 +35,7 @@ export class ServicosService {
   }
 
   updateServiceStatus(serviceId: number, newStatus: string): Observable<Service> {
-    const url = `http://localhost:3000/service/${serviceId}/update-status`;
+    const url = `http://localhost:3000/servico/${serviceId}/update-status`;
     const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
     return this.http.patch<Service>(url, body);
   }
