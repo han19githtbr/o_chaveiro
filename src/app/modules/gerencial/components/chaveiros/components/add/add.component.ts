@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MaterialModule } from 'src/app/material.module';
 import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CardSectionComponent } from 'src/app/modules/shared/components/card-section/card-section.component';
@@ -14,6 +14,7 @@ import { Chaveiro } from 'src/app/modules/shared/models/chaveiro';
 import { HttpClient } from '@angular/common/http';
 import { LoadingEffectComponent } from 'src/app/modules/shared/components/loading-effect/loading-effect.component';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
+import ButtonComponent from 'src/app/modules/shared/components/button/button.component';
 
 
 @Component({
@@ -29,6 +30,7 @@ import { LoadingService } from 'src/app/modules/shared/services/loading.service'
     FormsModule,
     MatInputModule,
     FormActionsComponent,
+    ButtonComponent,
     CardSectionComponent,
   ],
 })
@@ -37,6 +39,17 @@ export default class AddComponent {
 
   chaveiroId: number | null = null;
 
+
+  location = inject(Location)
+
+  @Input() tooltipTextInvalid: string = '';
+  @Input() showSaveButton: boolean = true;
+  @Output() clickSaveEvent: EventEmitter<any> = new EventEmitter<any>();
+
+
+  public back(): void{
+    this.location.back();
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -86,26 +99,30 @@ export default class AddComponent {
       const formData: CreateChaveiro = this.chaveiroForm.value;
 
       // Mostra o efeito de loading
-      this.loadingService.hideLoading();
+      this.loadingService.showLoading();
 
-      // Define um delay aleatório entre 1 e 5 segundos
-      const delay = Math.random() * (5000 - 1000) + 1000;
 
       if (this.chaveiroId) {
         // Atualização
         this.chaveiroService.updateChaveiro(this.chaveiroId, formData).subscribe(
           () => {
+            // Define um delay aleatório entre 1 e 5 segundos
+            const delay = Math.random() * (5000 - 1000) + 1000;
+
             setTimeout(() => {
               // Esconde o efeito de loading
-              this.loadingService.showLoading();
+              this.loadingService.hideLoading();
               this.router.navigate(['/gerencial/chaveiros']);
               this.snackBar.open('Chaveiro atualizado com sucesso.', '', { duration: 3000 });
             }, delay);
           },
           (error) => {
+            // Define um delay aleatório entre 1 e 5 segundos
+            const delay = Math.random() * (5000 - 1000) + 1000;
+
             setTimeout(() => {
               // Esconde o efeito de loading
-              this.loadingService.showLoading();
+              this.loadingService.hideLoading();
               console.error('Erro ao atualizar chaveiro:', error);
               this.snackBar.open('Erro ao atualizar chaveiro.', '', { duration: 3000 });
             }, delay);
@@ -115,17 +132,23 @@ export default class AddComponent {
         // Criação
         this.chaveiroService.createChaveiro(formData).subscribe(
           () => {
+            // Define um delay aleatório entre 1 e 5 segundos
+            const delay = Math.random() * (5000 - 1000) + 1000;
+
             setTimeout(() => {
               // Esconde o efeito de loading
-              this.loadingService.showLoading();
+              this.loadingService.hideLoading();
               this.router.navigate(['/gerencial/chaveiros']);
               this.snackBar.open('Chaveiro criado com sucesso.', '', { duration: 3000 });
             }, delay);
           },
           (error) => {
+            // Define um delay aleatório entre 1 e 5 segundos
+            const delay = Math.random() * (5000 - 1000) + 1000;
+
             setTimeout(() => {
               // Esconde o efeito de loading
-              this.loadingService.showLoading();
+              this.loadingService.hideLoading();
               console.error('Erro ao criar chaveiro:', error);
               this.snackBar.open('Erro ao criar chaveiro.', '', { duration: 3000 });
             }, delay);

@@ -9,6 +9,7 @@
       [fullSearch]="false"
     >
     </app-search>
+
   </div>
 
   <app-cliente-modal
@@ -60,7 +61,7 @@
 
   <div class="notification-container">
     <ng-container *ngFor="let notificationToast of notificationToasts">
-      <app-notification-toast [notification]="notificationToast" (remove)="removeNotification(notificationToast)"></app-notification-toast>
+      <app-notification-toast [notification]="notificationToast"></app-notification-toast>
     </ng-container>
   </div>
 

@@ -1,0 +1,63 @@
+<form [formGroup]="clientForm">
+  <section class="details">
+    <app-card-section text="Dados do cliente">
+      <section class="wrapper" body>
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <mat-icon matPrefix>person_pin_circle</mat-icon>
+            <input matInput formControlName="name" type="text" required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Endereço</mat-label>
+            <mat-icon matPrefix>home</mat-icon>
+            <input matInput formControlName="endereco" type="text" required />
+          </mat-form-field>
+
+          <mat-form-field class="field-image" appearance="outline">
+            <mat-label>URL da Imagem</mat-label>
+            <mat-icon matPrefix>image</mat-icon>
+            <input matInput formControlName="imageUrl" type="text" />
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-icon matPrefix>info</mat-icon>
+            <mat-select matInput formControlName="status" type="text" required>
+              <mat-option value="ativo">Servido</mat-option>
+              <mat-option value="inativo">Cancelado</mat-option>
+              <mat-option value="pendente">Pendente</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Telefone</mat-label>
+            <mat-icon matPrefix>phone</mat-icon>
+            <input matInput formControlName="phone" type="text" required />
+          </mat-form-field>
+        </div>
+      </section>
+    </app-card-section>
+
+    <div class="buttons">
+      <!--<app-form-actions (clickSaveEvent)="onSubmit()"></app-form-actions>-->
+      <div class="actions">
+        <app-button
+          type="outline"
+          (click)="back()"
+        >Cancelar
+        </app-button>
+        <app-button
+          type="fill"
+          (click)="clickSaveEvent.emit($event)"
+          *ngIf="showSaveButton"
+          (clickSaveEvent)="onSubmit()"
+        >Salvar
+        </app-button>
+      </div>
+    </div>
+  </section>
+</form>

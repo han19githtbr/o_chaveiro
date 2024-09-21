@@ -24,6 +24,7 @@ import { environment } from 'src/environments/environment';
 import { MatButtonModule } from '@angular/material/button';
 import { ChatService } from 'src/app/modules/shared/services/chat.service';
 import NotificationToastComponent from '../notification-toast/notification-toast.component';
+import ListComponent from '../chaveiros/components/list/list.component';
 
 
 
@@ -40,6 +41,7 @@ import NotificationToastComponent from '../notification-toast/notification-toast
     FormsModule,
     MatFormFieldModule,
     CardSectionComponent,
+    ListComponent,
     ClienteToastComponent,
     ClienteModalNotificationComponent,
     ClienteModalComponent,
@@ -54,15 +56,23 @@ export default class DashboardComponent implements OnDestroy {
   public totalRecebido: number = 0;
   public totalClientes: number = 0;
   public totalNotifications: number = 0;
+
   public clientesToasts: any[] = [];
+  filteredClientesToasts: any[] = [];
+
   public notificationToasts: any[] = [];
+  filteredNotificationToasts: any[] = [];
+
   selectedCliente: any = null;
   isModalOpen: boolean = false;
   public chaveiros: any[] = [];
   public clientes: any[] = [];
+
+  public searchText: string = '';
+
   selectedServices: Service[] = [];
-  searchText: string = '';
-  notifications: Array<{ message: string; data?: any }> = [];
+
+  notifications: Array<{ message: string; data?: any; status: string; loading: boolean }> = [];
   private socket: Socket;
   newMessageNotification: boolean = false;
   isChatOpen: boolean = false;
@@ -88,59 +98,124 @@ export default class DashboardComponent implements OnDestroy {
 
 
   ngOnInit() {
-      this.loadChaveiros();
-      this.updateTotalClientes();
-      this.showRandomNotification();
-      this.updateTotalNotifications();
-      this.showRandomCliente();
-      this.loadServices();
+    this.loadChaveiros();
+    this.updateTotalClientes();
+    this.showRandomNotification();
+    this.updateTotalNotifications();
+    this.listenToNotificationUpdates();
+    this.showRandomCliente();
+    this.loadServices();
+    //this.filteredClientesToasts = this.clientesToasts;
+    //this.filteredNotificationToasts = this.notificationToasts;
 
-      this.socket.on('newMessage', () => {
-        this.newMessageNotification = true;
+
+    this.socket.on('newMessage', () => {
+      this.newMessageNotification = true;
+    });
+  }
+
+
+  // Função de busca que abre o modal se o cliente for encontrado
+  onSearchChange(searchValue: string): void {
+    this.searchText = searchValue;
+
+
+    /*this.filteredClientesToasts = this.clientesToasts.filter(cliente =>
+      cliente.name.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+
+    this.filteredNotificationToasts = this.notificationToasts.filter(notification =>
+      notification.name.toLowerCase().includes(this.searchText.toLowerCase())
+    );*/
+
+  }
+
+
+  private listenToNotificationUpdates() {
+
+    this.subscription = this.notificationService.getNotifications().subscribe((notification: string | { message: string; data?: any }) => {
+      console.log('Notificação Recebida:', notification);
+
+      if (typeof notification === 'string') {
+        this.notifications.push({ message: notification, status: 'novo', loading: false });
+        this.notificationService.showNotification(notification, 'Ver detalhes', null);
+      } else if (notification && notification.data) {
+        const fullData = {
+          message: notification.message || '',
+          status: 'novo',
+          loading: false,
+          name: notification.data.name || '',
+          endereco: notification.data.endereco || '',
+          phone: notification.data.phone || '',
+          imageUrl: notification.data.imageUrl || '',
+          //service: notification.data.service || '',
+          service: Array.isArray(notification.data.service) ? notification.data.service : [notification.data.service || '']
+        };
+
+        this.notifications.push(fullData);
+        this.notificationService.showNotification(fullData.message, 'Ver detalhes', fullData);
+      }
+
+    });
+  }
+
+
+  // Método para atualizar o status da notificação
+  public updateNotificationStatus(index: number, newStatus: string) {
+    const notification = this.notifications[index];
+
+    // Marca o estado de loading para mostrar o efeito de carregamento
+    notification.loading = true;
+
+    // Simula o tempo de carregamento aleatório
+    const randomTime = Math.floor(Math.random() * 5000) + 1000;
+    setTimeout(() => {
+      notification.status = newStatus;
+      notification.loading = false;
+    }, randomTime);
+  }
+
+
+  // Acrescentei essa nova função
+  private updateTotalNotifications() {
+    this.notificationService.getNotifications().subscribe(notifications => {
+      if (Array.isArray(notifications)) {
+        // Se as notificações são recebidas como um array
+        this.totalNotifications = notifications.length;
+      } else {
+        // Caso contrário, trataremos como um objeto singular ou string (se for possível)
+        this.totalNotifications = notifications ? 1 : 0;
+      }
+    });
+  }
+
+
+  private showRandomNotification() {
+    setInterval(() => {
+      // Gera um ID aleatório para buscar uma notificação (ajuste conforme necessário)
+      const randomId = Number(this.generateRandomId());
+      this.notificationService.fetchNotificationById(randomId).subscribe(notification => {
+        this.notificationToasts.push(notification);
+        setTimeout(() => {
+          this.notificationToasts = this.notificationToasts.filter(c => c !== notification);
+        }, 12000);
       });
+    }, 6000);
+  }
 
-      // Assinatura do serviço de notificações
-      this.subscription = this.notificationService.getNotifications().subscribe((notification: string | { message: string; data?: any }) => {
-        console.log('Notificação Recebida:', notification);
 
-        if (typeof notification === 'string') {
-          // Se for uma string, cria um objeto de notificação simples
-          this.notifications.push({ message: notification });
-          this.notificationService.showNotification(notification, 'Ver detalhes', null);
-        } else if (notification && notification.data) {
-          // Se for um objeto, garanta que os dados estão presentes e completos
-          const fullData = {
-            message: notification.message || '',
-            name: notification.data.name || '',
-            endereco: notification.data.endereco || '',
-            phone: notification.data.phone || '',
-            imageUrl: notification.data.imageUrl || '',
-            service: Array.isArray(notification.data.service) ? notification.data.service : [notification.data.service || '']
-          };
-
-          console.log('Dados completos para exibir notificação:', fullData);
-
-          // Adiciona a notificação ao array
-          this.notifications.push(fullData);
-
-          // Exibe a notificação no snack bar
-          this.notificationService.showNotification(fullData.message, 'Ver detalhes', fullData);
-        }
-      });
+  // Função auxiliar para gerar um ID aleatório (ajuste conforme necessário)
+  private generateRandomId(): string {
+    const min = 1;
+    const max = 50;
+    const randomId = Math.floor((Math.random() * (max - min + 1)) + min).toString();
+    return randomId;
   }
 
 
   ngOnDestroy() {
-    this.chatService.disconnect();
-  }
-
-  openChat() {
-    this.isChatOpen = true;
-    this.newMessageNotification = false;
-  }
-
-  removeNotification(notification: any) {
-    this.notifications = this.notifications.filter(n => n !== notification);
+    //this.chatService.disconnect();
+    this.notificationService.disconnect();
   }
 
   openOrderDetailsModal(data: any) {
@@ -215,42 +290,6 @@ export default class DashboardComponent implements OnDestroy {
     });
   }
 
-  // Acrescentei essa nova função
-  private updateTotalNotifications() {
-    this.notificationService.getNotifications().subscribe(notifications => {
-      if (Array.isArray(notifications)) {
-        // Se as notificações são recebidas como um array
-        this.totalNotifications = notifications.length;
-      } else {
-        // Caso contrário, trataremos como um objeto singular ou string (se for possível)
-        this.totalNotifications = notifications ? 1 : 0;
-      }
-    });
-  }
-
-
-  private showRandomNotification() {
-      setInterval(() => {
-        // Gera um ID aleatório para buscar uma notificação (ajuste conforme necessário)
-        const randomId = Number(this.generateRandomId()); // Você precisará de uma lógica para gerar um ID válido ou ajustar conforme sua lógica de backend
-        this.notificationService.fetchNotificationById(randomId).subscribe(notification => {
-          this.notificationToasts.push(notification);
-          setTimeout(() => {
-            this.notificationToasts = this.notificationToasts.filter(c => c !== notification);
-          }, 12000);
-        });
-      }, 6000);
-    }
-
-    // Função auxiliar para gerar um ID aleatório (ajuste conforme necessário)
-    private generateRandomId(): string {
-      const min = 1;
-      const max = 15;
-      const randomId = Math.floor((Math.random() * (max - min + 1)) + min).toString();
-      //const randomId = Math.floor(Math.random() * 5).toString(); // Exemplo básico, ajuste conforme necessário
-      return randomId;
-  }
-
 
   private showRandomCliente() {
     setInterval(() => {
@@ -264,10 +303,6 @@ export default class DashboardComponent implements OnDestroy {
     }, 10000);
   }
 
-  // Função de busca que abre o modal se o cliente for encontrado
-  onSearchChange(searchText: string): void {
-    this.searchText = searchText;
-  }
 
   onFilterClick(): void {
     const foundCliente = this.clientes.find(cliente => cliente.name.toLowerCase() === this.searchText.toLowerCase());

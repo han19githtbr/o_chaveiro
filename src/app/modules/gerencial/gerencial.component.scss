@@ -3,7 +3,7 @@
 :host {
   display: flex;
   flex-direction: column;
-  height: 130vh;
+  height: 175vh;
 }
 
 .search-bar {
@@ -62,9 +62,16 @@ app-menu-side-nav {
 }
 
 
+@media (max-width: 1100px) {
+  :host {
+    height: 180vh;
+  }
+}
+
+
 @media (max-width: 768px) {
   :host {
-    height: 150vh;
+    height: 175vh;
   }
 
   .search-bar {

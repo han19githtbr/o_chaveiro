@@ -60,7 +60,16 @@ export default class GerencialComponent implements OnInit {
       icon: 'person_outline',
       router: 'keys',
     },
-
+    {
+      label: 'Clientes',
+      icon: 'person_outline',
+      router: 'clientes',
+    },
+    {
+      label: 'Pedidos',
+      icon: 'notifications',
+      router: 'notifications',
+    },
     {
       label: 'Controle de acesso',
       icon: 'door_front',

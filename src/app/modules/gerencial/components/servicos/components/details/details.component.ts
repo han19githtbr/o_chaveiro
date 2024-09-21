@@ -44,16 +44,16 @@ export default class DetailsComponent implements OnInit {
       this.service = data;
     })
 
-    this.loadServiceById();
+    //this.loadServiceById();
   }
 
-  loadServiceById() {
+  /*loadServiceById() {
     const serviceId = +this.route.snapshot.paramMap.get('id')!;
     this.servicoService.getServiceById(serviceId).subscribe(response => {
       this.service = response;
       console.log('Detalhes do serviço', this.service);
     })
-  }
+  }*/
 
   openEditModal(): void {
     if (this.service) {

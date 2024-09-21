@@ -95,4 +95,3 @@ export default class FileUploaderComponent implements OnInit {
     })
   }
 }
-

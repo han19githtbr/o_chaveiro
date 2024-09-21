@@ -20,7 +20,7 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         'pendente': cliente.status === 'pendente',
         'inativo': cliente.status === 'inativo',
       }">
-        <mat-icon *ngIf="cliente.status === 'pendente'">error</mat-icon>
+        <mat-icon class="error" *ngIf="cliente.status === 'pendente'">error</mat-icon>
         <mat-icon *ngIf="cliente.status === 'ativo'">check_circle</mat-icon>
         <mat-icon *ngIf="cliente.status === 'inativo'">cancel</mat-icon>
 
@@ -48,33 +48,43 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         display: flex;
         flex-direction: column;
       }
+
       .cliente-toast {
         display: flex;
         align-items: center;
         padding: 10px;
-        //background: rgba(41, 213, 170, 0.725);
-        background: #4d4dff;
-        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
-        position: relative;
-        top: 300px;
+        background: #0c02c1;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.8);
+        position: fixed;
+        //border: 1px solid yellow;
         bottom: 20px;
-        width: 200px;
-        left: 20px;
+        width: 240px;
+        right: 20px;
+        margin-right: 300px;
         z-index: 1000;
         border-radius: 5px;
         cursor: pointer;
       }
+
       .cliente-image {
         width: 50px;
         height: 50px;
         border-radius: 50%;
         margin-right: 10px;
       }
+
       .cliente-name {
         font-weight: bold;
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        color: white;
       }
+
       .cliente-phone {
         text-wrap: wrap;
+        color: white;
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
         font-weight: bold;
       }
 
@@ -91,15 +101,34 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         gap: 5px;
         width: fit-content;
       }
+
+      @keyframes infiniteZoom {
+        70% {
+          transform: scale(1);
+        }
+        70% {
+          transform: scale(1.17);
+        }
+      }
+
+      .error {
+        animation: infiniteZoom 0.5s infinite;
+      }
+
       .status-badge.pendente {
+        border: 2px solid black;
         background-color: #eedf22;
         color: black;
       }
+
       .status-badge.ativo {
+        border: 2px solid black;
         background-color: #0fce22;
         color: black;
       }
+
       .status-badge.inativo {
+        border: 2px solid black;
         background-color: #ea1e0d;
         color: black;
       }

@@ -23,6 +23,16 @@ export default [
     data: { useBreadcrumb: true },
   },
   {
+    path: 'clientes',
+    loadChildren: () => import('./components/clientes/clientes.routes'),
+    data: { useBreadcrumb: true },
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./components/pedidos/pedido.routes'),
+    data: { useBreadcrumb: true },
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./components/settings/settings.routes'),
     data: { useBreadcrumb: true },

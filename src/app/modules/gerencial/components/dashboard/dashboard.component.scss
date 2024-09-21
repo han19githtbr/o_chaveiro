@@ -104,8 +104,87 @@
 
 .notification mat-icon {
   margin-right: 8px;
-  color: #f44336; /* Cor do ícone de ponto de exclamação */
+  color: #f44336;
 }
+
+/* Estilo para o texto do status atual */
+.notification-toast p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* Botões para alterar status */
+.status-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.status-buttons button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.status-buttons button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.status-buttons button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* Estilização do modo de loading */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  font-size: 16px;
+  color: #ffc107;
+  background-color: #343a40;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Animação de loading (pode ser um spinner opcional) */
+.loading p {
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Ajustes para responsividade */
+@media (max-width: 768px) {
+  .notification-toast {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .status-buttons button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+
 
 
 @media (max-width: 1300px) {

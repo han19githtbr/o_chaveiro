@@ -27,7 +27,8 @@
     margin-bottom: 24px;
     .welcome{
       font-size: calc($font-size + 10px);
-      color: $primary;
+      //color: $primary;
+      color: #2331cb;
       font-weight: bold;
     }
 
@@ -42,12 +43,24 @@
 
   .font {
     color: blue;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 18px;
   }
 
   .form{
     font-size: $font-size;
     color: #2398cb;
     margin-bottom: 36px;
+  }
+
+  .icon-mail {
+    color: #2331cb;
+  }
+
+  .icon-password {
+    color: #0b1de7;
   }
 
   .container_cadastro {
@@ -71,6 +84,11 @@
   .animated-icon {
     display: inline-block;
     animation: shake 1.5s infinite;
+    color: #2331cb;
+  }
+
+  .primary {
+    color: #2331cb;
   }
 
   @keyframes shake {
@@ -87,5 +105,4 @@
       transform: rotate(5deg);
     }
   }
-
 }

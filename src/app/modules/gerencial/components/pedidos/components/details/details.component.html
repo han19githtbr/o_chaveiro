@@ -1,0 +1,38 @@
+<div class="details">
+  <!-- cliente-modal.component.html -->
+  <div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="card-section">
+        <div class="row items-center">
+          <ng-container>
+            <mat-icon class="edit_button" matTooltip="Editar" (click)="openEditModal()">edit</mat-icon>
+          </ng-container>
+          <!--<ng-container>
+            <mat-slide-toggle
+              color="primary"
+              matTooltip="Alterar status"
+              [checked]="cliente?.status === 'ativo'"
+              (change)="toggleClientStatus()"
+            >
+
+            </mat-slide-toggle>
+          </ng-container>-->
+          <ng-container>
+            <mat-icon matTooltip="Remover">delete_outline</mat-icon>
+          </ng-container>
+        </div>
+      </div>
+      <!--<button class="close-button" (click)="closeModal()">x</button>-->
+      <img [src]="notification?.imageUrl" alt="Notification Image" class="modal-image" />
+      <h2 class="nome_cliente">{{ notification?.name }}</h2>
+      <p><strong>Telefone do cliente:</strong> {{ notification?.phone }}</p>
+      <p><strong>Endereço do cliente:</strong> {{ notification?.endereco }}</p>
+      <p><strong>Status do cliente:</strong> {{ getStatusLabel(notification?.status || '') | titlecase }}</p>
+
+
+      <div class="buttons">
+        <app-form-actions></app-form-actions>
+      </div>
+    </div>
+  </div>
+</div>

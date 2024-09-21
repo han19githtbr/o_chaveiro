@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { MaterialModule } from 'src/app/material.module';
 import { CardSectionComponent } from 'src/app/modules/shared/components/card-section/card-section.component';
 import FormActionsComponent from 'src/app/modules/shared/components/form-actions/form-actions.component';
@@ -14,6 +14,7 @@ import { Service, CreateService, UpdateService } from 'src/app/modules/shared/mo
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { HttpClient } from '@angular/common/http';
 import { LoadingEffectComponent } from 'src/app/modules/shared/components/loading-effect/loading-effect.component';
+import ButtonComponent from 'src/app/modules/shared/components/button/button.component';
 
 
 @Component({
@@ -29,6 +30,7 @@ import { LoadingEffectComponent } from 'src/app/modules/shared/components/loadin
     FormsModule,
     MatFormFieldModule,
     LoadingEffectComponent,
+    ButtonComponent,
     FormActionsComponent,
     CardSectionComponent,
   ],
@@ -38,6 +40,17 @@ export default class AddComponent implements OnInit{
   serviceForm!: FormGroup;
 
   serviceId: number | null = null;
+
+  location = inject(Location)
+
+  @Input() tooltipTextInvalid: string = '';
+  @Input() showSaveButton: boolean = true;
+  @Output() clickSaveEvent: EventEmitter<any> = new EventEmitter<any>();
+
+
+  public back(): void{
+    this.location.back();
+  }
 
 
   constructor(
@@ -90,13 +103,14 @@ export default class AddComponent implements OnInit{
       // Mostra o efeito de loading
       this.loadingService.showLoading();
 
-      // Define um delay aleatório entre 1 e 5 segundos
-      const delay = Math.random() * (5000 - 1000) + 1000;
 
       if (this.serviceId) {
         // Atualização
         this.servicoService.updateService(this.serviceId, formData).subscribe(
           () => {
+            // Define um delay aleatório entre 1 e 5 segundos
+            const delay = Math.random() * (5000 - 1000) + 1000;
+
             setTimeout(() => {
               // Esconde o efeito de loading
               this.loadingService.hideLoading();
@@ -105,6 +119,9 @@ export default class AddComponent implements OnInit{
             }, delay);
           },
           (error) => {
+            // Define um delay aleatório entre 1 e 5 segundos
+            const delay = Math.random() * (5000 - 1000) + 1000;
+
             setTimeout(() => {
               // Esconde o efeito de loading
               this.loadingService.hideLoading();
@@ -117,6 +134,9 @@ export default class AddComponent implements OnInit{
         // Criação
         this.servicoService.createService(formData).subscribe(
           () => {
+            // Define um delay aleatório entre 1 e 5 segundos
+            const delay = Math.random() * (5000 - 1000) + 1000;
+
             setTimeout(() => {
               // Esconde o efeito de loading
               this.loadingService.hideLoading();
@@ -125,6 +145,9 @@ export default class AddComponent implements OnInit{
             }, delay);
           },
           (error) => {
+            // Define um delay aleatório entre 1 e 5 segundos
+            const delay = Math.random() * (5000 - 1000) + 1000;
+
             setTimeout(() => {
               // Esconde o efeito de loading
               this.loadingService.hideLoading();

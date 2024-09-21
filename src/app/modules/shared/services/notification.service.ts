@@ -16,7 +16,8 @@ import { Notification } from '../models/notification';
 export class NotificationService {
   //private apiUrl = 'http://localhost:3000/notifications';
   private apiUrl = `${environment.api}/notifications`;
-  private socketUrl = environment.api;
+  //private socketUrl = environment.api;
+  private socketUrl = 'http://localhost:4200'
   private socket: Socket;
   private notificationsSubject = new Subject<string | { message: string; data?: any }>();
   //notifications$ = this.notificationsSubject.asObservable();
@@ -94,15 +95,12 @@ export class NotificationService {
     });
   }
 
-  /*fetchNotificationById(id: string): void {
-    this.http.get<{ message: string; data?: any }>(`${this.apiUrl}/${id}`).subscribe(notification => {
-
-      this.sendNotification(notification.message);
-    });
-  }*/
-
   fetchNotificationById(id: number): Observable<{ message: string; data?: any }> {
     return this.http.get<{ message: string; data?: any }>(`${this.apiUrl}/${id}`);
+  }
+
+  disconnect() {
+    this.socket.disconnect();
   }
 
   openOrderDetailsModal(data: any): void {

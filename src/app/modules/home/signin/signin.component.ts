@@ -61,7 +61,6 @@ export default class SigninComponent implements AfterContentInit {
     private storageService: StorageService,
     private snackBar: MatSnackBar,
     private loadingService: LoadingService,
-
   ) {}
 
   public hide: boolean = true;

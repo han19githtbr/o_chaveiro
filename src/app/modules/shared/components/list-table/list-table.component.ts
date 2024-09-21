@@ -43,6 +43,8 @@ export default class ListTableComponent
   @ViewChild(MatSort) public sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  @Input() public getStatusLabel!: (status: string) => string;
+
   @Input() public displayedColumns: DisplayColumns[] = [];
   @Input() public checkCustomColors?: { [key: string]: string };
   @Input() public listTable: any[] = [];

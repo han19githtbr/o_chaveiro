@@ -1,8 +1,9 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TypeFile } from 'src/app/modules/shared/enums/type-file.enum';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +11,8 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { Service } from 'src/app/modules/shared/models/service';
 import { DashboardService } from '../dashboard/dashboard.service';
+import FileUploaderComponent from 'src/app/modules/shared/components/file-uploader/file-uploader.component';
+import { FileUploadService } from 'src/app/modules/shared/components/file-uploader/file-upload.service';
 
 
 @Component({
@@ -30,11 +33,24 @@ import { DashboardService } from '../dashboard/dashboard.service';
           <input matInput formControlName="endereco" />
         </mat-form-field>
 
+        <!--<mat-form-field appearance="outline" class="custom-form-field">
+          <mat-icon matPrefix>image</mat-icon>
+          <mat-label>Coloque o link da imagem</mat-label>
+          <input matInput formControlName="imageUrl" />
+        </mat-form-field>-->
+
         <mat-form-field appearance="outline" class="custom-form-field">
           <mat-icon matPrefix>image</mat-icon>
-          <mat-label>URL da Foto</mat-label>
-          <input matInput formControlName="imageUrl" />
+          <mat-label>Foto do cliente</mat-label>
+          <input matInput formControlName="imageUrl" [value]="clienteForm.get('imageUrl')?.value" readonly />
         </mat-form-field>
+
+        <app-file-uploader
+          [textDescription]="'Carregue a foto'"
+          [fileLength]="1"
+          [typeFile]="TypeFile.Imagem"
+          (fileChange)="onFileChange($event)"
+        ></app-file-uploader>
 
         <mat-form-field appearance="outline" class="custom-form-field">
           <mat-icon matPrefix>phone</mat-icon>
@@ -67,14 +83,15 @@ import { DashboardService } from '../dashboard/dashboard.service';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
+    FileUploaderComponent,
     MatInputModule,
     MatIconModule
   ],
   styles: [
     `
       .info-client {
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
         margin-left: 10px;
         margin-right: 10px;
       }
@@ -84,17 +101,18 @@ import { DashboardService } from '../dashboard/dashboard.service';
         margin-left: 10px;
         margin-right: 10px;
         flex-direction: column;
-        gap: 16px;
+        //gap: -5px;
       }
 
       .custom-form-field {
         width: 100%;
+        height: 75px;
       }
 
       .dialog-actions {
         display: flex;
         justify-content: flex-end;
-        margin-top: 20px;
+        margin-top: -5px;
       }
 
       .cancel-button, .save-button {
@@ -103,7 +121,7 @@ import { DashboardService } from '../dashboard/dashboard.service';
       }
 
       .cancel-button {
-        background-color: #00ffff;
+        background-color: #909090;
         border: 1px solid black;
         margin-bottom: 10px;
         margin-left: 10px;
@@ -111,11 +129,11 @@ import { DashboardService } from '../dashboard/dashboard.service';
       }
 
       .cancel-button:hover {
-        background-color: #b3f4df;
+        background-color: #d5d5d5;
       }
 
       .save-button {
-        background-color: #3f51b5;
+        background-color: #0000ff;
         color: white;
         width: 200px;
         border: 1px solid black;
@@ -136,12 +154,17 @@ import { DashboardService } from '../dashboard/dashboard.service';
         color: #0000ff;
       }
 
+      .loading span {
+        font-weight: bold;
+        margin-left: 8px;
+      }
+
       .dot {
-        width: 10px;
-        height: 10px;
-        background-color: #3f51b5;
+        width: 8px;
+        height: 8px;
+        background-color: #0000ff;
         border-radius: 50%;
-        animation: blink 1.4s infinite both;
+        animation: blink 1.1s infinite both;
         margin: 0 4px;
       }
 
@@ -166,7 +189,10 @@ import { DashboardService } from '../dashboard/dashboard.service';
 })
 
 export class ClienteFormComponent implements OnInit {
+  form!: FormGroup;
   @Input() selectedServices: Service[] = [];
+
+  TypeFile = TypeFile;
 
   clienteForm: FormGroup;
   isLoading = false;
@@ -181,19 +207,20 @@ export class ClienteFormComponent implements OnInit {
     private notificationService: NotificationService,
     private loadingService: LoadingService,
     private dashboardService: DashboardService,
+    private fileUploaderService: FileUploadService,
+    private dialog: MatDialog
   ) {
     this.clienteForm = this.fb.group({
       name: ['', Validators.required],
       endereco: ['', Validators.required],
       phone: ['', Validators.required],
-      imageUrl: ['', Validators.required],
+      imageUrl: [''],
       service: ['', Validators.required],
     });
 
     if (data && data.selectedServices) {
       this.selectedServices = data.selectedServices;
     }
-
   }
 
 
@@ -203,20 +230,58 @@ export class ClienteFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+    /*this.form = this.fb.group({
+      imageUrl: [''],
+    });*/
     this.loadServices();
   }
 
-  /*onSave(): void {
-    this.isLoading = true;
+  openFileUploader(): void {
+    const dialogRef = this.dialog.open(FileUploaderComponent, {
+      width: '420px',
+      height: '170px'
+    });
 
-    setTimeout(() => {
-      this.isLoading = false;
-      this.dialogRef.close(this.data);
+    dialogRef.afterClosed().subscribe((result: string | null) => {
+      if (result) {
 
-      this.notificationService.sendNotification('Novo cliente salvo!').subscribe();
-      this.notificationService.showNotification('Novo cliente salvo!', 'Ver detalhes', this.data);
-    }, 3000);
+        this.clienteForm.get('imageUrl')?.setValue(result);
+
+        this.clienteForm.get('imageUrl')?.markAsDirty();
+        this.clienteForm.get('imageUrl')?.updateValueAndValidity();
+      }
+    });
+  }
+
+
+  onFileChange(event: File[]): void {
+    if (event && event.length > 0) {
+      const file = event[0];
+
+      this.fileUploaderService.uploadFile(file).subscribe(
+        (response) => {
+          const imageUrl = response.url;  // Usar a URL gerada pelo backend
+          this.clienteForm.get('imageUrl')?.setValue(imageUrl);  // Atualizar o campo com a URL completa
+          console.log('URL da Imagem:', imageUrl);
+        },
+        (error) => {
+          console.error('Erro ao fazer o upload da imagem:', error);
+        }
+      );
+    }
+  }
+
+  /*onFileChange(event: File[]): void {
+    if (event && event.length > 0) {
+      const file = event[0];
+      const imageUrl = `http://localhost:3000/public/${file.name}`;
+
+      this.clienteForm.get('imageUrl')?.setValue(imageUrl);
+      console.log('URL da Imagem:', imageUrl);
+    }
   }*/
+
+
 
   private loadServices() {
     this.dashboardService.getAllServices().subscribe(
@@ -248,10 +313,6 @@ export class ClienteFormComponent implements OnInit {
       this.isLoading = true;
 
       const { name, endereco, phone, imageUrl, service } = this.clienteForm.value;
-
-      //const selectedServicesText = this.selectedServices.map(service => service.service).join(', ');
-
-      //console.log('Selecionados (como texto):', selectedServicesText);
 
       const notification = {
         //message: `Novo cliente: ${name}, ${endereco}, ${phone}, ${imageUrl}, Serviços: ${selectedServicesText}`,

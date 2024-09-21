@@ -1,0 +1,8 @@
+<app-list-table
+  [listTable]="clientes"
+  [displayedColumns]="headers"
+  [useButton]="true"
+  buttonLabel="Adicionar cliente"
+  [routerLinkAction]="'/gerencial/clientes/new'"
+  (clickRowEvent)="goToDetails($event)">
+</app-list-table>

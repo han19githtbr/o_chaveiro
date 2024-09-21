@@ -8,16 +8,40 @@
 }
 
 .upload-container {
-  margin-top: 8px;
+  margin-top: -16px;
+  margin-bottom: 4px;
+
+  .attach_file {
+    color: rgb(255, 255, 255);
+    background-color: #0d0dee;
+    width: 50px;
+    padding: 12px 0 20px 12px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .attach_file:hover {
+    background-color: #8cc6ff;
+    transition: 0.3s;
+  }
+
+  .nomes_imagens {
+    font-weight: bold;
+  }
+
+  .icone_images {
+    margin-top: 110px;
+  }
+
   > .preview-image-upload{
     @include flex-column;
     align-items: center;
-    border: 1px dashed #00000080;
+    border: 2px dashed #0000ff;
     padding: 30px;
     cursor: pointer;
     position: relative;
     gap: 8px;
-    border-radius: 12px;
+    border-radius: 5px;
 
     > img{
       width: 140px;
@@ -70,12 +94,11 @@
     padding: 4px 16px;
     margin-top: 16px;
     min-height: 40px;
-    border-radius: 6px;
-    background: #F5F5F5;
+    background: #a8a7a7;
     letter-spacing: var(--unnamed-character-spacing-0);
     gap: 8px;
 
-    > span {    
+    > span {
       word-break: break-all;
       font: normal normal 300 14px/21px 'Poppins','sans-serif';
     }
@@ -84,16 +107,12 @@
       @include flex();
       gap: 4px;
       > .check{
-        color: #70C72D;
-        border: 1px solid #c2f29d;
-        background: #c2f29d;
+        color: #2d3bff;
         border-radius: 50%;
       }
 
       > .delete {
-        color: #ff0000;
-        border: 1px solid #f8b1b1;
-        background: #f8b1b1;
+        color: #000000;
         border-radius: 50%;
       }
     }

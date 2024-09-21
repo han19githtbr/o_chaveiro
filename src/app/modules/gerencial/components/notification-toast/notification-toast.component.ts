@@ -15,8 +15,18 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
     <div class="notification-toast" (click)="openModal()"> <!-- Adicionado evento de clique -->
       <!-- Adicionando o aviso de status -->
       <img [src]="notification.imageUrl" alt="Cliente Image" class="cliente-image" />
-      <div class="status-badge" [ngClass]="{ 'novo': notification.status === 'novo'}">
+      <div class="status-badge" [ngClass]="{
+        'novo': notification.status === 'novo',
+        'pendente': notification.status === 'pendente',
+        'ativo': notification.status === 'ativo',
+        'inativo': notification.status === 'inativo'
+      }">
         <mat-icon class="fiber_new" *ngIf="notification.status === 'novo'">fiber_new</mat-icon>
+        <mat-icon class="error" *ngIf="notification.status === 'pendente'">error</mat-icon>
+        <mat-icon class="check_circle" *ngIf="notification.status === 'ativo'">check_circle</mat-icon>
+        <mat-icon class="cancel" *ngIf="notification.status === 'inativo'">cancel</mat-icon>
+
+        {{ getStatusLabel(notification.status) | titlecase }}
       </div>
 
       <div class="container-cliente">
@@ -36,9 +46,9 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         display: flex;
         align-items: center;
         padding: 10px;
-        //background: rgba(41, 213, 170, 0.725);
-        background: #4d4dff;
-        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+        //border: 1px solid yellow;
+        background: #000000;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.8);
         position: fixed;
         bottom: 20px;
         width: 240px;
@@ -57,11 +67,19 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         border-radius: 4px;
         margin-right: 10px;
       }
+
       .cliente-name {
         font-weight: bold;
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        color: white;
       }
+
       .cliente-phone {
         text-wrap: wrap;
+        color: white;
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
         font-weight: bold;
       }
 
@@ -93,8 +111,30 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         }
       }
 
+      .error {
+        animation: infiniteZoom 0.5s infinite;
+      }
+
       .status-badge.novo {
         background-color: #edb116;
+        border: 2px solid black;
+        color: black;
+      }
+
+      .status-badge.pendente {
+        background-color: #eedf22;
+        border: 2px solid black;
+        color: black;
+      }
+
+      .status-badge.ativo {
+        background-color: #0fce22;
+        border: 2px solid black;
+        color: black;
+      }
+
+      .status-badge.inativo {
+        background-color: #ea1e0d;
         width: 50px;
         color: black;
       }
@@ -108,6 +148,7 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
 })
 export default class NotificationToastComponent implements OnInit, OnDestroy {
   @Input() notification: any;
+
   isModalOpen: boolean = false;
 
   @Output() remove = new EventEmitter<void>();
@@ -134,9 +175,24 @@ export default class NotificationToastComponent implements OnInit, OnDestroy {
     }, 5000);
   }
 
+
   ngOnDestroy() {
     if (this.notificationSubscription) {
       this.notificationSubscription.unsubscribe();
+    }
+  }
+
+
+  getStatusLabel(status: string): string {
+    switch (status) {
+      case 'ativo':
+        return 'servido';
+      case 'inativo':
+        return 'cancelado';
+      case 'pendente':
+        return 'pendente';
+      default:
+        return status;
     }
   }
 
@@ -151,7 +207,6 @@ export default class NotificationToastComponent implements OnInit, OnDestroy {
       data: this.notification
     });
   }
-
 
   closeModal() {
     this.isModalOpen = false;

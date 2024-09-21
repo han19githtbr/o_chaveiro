@@ -3,13 +3,13 @@
     <app-card-section text="Informações do serviço">
       <section class="wrapper" body>
         <div class="row">
-          <mat-form-field appearance="outline">
+          <mat-form-field class="field-name" appearance="outline">
             <mat-label>Nome Cliente</mat-label>
             <mat-icon matPrefix>person_outline</mat-icon>
             <input id="name" formControlName="cliente" type="text" matInput apenasLetras />
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field class="field-price" appearance="outline">
             <mat-label>Preço</mat-label>
             <mat-icon matPrefix>money</mat-icon>
             <input id="value" formControlName="value" type="text" matInput />
@@ -24,7 +24,7 @@
         </div>
 
         <div class="row">
-          <mat-form-field appearance="outline">
+          <mat-form-field class="field-service" appearance="outline">
             <mat-label>Serviço</mat-label>
             <mat-icon matPrefix>work</mat-icon>
             <input id="service" formControlName="service" type="text" matInput apenasLetras />
@@ -32,7 +32,7 @@
         </div>
 
         <div class="row">
-          <mat-form-field appearance="outline">
+          <mat-form-field class="field-status" appearance="outline">
             <mat-label>Status</mat-label>
             <mat-icon matPrefix>info</mat-icon>
             <mat-select formControlName="status" required>
@@ -45,7 +45,21 @@
     </app-card-section>
 
     <div class="buttons">
-      <app-form-actions (clickSaveEvent)="onSubmit()"></app-form-actions>
+      <!--<app-form-actions (clickSaveEvent)="onSubmit()"></app-form-actions>-->
+      <div class="actions">
+        <app-button
+          type="outline"
+          (click)="back()"
+        >Cancelar
+        </app-button>
+        <app-button
+          type="fill"
+          (click)="clickSaveEvent.emit($event)"
+          *ngIf="showSaveButton"
+          (clickSaveEvent)="onSubmit()"
+        >Salvar
+        </app-button>
+      </div>
     </div>
 
   </section>

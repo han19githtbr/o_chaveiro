@@ -57,16 +57,7 @@ export default class DetailsComponent implements OnInit {
       this.chaveiro = data;
     });
 
-    this.loadChaveiroById();
-  }
 
-
-  loadChaveiroById() {
-    const chaveiroId = +this.route.snapshot.paramMap.get('id')!;
-    this.chaveiroService.getChaveiroById(chaveiroId).subscribe(response => {
-      this.chaveiro = response;
-      console.log('Detalhes do serviço', this.chaveiro);
-    })
   }
 
 

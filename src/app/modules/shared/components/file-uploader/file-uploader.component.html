@@ -1,14 +1,15 @@
-<div class="upload-container" >      
+<div class="upload-container" >
   <div class="preview-image-upload" (click)="fileInput.click()">
     <input #fileInput type="file" [accept]="typeFile" id="file-upload" (change)="addImage($event)">
-    <mat-icon>attach_file</mat-icon>
+    <mat-icon class="attach_file">attach_file</mat-icon>
     <span>{{textDescription}}</span>
 
     <div class="actions" *ngIf="previewFiles.length">
       <span >Adicionar mais arquivos</span>
     </div>
-    <p>Faça upload da imagens com o tamanho 0000x0000</p>
-    <small>PNG, JPEG, JPG</small>
+    <!--<p>Faça upload de uma imagem</p>-->
+
+    <small class="nomes_imagens">PNG, JPEG</small>
 
   </div>
   <div class="check-image-upload" *ngFor="let file of previewFiles">

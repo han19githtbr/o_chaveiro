@@ -42,7 +42,24 @@
     </app-card-section>
 
     <div class="buttons">
-      <app-form-actions (clickSaveEvent)="onSubmit()"></app-form-actions>
+      <!--<app-form-actions (clickSaveEvent)="onSubmit()"></app-form-actions>-->
+      <div class="buttons">
+        <!--<app-form-actions (clickSaveEvent)="onSubmit()"></app-form-actions>-->
+        <div class="actions">
+          <app-button
+            type="outline"
+            (click)="back()"
+          >Cancelar
+          </app-button>
+          <app-button
+            type="fill"
+            (click)="clickSaveEvent.emit($event)"
+            *ngIf="showSaveButton"
+            (clickSaveEvent)="onSubmit()"
+          >Salvar
+          </app-button>
+        </div>
+      </div>
     </div>
   </section>
 </form>

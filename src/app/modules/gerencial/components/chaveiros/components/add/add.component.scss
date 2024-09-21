@@ -4,6 +4,30 @@
   margin-top: 50px;
 }
 
+.actions{
+  display: flex;
+  justify-content: flex-end;
+  //justify-content: center;
+  height: 20px;
+  margin-bottom: 20px;
+  gap: 24px;
+}
+
+
+@media (max-width: 1100px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+
 .details{
   display: grid;
   gap: 28px;

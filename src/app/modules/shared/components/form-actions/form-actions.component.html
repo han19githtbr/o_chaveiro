@@ -1,10 +1,12 @@
 <div class="actions">
-  <app-button 
-    type="outline"
-    (click)="back()">Cancelar</app-button>
   <app-button
+    type="outline"
+    (click)="back()"
+  >Fechar
+  </app-button>
+  <!--<app-button
     type="fill"
     (click)="clickSaveEvent.emit($event)"
     *ngIf="showSaveButton">Salvar
-  </app-button>
+  </app-button>-->
 </div>

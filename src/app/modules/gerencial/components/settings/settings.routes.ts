@@ -5,16 +5,16 @@ export default [
   {
     path: 'lista',
     loadComponent: () => import('././components/list/list.component'),
-    data: { useBreadcrumb: true, breadcrumb: 'Configurações', description: 'Configurações' }
+    data: { useBreadcrumb: true, breadcrumb: 'Controle de acesso', description: 'Controle de acesso' }
   },
   {
     path: 'detalhes/:id',
     loadComponent: () => import('././components/details/details.component'),
-    data: { useBreadcrumb: true, breadcrumb: 'Configurações', description: 'Detalhes do colaborador' }
+    data: { useBreadcrumb: true, breadcrumb: 'Controle de acesso', description: 'Detalhes do administrador' }
   },
   {
     path: 'novo',
     loadComponent: () => import('././components/details/details.component'),
-    data: { useBreadcrumb: true, breadcrumb: 'Configurações', description: 'Adicionar colaborador' }
+    data: { useBreadcrumb: true, breadcrumb: 'Controle de acesso', description: 'Adicionar administrador' }
   },
 ] as Routes;

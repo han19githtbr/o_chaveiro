@@ -12,4 +12,3 @@ import { CommonModule } from '@angular/common';
 export class CustomNotificationComponent {
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {}
 }
-

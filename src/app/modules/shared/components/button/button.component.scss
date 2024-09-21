@@ -1,24 +1,27 @@
 @import "../../styles/variables.scss";
 
 .button {
-  height: 50px;
+  height: 40px;
   width: 250px;
   min-width: 50px;
-  border-radius: 6px;
+  border-radius: 4px;
   border: none;
   cursor: pointer;
   transition: 0.3s;
+  font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
-  background-color: #1a1aff;
+  font-size: 18px;
+  background-color: #0202e6;
   //background-color: $primary;
   color: #fff;
   padding: 0 16px;
 
   &:hover,
   &.outline {
-    color: $primary;
+    color: #0000ff;
     background-color: transparent;
-    border: 1px solid $primary;
+    //border: 1px solid $primary;
+    border: 2px solid #0000ff;
   }
 
   &.error {

@@ -5,7 +5,7 @@
   height: 80px;
   display: flex;
   align-items: center;
-  border: 2px solid rgb(16, 138, 225);
+  border: 2px solid rgb(48, 236, 253);
   padding: 0px 20px;
   border-radius: 12px;
   box-shadow: rgba(50, 50, 93, 0) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -52px;
@@ -16,9 +16,10 @@
   }
 
   .welcome {
-    color: #ffffff;
+    color: #feffff;
     font-size: large;
-    font-weight: bold;
+    font-weight: lighter;
     font-family:'Times New Roman', Times, serif;
   }
+
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Chaveiro } from 'src/app/modules/shared/models/chaveiro';
 import { Service } from 'src/app/modules/shared/models/service';
-import { Cliente } from 'src/app/modules/shared/models/cliente';
+import { Cliente, UpdateCliente } from 'src/app/modules/shared/models/cliente';
 
 @Injectable({
   providedIn: 'root'
@@ -40,10 +40,14 @@ export class DashboardService {
     return this.http.get<Service[]>(`${this.apiUrlServico}`);
   }
 
-  updateClientStatus(clientId: number, newStatus: string): Observable<Cliente> {
-    const url = `http://localhost:3000/clientes/${clientId}/update-status`;
+  updateClientStatus(clienteId: number, newStatus: string): Observable<Cliente> {
+    const url = `http://localhost:3000/clientes/${clienteId}/update-status`;
     const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
     return this.http.patch<Cliente>(url, body);
+  }
+
+  updateClient(id: number, clienteData: UpdateCliente): Observable<Cliente> {
+    return this.http.put<Cliente>(`${this.apiUrlCliente}/${id}`, clienteData);
   }
 
   getClientById(clientId: number): Observable<any>{

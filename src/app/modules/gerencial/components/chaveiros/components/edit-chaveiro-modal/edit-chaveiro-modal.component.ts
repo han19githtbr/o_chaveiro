@@ -53,18 +53,27 @@ export class EditChaveiroModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { chaveiro: Chaveiro }
   ) {
     this.chaveiroForm = this.fb.group({
-      name: [''],
-      endereco: [''],
-      imageUrl: [''],
-      phone: [''],
-      status: [''],
+      name: ['', Validators.required],
+      endereco: ['', Validators.required],
+      imageUrl: ['', [Validators.required, Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/)]],
+      phone: ['', Validators.required],
+      status: ['', Validators.required],
     });
   }
 
 
   ngOnInit(): void {
     if (this.data?.chaveiro?.id) {
-      this.chaveiroId = this.data.chaveiro.id; // Atribua o id do chaveiro a partir dos dados injetados
+      this.chaveiroId = this.data.chaveiro.id;
+
+      this.chaveiroForm.patchValue({
+        name: this.data.chaveiro.name || '',
+        endereco: this.data.chaveiro.endereco || '',
+        imageUrl: this.data.chaveiro.imageUrl || '',
+        phone: this.data.chaveiro.phone || '',
+        status: this.data.chaveiro.status || ''
+      });
+
     }
   }
 
@@ -87,17 +96,17 @@ export class EditChaveiroModalComponent implements OnInit {
 
   onSubmit(): void {
     if (this.chaveiroForm.valid) {
-      const chaveiroData: CreateChaveiro = this.chaveiroForm.value;
+      const formValues = this.chaveiroForm.value;
 
-      const updatedChaveiroData: UpdateChaveiro = {
-        name: chaveiroData.name || '',  // Forneça um valor padrão vazio se estiver undefined
-        endereco: chaveiroData.endereco || '',
-        imageUrl: chaveiroData.imageUrl || '',
-        phone: typeof chaveiroData.phone === 'string' ? Number(chaveiroData.phone) || 0 : chaveiroData.phone,
-        status: chaveiroData.status || ''
+      const chaveiroData: UpdateChaveiro = {
+        name: formValues.name || this.data.chaveiro.name,
+        endereco: formValues.endereco || this.data.chaveiro.endereco,
+        imageUrl: formValues.imageUrl || this.data.chaveiro.imageUrl,
+        phone: formValues.phone || this.data.chaveiro.phone,
+        status: formValues.status || this.data.chaveiro.status,
       };
 
-      this.chaveiroService.updateChaveiro(this.chaveiroId, updatedChaveiroData).subscribe(
+      this.chaveiroService.updateChaveiro(this.chaveiroId, chaveiroData).subscribe(
         (response) => {
           this.snackBar.open('Chaveiro atualizado com sucesso!', 'Fechar', { duration: 3000 });
         },
