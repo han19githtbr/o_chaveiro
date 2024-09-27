@@ -71,7 +71,12 @@ export default class GerencialComponent implements OnInit {
       router: 'notifications',
     },
     {
-      label: 'Controle de acesso',
+      label: 'Admins',
+      icon: 'person',
+      router: 'admin-chaveiros',
+    },
+    {
+      label: 'Acesso',
       icon: 'door_front',
       router: 'settings',
     },

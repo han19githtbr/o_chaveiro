@@ -17,8 +17,14 @@
 
             </mat-slide-toggle>
           </ng-container>-->
-          <ng-container>
-            <mat-icon matTooltip="Remover">delete_outline</mat-icon>
+          <ng-container *ngIf="notification">
+            <mat-icon
+              class="delete_button"
+              (click)="confirmDelete(notification)"
+              matTooltip="Remover"
+            >
+            delete_outline
+            </mat-icon>
           </ng-container>
         </div>
       </div>

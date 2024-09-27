@@ -23,6 +23,7 @@
     "ngx-socket-io": "^4.7.0",
     "ngx-spinner": "^17.0.0",
     "ngx-toastr": "^19.0.0",
+    "project": "file:",
     "rxjs": "~7.8.0",
     "socket.io-client": "^4.7.5",
     "tslib": "^2.3.0",

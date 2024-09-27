@@ -9,6 +9,8 @@ import { CustomNotificationComponent } from '../../gerencial/components/custom-n
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Notification } from '../models/notification';
+import { NewNotification } from '../models/notification';
+
 
 @Injectable({
   providedIn: 'root'
@@ -87,6 +89,11 @@ export class NotificationService {
         console.log('Resposta da API ao criar notificação:', response);
       })
     );
+  }
+
+
+  getAllNotifications(): Observable<NewNotification[]> {
+    return this.http.get<NewNotification[]>(`${this.apiUrl}`);
   }
 
   fetchNotifications(): void {

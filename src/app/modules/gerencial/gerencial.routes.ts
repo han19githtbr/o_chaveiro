@@ -33,6 +33,11 @@ export default [
     data: { useBreadcrumb: true },
   },
   {
+    path: 'admin-chaveiros',
+    loadComponent: () => import('./components/chaveiros-admin/chaveiros-admin.component'),
+    data: { useBreadcrumb: true },
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./components/settings/settings.routes'),
     data: { useBreadcrumb: true },

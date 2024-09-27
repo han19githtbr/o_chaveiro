@@ -45,6 +45,13 @@
     >
     </app-dashboard-card>
     <app-dashboard-card
+      [number]="formatNumber(totalNotifications)"
+      [description]="'Pedidos recebidos'"
+      [icon]="'person_outline'"
+      [iconContainerColor]="'#000000'"
+    >
+    </app-dashboard-card>
+    <app-dashboard-card
       [number]="(totalRecebido | currency:'BRL') ?? ''"
       [description]="'Preço por serviço'"
       [icon]="'attach_money'"

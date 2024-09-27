@@ -7,6 +7,11 @@
   cursor: pointer;
 }
 
+.delete_button:hover {
+  color: #ff0000;
+  cursor: pointer;
+}
+
 .custom-dialog-container {
   z-index: 1000 !important;
 }

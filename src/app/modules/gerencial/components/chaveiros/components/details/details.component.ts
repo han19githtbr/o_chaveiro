@@ -4,6 +4,7 @@ import { CardSectionComponent } from 'src/app/modules/shared/components/card-sec
 import { PropertyValueComponent } from 'src/app/modules/shared/components/property-value/property-value.component';
 import { ProjectButton } from 'src/app/modules/shared/models/button.model';
 import FormActionsComponent from 'src/app/modules/shared/components/form-actions/form-actions.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { Chaveiro } from 'src/app/modules/shared/models/chaveiro';
@@ -17,6 +18,7 @@ const components = [
   CardSectionComponent,
   PropertyValueComponent,
   MatSlideToggleModule,
+  MatSnackBarModule,
   MatIconModule,
   FormActionsComponent
 ];
@@ -31,6 +33,9 @@ const components = [
 export default class DetailsComponent implements OnInit {
   private route: ActivatedRoute = inject(ActivatedRoute);
   public chaveiro: Chaveiro | undefined;
+
+  public chaveiros: Chaveiro[] = [];
+
   @Output() close = new EventEmitter<void>();
   @Input() public useToggle!: boolean;
   @Input() public useEdit!: boolean;
@@ -45,7 +50,8 @@ export default class DetailsComponent implements OnInit {
 
   constructor(
     private chaveiroService: ChaveiroService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
 
   }
@@ -93,6 +99,67 @@ export default class DetailsComponent implements OnInit {
     } else {
       console.error('Chaveiro não encontrado');
     }
+  }
+
+
+  // Função para confirmar a exclusão
+  public confirmDelete(chaveiro: Chaveiro | null): void {
+
+    if (!chaveiro) {
+      console.error('Chaveiro é nulo');
+      return;
+    }
+
+    console.log('ID do chaveiro antes de deletar:', chaveiro.id);
+
+    const snackBarRef = this.snackBar.open(
+      `Tem certeza que quer excluir o chaveiro: ${chaveiro.name}?`,
+      'Confirmar',
+      {
+        duration: 5000, // Duração do SnackBar
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['snackbar-warning'],
+      }
+    );
+
+    // Listener para a ação de confirmar
+    snackBarRef.onAction().subscribe(() => {
+      if (chaveiro.id) {
+        const chaveiroIdNumber = Number(chaveiro.id);
+        console.log('ID convertido para número:', chaveiroIdNumber);
+        this.deleteChaveiro(chaveiroIdNumber);
+      } else {
+        console.error('Chaveiro não tem um ID válido');
+      }
+    });
+  }
+
+  // Função para deletar o chaveiro
+  public deleteChaveiro(chaveiroId: number): void {
+    this.chaveiroService.deleteChaveiroById(chaveiroId).subscribe({
+      next: () => {
+        // Remove o chaveiro deletado da lista local
+        this.chaveiros = this.chaveiros.filter((chaveiro) => chaveiro.id !== chaveiroId);
+
+        // Exibe uma mensagem de sucesso após a exclusão
+        this.snackBar.open('Chaveiro deletado com sucesso!', 'Fechar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-success'],
+        });
+      },
+      error: (err) => {
+        console.error('Erro ao deletar o chaveiro', err);
+        this.snackBar.open('Erro ao deletar o chaveiro', 'Fechar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-error'],
+        });
+      },
+    });
   }
 
   closeModal() {

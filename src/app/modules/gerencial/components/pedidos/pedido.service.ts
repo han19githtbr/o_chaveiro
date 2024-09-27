@@ -22,6 +22,10 @@ export class PedidoService {
     return this.http.get<Notification>(`${this.apiUrlPedido}/${notificationId}`);
   }
 
+  deleteNotificationById(notificationId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrlPedido}/${notificationId}`);
+  }
+
   updateNotification(id: number, notificationData: UpdateNotification): Observable<Notification> {
     return this.http.put<Notification>(`${this.apiUrlPedido}/${id}`, notificationData);
   }

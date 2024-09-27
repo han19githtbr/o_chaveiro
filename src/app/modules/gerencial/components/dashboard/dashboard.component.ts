@@ -25,7 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ChatService } from 'src/app/modules/shared/services/chat.service';
 import NotificationToastComponent from '../notification-toast/notification-toast.component';
 import ListComponent from '../chaveiros/components/list/list.component';
-
+import { NewNotification } from 'src/app/modules/shared/models/notification';
 
 
 @Component({
@@ -77,6 +77,8 @@ export default class DashboardComponent implements OnDestroy {
   newMessageNotification: boolean = false;
   isChatOpen: boolean = false;
 
+  newNotifications: NewNotification[] = [];
+
   page: number = 0;
   size: number = 10;
 
@@ -101,13 +103,11 @@ export default class DashboardComponent implements OnDestroy {
     this.loadChaveiros();
     this.updateTotalClientes();
     this.showRandomNotification();
+    this.loadNewNotifications();
     this.updateTotalNotifications();
     this.listenToNotificationUpdates();
     this.showRandomCliente();
     this.loadServices();
-    //this.filteredClientesToasts = this.clientesToasts;
-    //this.filteredNotificationToasts = this.notificationToasts;
-
 
     this.socket.on('newMessage', () => {
       this.newMessageNotification = true;
@@ -118,16 +118,6 @@ export default class DashboardComponent implements OnDestroy {
   // Função de busca que abre o modal se o cliente for encontrado
   onSearchChange(searchValue: string): void {
     this.searchText = searchValue;
-
-
-    /*this.filteredClientesToasts = this.clientesToasts.filter(cliente =>
-      cliente.name.toLowerCase().includes(this.searchText.toLowerCase())
-    );
-
-    this.filteredNotificationToasts = this.notificationToasts.filter(notification =>
-      notification.name.toLowerCase().includes(this.searchText.toLowerCase())
-    );*/
-
   }
 
 
@@ -155,8 +145,12 @@ export default class DashboardComponent implements OnDestroy {
         this.notifications.push(fullData);
         this.notificationService.showNotification(fullData.message, 'Ver detalhes', fullData);
       }
-
     });
+  }
+
+
+  ngOnDestroy() {
+    this.notificationService.disconnect();
   }
 
 
@@ -176,6 +170,18 @@ export default class DashboardComponent implements OnDestroy {
   }
 
 
+  public loadNewNotifications() {
+    this.notificationService.getAllNotifications().subscribe(
+      (newNotifications: NewNotification[]) => {
+        this.totalNotifications = newNotifications.length;;
+      },
+      (error) => {
+        console.error('Erro ao carregar o total de pedidos:', error);
+      }
+    )
+  }
+
+  
   // Acrescentei essa nova função
   private updateTotalNotifications() {
     this.notificationService.getNotifications().subscribe(notifications => {
@@ -212,11 +218,6 @@ export default class DashboardComponent implements OnDestroy {
     return randomId;
   }
 
-
-  ngOnDestroy() {
-    //this.chatService.disconnect();
-    this.notificationService.disconnect();
-  }
 
   openOrderDetailsModal(data: any) {
     const modalData = {
@@ -289,7 +290,6 @@ export default class DashboardComponent implements OnDestroy {
       this.totalClientes = data.total;
     });
   }
-
 
   private showRandomCliente() {
     setInterval(() => {

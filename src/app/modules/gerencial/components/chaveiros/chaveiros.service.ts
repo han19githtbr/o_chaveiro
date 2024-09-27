@@ -21,6 +21,10 @@ export class ChaveiroService {
     return this.http.get<Chaveiro>(`${this.apiUrlChaveiro}/${chaveiroId}`);
   }
 
+  deleteChaveiroById(chaveiroId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrlChaveiro}/${chaveiroId}`);
+  }
+
   createChaveiro(chaveiroData: any): Observable<Chaveiro> {
     return this.http.post<Chaveiro>(`${this.apiUrlChaveiro}`, chaveiroData);
   }

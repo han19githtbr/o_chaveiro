@@ -11,7 +11,7 @@ import { CardSectionComponent } from 'src/app/modules/shared/components/card-sec
 import ButtonComponent from 'src/app/modules/shared/components/button/button.component';
 import { MatIconModule } from '@angular/material/icon';
 import { Type } from 'src/app/modules/shared/models/permissions';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-details',
@@ -53,13 +53,17 @@ export default class DetailsComponent implements OnInit {
   role: 'Admin' | 'User' = 'Admin';
   public permissoes: any[] = [
     { text: 'Dashboard' },
-    { text: 'Usuários' },
-    { text: 'Cashback' },
-    { text: 'Pagamentos' },
+    { text: 'Chaveiros' },
+    { text: 'Clientes' },
+    { text: 'Serviços' },
+    { text: 'Pedidos' },
     { text: 'Configurações' },
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.createAdminForm();
@@ -104,29 +108,13 @@ export default class DetailsComponent implements OnInit {
   public onSubmit() {
     this.setPermissions();
     this.service.create(this.adminForm.value).subscribe({
-      next: () => {
-        this.toastr.success('Administrador criado com sucesso!');
-        this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+      next: (response) => {
+        this.snackBar.open('Administrador criado com sucesso.', '', { duration: 3000 });
+        this.clickSaveEvent.emit(response);
+
       },
     });
   }
-
-  /*public uploadFile(event: any) {
-    const image = event.target.files[0];
-
-    if (image) {
-      const formData = new FormData();
-      formData.append('file', image);
-
-      this.uploadFileService.uploadFile(formData).subscribe({
-        next: (res) => {
-          this.imageUrl = res.url;
-          this.getField('imageUrl')?.patchValue(res.url);
-        },
-      });
-    }
-  }*/
-
 
   findUser() {
     this.service.findById(Number(this.userId)).subscribe({

@@ -6,6 +6,7 @@ import FormActionsComponent from 'src/app/modules/shared/components/form-actions
 import { ActivatedRoute } from '@angular/router';
 import { Service } from 'src/app/modules/shared/models/service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { EditServiceModalComponent } from '../edit-service-modal/edit-service-modal.component';
@@ -17,6 +18,7 @@ import { EditServiceModalComponent } from '../edit-service-modal/edit-service-mo
   imports: [
     CommonModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     MatIconModule,
     FormActionsComponent
   ],
@@ -32,9 +34,13 @@ export default class DetailsComponent implements OnInit {
   @Input() public useDelete!: boolean;
   public service: Service | undefined
 
+
+  public servicos: Service[] = [];
+
   constructor(
     private servicoService: ServicosService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -44,16 +50,16 @@ export default class DetailsComponent implements OnInit {
       this.service = data;
     })
 
-    //this.loadServiceById();
+    this.loadServiceById();
   }
 
-  /*loadServiceById() {
+  loadServiceById() {
     const serviceId = +this.route.snapshot.paramMap.get('id')!;
     this.servicoService.getServiceById(serviceId).subscribe(response => {
       this.service = response;
       console.log('Detalhes do serviço', this.service);
     })
-  }*/
+  }
 
   openEditModal(): void {
     if (this.service) {
@@ -88,6 +94,70 @@ export default class DetailsComponent implements OnInit {
     } else {
       console.error('Chaveiro não encontrado');
     }
+  }
+
+
+  // Função para confirmar a exclusão
+  public confirmDelete(servico: Service | null): void {
+
+    if (!servico) {
+      console.error('Serviço é nulo');
+      return;
+    }
+
+    console.log('ID do serviço antes de deletar:', servico.id);
+
+
+    const snackBarRef = this.snackBar.open(
+      `Quer excluir mesmo o serviço solicitado por: ${servico.cliente}?`,
+      'Confirmar',
+      {
+        duration: 5000, // Duração do SnackBar
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['snackbar-warning'], // Classe personalizada
+      }
+    );
+
+
+    snackBarRef.onAction().subscribe(() => {
+      if (servico.id) {
+        const servicoIdNumber = Number(servico.id);
+        console.log('ID convertido para número:', servicoIdNumber);
+        this.deleteService(servicoIdNumber);
+      } else {
+        console.error('Serviço não tem um ID válido');
+      }
+    });
+  }
+
+  // Função para deletar o serviço
+  public deleteService(servicoId: number): void {
+    console.log('Deletando serviço com ID:', servicoId);
+
+    this.servicoService.deleteServiceById(servicoId).subscribe({
+      next: () => {
+        // Remove o serviço deletado da lista local
+        this.servicos = this.servicos.filter((servico) => servico.id !== servicoId);
+
+        // Exibe uma mensagem de sucesso após a exclusão
+        this.snackBar.open('Serviço deletado com sucesso!', 'Fechar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-success'],
+        });
+      },
+      error: (err) => {
+        console.error('Erro ao deletar o serviço', err);
+        this.snackBar.open('Erro ao deletar o serviço', 'Fechar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-error'],
+        });
+      },
+    });
   }
 
 

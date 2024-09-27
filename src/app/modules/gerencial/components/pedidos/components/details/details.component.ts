@@ -5,6 +5,7 @@ import { PropertyValueComponent } from 'src/app/modules/shared/components/proper
 import { ProjectButton } from 'src/app/modules/shared/models/button.model';
 import FormActionsComponent from 'src/app/modules/shared/components/form-actions/form-actions.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { Notification } from 'src/app/modules/shared/models/notification';
 import { PedidoService } from '../../pedido.service';
@@ -16,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 const components = [
   CardSectionComponent,
   PropertyValueComponent,
+  MatSnackBarModule,
   MatSlideToggleModule,
   MatIconModule,
   FormActionsComponent
@@ -32,6 +34,9 @@ const components = [
 export default class DetailsComponent implements OnInit {
   private route: ActivatedRoute = inject(ActivatedRoute);
   public notification: Notification | undefined;
+
+  public notifications: Notification[] = [];
+
   @Output() close = new EventEmitter<void>();
   @Input() public useToggle!: boolean;
   @Input() public useEdit!: boolean;
@@ -40,6 +45,7 @@ export default class DetailsComponent implements OnInit {
 
   constructor(
     private pedidoService: PedidoService,
+    private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
 
@@ -86,23 +92,68 @@ export default class DetailsComponent implements OnInit {
   }
 
 
-  /*toggleClientStatus(): void {
-    if (this.cliente && this.cliente.id) {
-      const newStatus = this.cliente.status === 'ativo' ? 'inativo' : 'ativo';
+  // Função para confirmar a exclusão
+  public confirmDelete(notification: Notification | null): void {
 
-      this.clientService.updateClientStatus(this.cliente.id, newStatus).subscribe(
-        response => {
-
-          this.cliente = response;
-        },
-        error => {
-          console.error('Erro ao atualizar o status do cliente', error);
-        }
-      );
-    } else {
-      console.error('Cliente não encontrado');
+    if (!notification) {
+      console.error('Pedido é nulo');
+      return;
     }
-  }*/
+
+    console.log('ID do pedido antes de deletar:', notification.id);
+
+
+    const snackBarRef = this.snackBar.open(
+      `Tem certeza que quer excluir o pedido de: ${notification.name}?`,
+      'Confirmar',
+      {
+        duration: 5000, // Duração do SnackBar
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['snackbar-warning'], // Classe personalizada
+      }
+    );
+
+
+    snackBarRef.onAction().subscribe(() => {
+      if (notification.id) {
+        const notificationIdNumber = Number(notification.id);
+        console.log('ID convertido para número:', notificationIdNumber);
+        this.deleteNotification(notificationIdNumber);
+      } else {
+        console.error('Pedido não tem um ID válido');
+      }
+    });
+  }
+
+  // Função para deletar o administrador
+  public deleteNotification(notificationId: number): void {
+    console.log('Deletando pedido com ID:', notificationId);
+
+    this.pedidoService.deleteNotificationById(notificationId).subscribe({
+      next: () => {
+        // Remove o cliente deletado da lista local
+        this.notifications = this.notifications.filter((notification) => notification.id !== notificationId);
+
+        // Exibe uma mensagem de sucesso após a exclusão
+        this.snackBar.open('Pedido deletado com sucesso!', 'Fechar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-success'],
+        });
+      },
+      error: (err) => {
+        console.error('Erro ao deletar o pedido', err);
+        this.snackBar.open('Erro ao deletar o pedido', 'Fechar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-error'],
+        });
+      },
+    });
+  }
 
 
   closeModal() {

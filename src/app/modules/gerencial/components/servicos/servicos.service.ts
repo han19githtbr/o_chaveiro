@@ -22,9 +22,9 @@ export class ServicosService {
     return this.http.get<Service>(`${this.apiUrlServico}/${serviceId}`);
   }
 
-  /*createService(data: CreateService): Observable<{service: Service}> {
-    return this.http.post<{ service: Service }>(`${this.apiUrlServico}`, data);
-  }*/
+  deleteServiceById(servicoId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrlServico}/${servicoId}`);
+  }
 
   createService(serviceData: any): Observable<Service> {
     return this.http.post<Service>(`${this.apiUrlServico}`, serviceData);

@@ -21,6 +21,10 @@ export class SettingsService {
     return this.http.get(`${this.baseUrl}/admins/${userId}`);
   }
 
+  deleteUserById(userId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/admins/${userId}`);
+  }
+
   create(body: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/admins`, body);
   }
