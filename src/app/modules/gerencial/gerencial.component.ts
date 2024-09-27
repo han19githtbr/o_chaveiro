@@ -70,7 +70,7 @@ export default class GerencialComponent implements OnInit {
       icon: 'notifications',
       router: 'notifications',
     },
-    {
+    /*{
       label: 'Admins',
       icon: 'person',
       router: 'admin-chaveiros',
@@ -79,7 +79,7 @@ export default class GerencialComponent implements OnInit {
       label: 'Acesso',
       icon: 'door_front',
       router: 'settings',
-    },
+    },*/
   ];
 
 

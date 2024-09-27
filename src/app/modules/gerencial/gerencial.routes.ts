@@ -32,7 +32,7 @@ export default [
     loadChildren: () => import('./components/pedidos/pedido.routes'),
     data: { useBreadcrumb: true },
   },
-  {
+  /*{
     path: 'admin-chaveiros',
     loadComponent: () => import('./components/chaveiros-admin/chaveiros-admin.component'),
     data: { useBreadcrumb: true },
@@ -41,6 +41,6 @@ export default [
     path: 'settings',
     loadChildren: () => import('./components/settings/settings.routes'),
     data: { useBreadcrumb: true },
-  },
+  },*/
 
 ] as Route[];
