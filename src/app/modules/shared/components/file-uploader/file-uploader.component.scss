@@ -1,16 +1,13 @@
 @mixin flex{
   display: flex;
 }
-
 @mixin flex-column{
   @include flex;
   flex-direction: column;
 }
-
 .upload-container {
   margin-top: -16px;
   margin-bottom: 4px;
-
   .attach_file {
     color: rgb(255, 255, 255);
     background-color: #0d0dee;
@@ -19,12 +16,10 @@
     height: 50px;
     border-radius: 50%;
   }
-
   .attach_file:hover {
     background-color: #8cc6ff;
     transition: 0.3s;
   }
-
   .nomes_imagens {
     font-weight: bold;
   }
@@ -32,7 +27,6 @@
   .icone_images {
     margin-top: 110px;
   }
-
   > .preview-image-upload{
     @include flex-column;
     align-items: center;
@@ -74,19 +68,16 @@
       z-index: 1;
       top: 0;
       justify-items: center;
-
       &:hover {
         background: #000a;
         opacity: 1;
       }
-
       > span {
         font: normal normal 300 14px/21px 'Gilroy-Light','sans-serif';
         color: #FFF
       }
     }
   }
-
   > .check-image-upload > .image-uploaded {
     @include flex;
     align-items: center;
@@ -116,11 +107,9 @@
         border-radius: 50%;
       }
     }
-
     &:hover{
       cursor: pointer;
     }
-
     @media (max-width: 768px) {
       @include flex-column;
     }

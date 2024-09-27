@@ -1,16 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 /*html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
-
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
-
 * {
   padding: 0;
   margin: 0;
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
 }
-
 p, button {
   font-size: 14px;
 }
@@ -80,4 +77,43 @@ p, button {
 
 .w-full {
   width: 100%;
+}
+@media (max-width: 768px) {
+  .notification-toast {
+    padding: 15px;
+    font-size: 14px;
+  }
+  .status-buttons button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .cards {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    overflow-y: hidden;
+    margin-top: 100px;
+    padding-bottom: 0;
+  }
+  .custom-select {
+    bottom: 0;
+  }
+  .client-toast-container {
+    margin-top: 350px;
+  }
+  .clientes-list {
+    padding: 0 20px;
+    margin-top: 50px;
+  }
+}
+@media (max-width: 1300px) {
+  .cards {
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+  }
+  .client-toast-container {
+    margin-top: 400px;
+    margin-bottom: 40px;
+  }
 }

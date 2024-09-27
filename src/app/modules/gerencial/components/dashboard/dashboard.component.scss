@@ -1,8 +1,6 @@
 .dashboard {
   position: relative;
-  //overflow-y: hidden;
 }
-
 .cards {
   display: flex;
   justify-content: space-between;
@@ -11,39 +9,32 @@
   position: absolute;
   margin-top: 80px;
 }
-
 .search-bar {
   margin-top: 80px;
 }
-
 .custom-select {
   position: relative;
   float: right;
   width: 300px;
   bottom: 70px;
 }
-
 .custom-select .mat-form-field-wrapper {
   padding: 0;
   margin: 0;
 }
-
 .custom-select .mat-form-field-flex {
   padding: 0;
   margin: 0;
   border-bottom: none;
 }
-
 .custom-select .mat-select-value {
   display: flex;
   align-items: center;
   padding: 0;
 }
-
 .nossos-clientes {
   margin-bottom: 20px;
 }
-
 .clientes-list {
   width: 100%;
   max-width: 1000px;
@@ -52,12 +43,9 @@
   box-sizing: border-box;
   margin-top: 100px;
 }
-
 .key_service {
-  color: #1503bcfd;
   margin-left: 10px;
 }
-
 .custom-snackbar-dashboard {
   background-color: #ff9800;
   color: #fff;
@@ -70,11 +58,9 @@
   font-weight: bold;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
-
 .client-toast-container {
   margin-top: 150px;
 }
-
 .notification-container {
   position: fixed;
   top: 16px;
@@ -84,7 +70,6 @@
   gap: 8px;
   z-index: 1000;
 }
-
 .notification {
   display: flex;
   align-items: center;
@@ -95,30 +80,20 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
-.notification:hover {
-  background-color: #fdd835;
-}
-
 .notification mat-icon {
   margin-right: 8px;
   color: #f44336;
 }
-
-/* Estilo para o texto do status atual */
 .notification-toast p {
   margin: 10px 0 0;
   font-size: 14px;
   color: #6c757d;
 }
-
-/* Botões para alterar status */
 .status-buttons {
   display: flex;
   gap: 10px;
   margin-top: 10px;
 }
-
 .status-buttons button {
   background-color: #007bff;
   color: white;
@@ -129,17 +104,13 @@
   font-size: 14px;
   transition: background-color 0.3s ease;
 }
-
 .status-buttons button:disabled {
   background-color: #6c757d;
   cursor: not-allowed;
 }
-
 .status-buttons button:hover:not(:disabled) {
   background-color: #0056b3;
 }
-
-/* Estilização do modo de loading */
 .loading {
   display: flex;
   align-items: center;
@@ -151,12 +122,9 @@
   border-radius: 8px;
   text-align: center;
 }
-
-/* Animação de loading (pode ser um spinner opcional) */
 .loading p {
   animation: blink 1.5s infinite;
 }
-
 @keyframes blink {
   0% {
     opacity: 1;
@@ -169,53 +137,3 @@
   }
 }
 
-/* Ajustes para responsividade */
-@media (max-width: 768px) {
-  .notification-toast {
-    padding: 15px;
-    font-size: 14px;
-  }
-
-  .status-buttons button {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 1300px) {
-
-  .cards {
-    margin: 0 auto;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .client-toast-container {
-    margin-top: 400px;
-    margin-bottom: 40px;
-  }
-}
-
-@media (max-width: 768px) {
-  .cards {
-    flex-direction: column; /* Empilha os cards verticalmente */
-    align-items: center; /* Alinha os cards ao centro */
-    margin: 0 auto;
-    overflow-y: hidden;
-    margin-top: 100px;
-    padding-bottom: 0;
-  }
-
-  .custom-select {
-    bottom: 0;
-  }
-
-  .client-toast-container {
-    margin-top: 350px;
-  }
-
-  .clientes-list {
-    padding: 0 20px; /* Reduz o padding */
-    margin-top: 50px; /* Ajusta a margem */
-  }
-}

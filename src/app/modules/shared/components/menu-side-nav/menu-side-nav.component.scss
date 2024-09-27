@@ -7,7 +7,7 @@ span {
 }
 
 .menu {
-  background-color: #233ac1; // ou qualquer cor que você preferir para a barra de navegação
+  background-color: #233ac1;
   color: white;
 
   > .container {
@@ -68,7 +68,6 @@ button.mat-button {
 .router-link-active {
   color: #ffcc00; // cor de destaque para o item ativo
 }
-
 
 @media (max-width: 1250px) {
   .container {
