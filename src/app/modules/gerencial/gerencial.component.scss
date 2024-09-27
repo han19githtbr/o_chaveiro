@@ -19,7 +19,6 @@ app-menu-side-nav {
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-
 .hamburger {
   display: none;
   position: fixed;
@@ -98,40 +97,3 @@ app-menu-side-nav {
 .app-menu-side-nav.menu-open {
   display: block;
 }
-
-/*@import '../../modules/shared/styles/variables.scss';
-
-.search-bar {
-  margin-top: 80px;
-  width: 100px;
-}
-
-.container {
-  border-right: 1px solid rgba(0, 0, 0, 0.5);
-  height: 100vh;
-
-  .sidenav {
-    width: 235px;
-    background: #000000;
-  }
-
-  ::ng-deep mat-drawer-content {
-    background-color: $color-white;
-    .content{
-      padding: 24px;
-
-      .header{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 32px;
-      }
-    }
-  }
-
-  .main-content{
-    &.blur{
-      filter: blur(2px);
-    }
-  }
-}*/

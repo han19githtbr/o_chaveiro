@@ -15,16 +15,7 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
             <ng-container>
               <mat-icon class="edit_button">edit</mat-icon>
             </ng-container>
-            <!--<ng-container>
-              <mat-slide-toggle
-                color="primary"
-                matTooltip="Alterar status"
-                [checked]="notification?.status === 'pendente'"
-                (change)="toggleNotificationStatus()"
-              >
 
-              </mat-slide-toggle>
-            </ng-container>-->
             <ng-container>
               <mat-icon>delete_outline</mat-icon>
             </ng-container>
@@ -187,24 +178,6 @@ export class ClienteModalNotificationComponent {
       this.notification = data;
     })
   }
-
-  /*toggleNotificationStatus(): void {
-    if (this.notification && this.notification.id) {
-      const newStatus = this.notification.status === 'ativo' ? 'pendente' : 'ativo';
-
-      this.notificationService.updateNotificationStatus(this.notification.id, newStatus).subscribe(
-        response => {
-
-          this.notification = response;
-        },
-        error => {
-          console.error('Erro ao atualizar o status do cliente', error);
-        }
-      );
-    } else {
-      console.error('Cliente não encontrado');
-    }
-  }*/
 
   closeModal(): void {
     this.dialogRef.close();
