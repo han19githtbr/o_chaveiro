@@ -6,7 +6,8 @@
   grid-template-columns: repeat(1, 1fr);
   align-items: center;
   background-color: $color-black;
-  color: $primary;
+  //color: $primary;
+  color: #001eff;
   height: 116vh;
   overflow: hidden;
 
@@ -32,7 +33,7 @@
   .custom-select {
     margin-left: 5px;
     padding: 10px 10px;
-    color: #efe055;
+    color: #2a42f9;
     border-radius: 50%;
     background-color: #000000;
   }

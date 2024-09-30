@@ -1,8 +1,9 @@
 <app-list-table
   [listTable]="services"
   [displayedColumns]="headers"
-  [useButton]="true"
-  buttonLabel="Adicionar serviço"
   [routerLinkAction]="'/gerencial/servicos/new'"
   (clickRowEvent)="goToDetails($event)">
 </app-list-table>
+
+<!-- [useButton]="true" -->
+<!-- buttonLabel="Adicionar serviço" -->
