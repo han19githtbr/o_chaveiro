@@ -1,6 +1,13 @@
 .dashboard {
   position: relative;
 }
+.icon_notifications {
+  //float: right;
+  position: relative;
+  margin-top: -80px;
+  margin-bottom: 20px;
+  z-index: 99999;
+}
 .cards {
   display: flex;
   justify-content: space-between;
