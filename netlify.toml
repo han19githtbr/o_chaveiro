@@ -4,6 +4,9 @@
   publish = "dist/o_chaveiro"
   node_version = "18.13.0"
 
+[context.production.environment]
+  NPM_FLAGS = "--legacy-peer-deps"
+
 [[plugins]]
   package = "@netlify/angular-runtime"
 
