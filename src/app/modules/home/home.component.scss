@@ -7,7 +7,7 @@
   align-items: center;
   background-color: $color-black;
   //color: $primary;
-  color: #001eff;
+  color: #59a0fc;
   height: 116vh;
   overflow: hidden;
 
@@ -79,10 +79,14 @@
       }
 
       .container-logomarca {
-        margin-left: 30px;
+        margin-left: -40px;
+        //position: relative;
         margin-bottom: -20px;
 
         .dynamic_text {
+          font-size: 24px;
+          margin-top: 10px;
+          margin-left: -53px;
           position: absolute;
         }
       }
