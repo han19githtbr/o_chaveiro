@@ -1,7 +1,7 @@
 [build]
-  base = "dist/o_chaveiro/project"
+  base = "dist/o_chaveiro"
   command = "npm run build"
-  publish = "dist/o_chaveiro/project/browser"
+  publish = "dist/o_chaveiro/browser"
   node_version = "18.13.0"
 
 [[plugins]]

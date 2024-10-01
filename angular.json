@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/o_chaveiro/project",
+            "outputPath": "dist/o_chaveiro",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
