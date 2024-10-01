@@ -3,3 +3,6 @@
   command = "npm run build"
   publish = "dist/o_chaveiro/project/browser"
   node_version = "18.13.0"
+
+[[plugins]]
+package = "@netlify/angular-runtime"
