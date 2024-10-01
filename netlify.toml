@@ -1,8 +1,9 @@
 [build]
-  base = "o_chaveiro"
+  base = ""
   command = "npm run build"
   publish = "dist/o_chaveiro"
   node_version = "18.13.0"
 
 [[plugins]]
-package = "@netlify/angular-runtime"
+  package = "@netlify/angular-runtime"
+
