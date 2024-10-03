@@ -78,6 +78,7 @@ export class NotificationService {
 
   updateNotificationStatus(notificationId: number, newStatus: string): Observable<Notification> {
     const url = `http://localhost:3000/notifications/${notificationId}/update-status`;
+    //const url = `https://api-ochaveiro.vercel.app/notifications/${notificationId}/update-status`;
     const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
     return this.http.patch<Notification>(url, body);
   }

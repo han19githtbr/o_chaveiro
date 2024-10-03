@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class PedidoService {
 
   private apiUrlPedido = 'http://localhost:3000/notifications';
+  //private apiUrlPedido = 'https://api-ochaveiro.vercel.app/notifications';
 
   constructor(private http: HttpClient) { }
 
@@ -32,6 +33,7 @@ export class PedidoService {
 
   updateNotificationStatus(notificationId: number, newStatus: string): Observable<Notification> {
     const url = `http://localhost:3000/notifications/${notificationId}/update-status`;
+    //const url = `https://api-ochaveiro.vercel.app/notifications/${notificationId}/update-status`;
     const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
     return this.http.patch<Notification>(url, body);
   }

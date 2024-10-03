@@ -9,6 +9,7 @@ import { UserAdminResponse } from 'src/app/modules/shared/models/userAdmin';
 })
 export class SettingsService {
   private baseUrl = 'http://localhost:3000';
+  //private baseUrl = 'https://api-ochaveiro.vercel.app';
 
   constructor(private http: HttpClient) {}
 

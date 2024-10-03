@@ -10,6 +10,8 @@ import { Service, CreateService, UpdateService } from 'src/app/modules/shared/mo
 export class ServicosService {
 
   private apiUrlServico = 'http://localhost:3000/servico';
+  //private apiUrlServico = 'https://api-ochaveiro.vercel.app/servico';
+
 
   constructor(private http: HttpClient) { }
 
@@ -36,6 +38,7 @@ export class ServicosService {
 
   updateServiceStatus(serviceId: number, newStatus: string): Observable<Service> {
     const url = `http://localhost:3000/servico/${serviceId}/update-status`;
+    //const url = `https://api-ochaveiro.vercel.app/servico/${serviceId}/update-status`;
     const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
     return this.http.patch<Service>(url, body);
   }

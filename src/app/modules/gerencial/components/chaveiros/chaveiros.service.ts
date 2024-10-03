@@ -9,6 +9,8 @@ import { Chaveiro, CreateChaveiro, UpdateChaveiro } from 'src/app/modules/shared
 export class ChaveiroService {
 
   private apiUrlChaveiro = 'http://localhost:3000/chaveiro';
+  //private apiUrlChaveiro = 'https://api-ochaveiro.vercel.app/chaveiro';
+
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +37,7 @@ export class ChaveiroService {
 
   updateChaveiroStatus(chaveiroId: number, newStatus: string): Observable<Chaveiro> {
     const url = `http://localhost:3000/chaveiro/${chaveiroId}/update-status`;
+    //const url = `https://api-ochaveiro.vercel.app/chaveiro/${chaveiroId}/update-status`;
     const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
     return this.http.patch<Chaveiro>(url, body);
   }

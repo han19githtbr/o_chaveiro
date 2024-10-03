@@ -13,6 +13,9 @@ export class DashboardService {
   private apiUrlCliente = 'http://localhost:3000/clientes';
   private apiUrlChaveiro = 'http://localhost:3000/chaveiro';
   private apiUrlServico = 'http://localhost:3000/servico';
+  //private apiUrlCliente = 'https://api-ochaveiro.vercel.app/clientes'
+  //private apiUrlChaveiro = 'https://api-ochaveiro.vercel.app/chaveiro'
+  //private apiUrlServico = 'https://api-ochaveiro.vercel.app/servico'
 
   constructor(private http: HttpClient) { }
 
@@ -42,6 +45,7 @@ export class DashboardService {
 
   updateClientStatus(clienteId: number, newStatus: string): Observable<Cliente> {
     const url = `http://localhost:3000/clientes/${clienteId}/update-status`;
+    //const url = `https://api-ochaveiro.vercel.app/clientes/${clienteId}/update-status`
     const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
     return this.http.patch<Cliente>(url, body);
   }
