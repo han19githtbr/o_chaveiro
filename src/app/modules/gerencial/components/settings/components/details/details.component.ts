@@ -143,7 +143,7 @@ export default class DetailsComponent implements OnInit {
       ...user,
       permissions: this.permissions,
     };
-    this.service.update(adminUser, Number(this.userId)).subscribe({
+    this.service.update(Number(this.userId), adminUser).subscribe({
       next: (response) => {
         this.spinner.hide();
         this.toastr.success('Usuário atualizado com sucesso');

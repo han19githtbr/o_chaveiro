@@ -120,4 +120,37 @@
       object-fit: cover;
     }
   }
+
+
+  .cadastro {
+    margin-top: 15px;
+  }
+
+  .cadastro h4 {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .register_button {
+    width: 160px;
+    height: 35px;
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    background-color: #000000;
+    border: 2px solid #001eff;
+  }
+
+  .register_button:hover {
+    border: 2px solid #86f9f0;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .link_cadastro {
+    list-style: none;
+  }
 }

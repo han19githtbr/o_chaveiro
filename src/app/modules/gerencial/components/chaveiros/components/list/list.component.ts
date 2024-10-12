@@ -29,6 +29,11 @@ export default class ListComponent {
     { key: 'status', text: 'Status' },
   ];
 
+  public checkCustomColors: {[key: string]: string} = {
+    'Ativo': '#D7E9D0',
+    'Inativo': '#e8c5c5',
+  }
+
   constructor(private chaveiroService: ChaveiroService) {
     this.loadChaveiros();
   }

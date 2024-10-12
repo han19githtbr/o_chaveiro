@@ -3,10 +3,8 @@ export interface CreateRegisterDto {
   name: string;
   email: string;
   password: string;
-  status: 'ativo' | 'inativo';
+  //status: 'ativo' | 'inativo';
   imageUrl?: string;
-  birthDate: string;
-  cpf: string;
   phone: string;
 }
 
@@ -17,14 +15,12 @@ export interface UserDetailsDto {
 
 export interface RegisterDto {
   id: number;
-  birthDate: string;
-  cpf: string;
   phone: string;
   email: string;
   name: string;
   imageUrl: string | null;
   role: 'admin' | 'user';
-  status: 'ativo' | 'inativo';
+  //status: 'ativo' | 'inativo';
   createdAt: Date;
   updatedAt: Date;
 }
@@ -35,9 +31,7 @@ export interface UpdateRegisterDto {
   name?: string;
   email?: string;
   password?: string;
-  status?: 'ativo' | 'inativo';
+  //status?: 'ativo' | 'inativo';
   imageUrl?: string;
-  birthDate?: string;
-  cpf?: string;
   phone?: string;
 }

@@ -10,9 +10,9 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { DisplayColumns, TypeColumn } from './models/display-columns.model';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { TableColumns, DisplayColumns, TypeColumn } from './models/display-columns.model';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { BehaviorSubject } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -26,7 +26,14 @@ import ButtonComponent from '../button/button.component';
   templateUrl: './list-table.component.html',
   styleUrls: ['./list-table.component.scss'],
   standalone: true,
-  imports: [MaterialModule, SearchComponent, CommonModule, ButtonComponent],
+  imports: [
+    MaterialModule,
+    MatSortModule,
+    MatTableModule,
+    SearchComponent,
+    CommonModule,
+    ButtonComponent
+  ],
 })
 export default class ListTableComponent
   implements OnInit, AfterViewInit, OnChanges
@@ -55,12 +62,19 @@ export default class ListTableComponent
   @Input() public buttonLabel!: string;
   @Input() public totalItems!: number;
 
+  @Input() public icon?: string;
+  @Input() public iconConfig?: { [key: string]: string };
+  @Input() public typeColumn!: string;
+  @Input() public customTableClass?: string;
+
   @Output() public clickRowEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() public clickButtonEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() public onPageChange: EventEmitter<PageEvent> =
     new EventEmitter<PageEvent>();
 
   constructor(private breakpointObserver: BreakpointObserver) {}
+
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['listTable']) {
@@ -73,6 +87,14 @@ export default class ListTableComponent
         console.error('listTable is not an array', newValue);
       }
     }
+  }
+
+  getBackgroundColor(value: string | undefined): string {
+    if (!this.checkCustomColors || value === undefined) {
+      return 'inherit';
+    }
+
+    return this.checkCustomColors[value] || 'inherit';
   }
 
   public ngAfterViewInit(): void {

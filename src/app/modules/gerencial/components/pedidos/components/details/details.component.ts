@@ -61,7 +61,7 @@ export default class DetailsComponent implements OnInit {
   }
 
 
-  public getStatusLabel(status: string): string {
+  /*public getStatusLabel(status: string): string {
     switch (status) {
       case 'ativo':
         return 'servido';
@@ -72,7 +72,7 @@ export default class DetailsComponent implements OnInit {
       default:
         return status;
     }
-  }
+  }*/
 
 
   openEditModal(): void {

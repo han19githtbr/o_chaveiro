@@ -271,7 +271,7 @@ export class ClienteFormComponent implements OnInit {
     }
   }
 
-  
+
   private loadServices() {
     this.dashboardService.getAllServices().subscribe(
       (services: Service[]) => {

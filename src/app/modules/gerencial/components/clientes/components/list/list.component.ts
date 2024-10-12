@@ -23,6 +23,7 @@ export default class ListComponent {
     { key: 'name', text: 'Nome' },
     { key: 'phone', text: 'Telefone' },
     { key: 'endereco', text: 'Endereço' },
+    { key: 'service', text: 'Serviço' },
     { key: 'status', text: 'Status' },
   ];
 

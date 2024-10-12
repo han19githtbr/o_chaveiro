@@ -1,11 +1,11 @@
 import { Observable} from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SideImageControllerService } from '../shared/services/side-image-controller.service';
 import { MatDialog } from '@angular/material/dialog';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { MatMenuModule, MatMenuPanel } from '@angular/material/menu';
@@ -36,21 +36,11 @@ import { ClienteFormComponent } from '../gerencial/components/cliente-form/clien
   ]
 })
 export default class HomeComponent implements OnInit {
-  //public image$: Observable<string> = this.sideImageService.image$.pipe(takeUntilDestroyed());
-
-  /*phrases: string[] = [
-    "Melhores preços do mercado",
-    "Aqui você encontra a chave que procura",
-    "Entregamos um serviço de qualidade",
-    "Rapidez e eficiência garantidas",
-    "A chave perfeita para você"
-  ]*/
 
   displayedText: string = "Faça a sua chave conosco";
   currentPhraseIndex: number = 0;
   selectedUser: UserAdmin[] = [];
   searchText: string = '';
-
 
   services: string[] = ['Cópia', 'Conserto'];
   selectedService: string | null = null;
@@ -62,9 +52,10 @@ export default class HomeComponent implements OnInit {
     private snackBar: MatSnackBar
   ) { }
 
+  public router: Router = inject(Router);
+
   ngOnInit(): void {
     this.sideImageService.setImage();
-    //this.startTextRotation();
   }
 
   onSelectionChange(event: any): void {
@@ -75,7 +66,6 @@ export default class HomeComponent implements OnInit {
     this.selectedService = event.value;
     this.openClienteFormModal();
   }
-
 
   openClienteFormModal(): void {
     const dialogRef = this.dialog.open(ClienteFormComponent, {
@@ -106,7 +96,6 @@ export default class HomeComponent implements OnInit {
     }, 100);
   }
 
-
   showNotification(message: string): void {
     this.snackBar.open(message, 'Fechar', {
       duration: 3000,
@@ -116,9 +105,7 @@ export default class HomeComponent implements OnInit {
     });
   }
 
-
   onNewOrderReceived(): void {
     this.showNotification('Pedido recebido');
   }
-
 }

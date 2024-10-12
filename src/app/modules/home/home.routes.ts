@@ -15,6 +15,9 @@ export default [
     path: 'reset',
     loadComponent: () => import('./reset-password/reset-password.component'),
   },
-  
+  /*{
+    path: 'account',
+    loadComponent: () => import('../account/account.component'),
+  },*/
 
 ] as Route[];

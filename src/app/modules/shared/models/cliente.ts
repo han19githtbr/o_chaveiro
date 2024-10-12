@@ -1,7 +1,8 @@
 export interface Cliente {
   id?: number;
-  status: 'ativo' | 'inativo' | 'pendente';
+  status: 'servido' | 'andando' | 'pendente' | 'cancelado' ;
   name?: string;
+  service: string;
   endereco?: string;
   imageUrl?: string;
   phone?: number;
@@ -11,8 +12,9 @@ export interface Cliente {
 
 export interface CreateCliente {
   id?: number;
-  status: 'ativo' | 'inativo' | 'pendente';
+  status: 'servido' | 'andando' | 'pendente' | 'cancelado' ;
   name?: string;
+  service: string;
   endereco?: string;
   imageUrl?: string;
   phone?: number;
@@ -22,8 +24,9 @@ export interface CreateCliente {
 
 export interface UpdateCliente {
   id?: number;
-  status: 'ativo' | 'inativo' | 'pendente';
+  status: 'servido' | 'andando' | 'pendente' | 'cancelado' ;
   name?: string;
+  service: string;
   endereco?: string;
   imageUrl?: string;
   phone?: number;

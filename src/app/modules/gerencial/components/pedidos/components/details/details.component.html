@@ -7,7 +7,7 @@
           <ng-container>
             <mat-icon class="edit_button" matTooltip="Editar" (click)="openEditModal()">edit</mat-icon>
           </ng-container>
-          
+
           <ng-container *ngIf="notification">
             <mat-icon
               class="delete_button"
@@ -24,7 +24,8 @@
       <h2 class="nome_cliente">{{ notification?.name }}</h2>
       <p><strong>Telefone do cliente:</strong> {{ notification?.phone }}</p>
       <p><strong>Endereço do cliente:</strong> {{ notification?.endereco }}</p>
-      <p><strong>Status do cliente:</strong> {{ getStatusLabel(notification?.status || '') | titlecase }}</p>
+      <p><strong>Pedido do cliente:</strong> {{ notification?.service }}</p>
+      <p><strong>Status do cliente:</strong> {{ notification?.status }}</p>
 
 
       <div class="buttons">

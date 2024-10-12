@@ -38,6 +38,11 @@ export default [
     data: { useBreadcrumb: true },
   },
   {
+    path: 'admin-modal',
+    loadComponent: () => import('./components/admin-modal/admin-modal.component'),
+    data: { useBreadcrumb: true },
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./components/settings/settings.routes'),
     data: { useBreadcrumb: true },

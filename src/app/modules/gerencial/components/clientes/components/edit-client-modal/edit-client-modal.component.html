@@ -30,6 +30,14 @@
 
         <div class="row">
           <mat-form-field class="w-full">
+            <mat-label>Serviço solicitado</mat-label>
+            <mat-icon matPrefix>key</mat-icon>
+            <input id="service" formControlName="service" type="text" matInput autocomplete="service" />
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="w-full">
             <mat-label>Endereço</mat-label>
             <mat-icon matPrefix>person_pin_circle</mat-icon>
             <input id="endereco" formControlName="endereco" type="text" matInput autocomplete="place" />
@@ -39,9 +47,10 @@
             <mat-label>Status</mat-label>
             <mat-icon matPrefix>info</mat-icon>
             <mat-select formControlName="status">
-              <mat-option value="ativo">Servido</mat-option>
-              <mat-option value="inativo">Cancelado</mat-option>
+              <mat-option value="servido">Servido</mat-option>
+              <mat-option value="cancelado">Cancelado</mat-option>
               <mat-option value="pendente">Pendente</mat-option>
+              <mat-option value="andando">Andando</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

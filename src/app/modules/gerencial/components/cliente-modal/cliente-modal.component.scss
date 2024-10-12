@@ -41,9 +41,11 @@
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  border: 1px solid black;
+  border: 3px solid black;
   color: black;
   font-weight: bold;
+  height: 25px;
+  font-size: 18px;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -52,15 +54,25 @@
   cursor: pointer;
 }
 
+.servico_solicitado {
+  text-wrap: nowrap;
+}
+
 .button-status {
-  &.ativo {
+  &.servido {
     background-color: #28f42e; /* Verde para ativo */
     color: black;
     font-family: 'Times New Roman', Times, serif;
   }
 
-  &.inativo {
+  &.cancelado {
     background-color: #f44336; /* Vermelho para inativo */
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  &.andando {
+    background-color: #36e1f4; /* Vermelho para inativo */
     color: black;
     font-family: 'Times New Roman', Times, serif;
   }

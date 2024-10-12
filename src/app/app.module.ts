@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthenticationInterceptor } from './modules/core/interceptors/authentication.interceptor';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -24,7 +24,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     HttpClientModule,
     BrowserAnimationsModule,
     SocketIoModule.forRoot(config),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatDialogModule
   ],
   providers: [
     provideClientHydration(),

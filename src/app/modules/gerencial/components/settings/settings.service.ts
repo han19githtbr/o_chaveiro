@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UserAdmin } from 'src/app/modules/shared/models/userAdmin';
+import { UserAdmin, UpdateAdmin } from 'src/app/modules/shared/models/userAdmin';
 import { UserAdminResponse } from 'src/app/modules/shared/models/userAdmin';
 
 @Injectable({
@@ -30,9 +30,17 @@ export class SettingsService {
     return this.http.post(`${this.baseUrl}/admins`, body);
   }
 
-  update(body: any, userId: number){
+  /*update(body: any, userId: number){
     return this.http.put(`${this.baseUrl}/admins/${userId}`, body);
+  }*/
+
+  update(userId: number, adminData: UpdateAdmin){
+    return this.http.put<UserAdmin>(`${this.baseUrl}/admins/${userId}`, adminData);
   }
+
+  /*updateChaveiro(id: number, chaveiroData: UpdateChaveiro): Observable<Chaveiro> {
+    return this.http.put<Chaveiro>(`${this.apiUrlChaveiro}/${id}`, chaveiroData);
+  }*/
 
   updateStatus(userId: number, status: string): Observable<any> {
     return this.http.patch(`${this.baseUrl}/admins/${userId}/update-status`, { status });

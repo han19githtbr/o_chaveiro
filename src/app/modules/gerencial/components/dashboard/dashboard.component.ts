@@ -181,7 +181,7 @@ export default class DashboardComponent implements OnDestroy {
     )
   }
 
-  
+
   // Acrescentei essa nova função
   private updateTotalNotifications() {
     this.notificationService.getNotifications().subscribe(notifications => {
@@ -213,7 +213,7 @@ export default class DashboardComponent implements OnDestroy {
   // Função auxiliar para gerar um ID aleatório (ajuste conforme necessário)
   private generateRandomId(): string {
     const min = 1;
-    const max = 50;
+    const max = 30;
     const randomId = Math.floor((Math.random() * (max - min + 1)) + min).toString();
     return randomId;
   }

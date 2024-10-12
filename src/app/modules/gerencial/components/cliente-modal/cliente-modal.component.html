@@ -22,12 +22,13 @@
             matTooltip="Alterar status"
             [ngClass]="{
               'button-status': true,
-              'ativo': cliente?.status === 'ativo',
-              'inativo': cliente?.status === 'inativo',
+              'servido': cliente?.status === 'servido',
+              'cancelado': cliente?.status === 'cancelado',
+              'andando': cliente?.status === 'andando',
               'pendente': cliente?.status === 'pendente'
             }"
           >
-            {{ getStatusLabel(cliente?.status || '') }}
+            {{ cliente?.status }}
           </button>
         </ng-container>
         <ng-container>
@@ -41,13 +42,16 @@
       <img [src]="cliente?.imageUrl" alt="Cliente Image" class="modal-image" />
       <h2>{{ cliente?.name }}</h2>
       <p>
-        <strong>Status:</strong> {{ getStatusLabel(cliente?.status || '') }}
+        <strong>Status:</strong> {{ cliente?.status }}
       </p>
       <p>
         <strong>Telefone:</strong> {{ cliente?.phone }}
       </p>
       <p>
         <strong>Endereço:</strong> {{ cliente?.endereco }}
+      </p>
+      <p class="servico_solicitado">
+        <strong>Serviço solicitado:</strong> {{ cliente?.service }}
       </p>
     </div>
     <button mat-button (click)="closeModal()" class="close-button">Fechar</button>

@@ -20,3 +20,13 @@ export interface UserAdmin {
   imageUrl: string;
   permissions: Permission[];
 }
+
+export interface UpdateAdmin {
+  //id: number;
+  name: string;
+  email: string;
+  status: string;
+  //role: 'User' | 'Admin';
+  imageUrl: string;
+  permissions: Permission[];
+}

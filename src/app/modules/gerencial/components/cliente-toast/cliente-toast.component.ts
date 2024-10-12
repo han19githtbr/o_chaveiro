@@ -16,15 +16,17 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
       <!-- Adicionando o aviso de status -->
       <!--'pendente': cliente.status === 'pendente',-->
       <div class="status-badge" [ngClass]="{
-        'ativo': cliente.status === 'ativo',
+        'servido': cliente.status === 'servido',
         'pendente': cliente.status === 'pendente',
-        'inativo': cliente.status === 'inativo',
+        'andando': cliente.status === 'andando',
+        'cancelado': cliente.status === 'cancelado',
       }">
         <mat-icon class="error" *ngIf="cliente.status === 'pendente'">error</mat-icon>
-        <mat-icon *ngIf="cliente.status === 'ativo'">check_circle</mat-icon>
-        <mat-icon *ngIf="cliente.status === 'inativo'">cancel</mat-icon>
+        <mat-icon *ngIf="cliente.status === 'servido'">check_circle</mat-icon>
+        <mat-icon *ngIf="cliente.status === 'cancelado'">cancel</mat-icon>
+        <mat-icon class="loading-icon" *ngIf="cliente.status === 'andando'">loop</mat-icon>
 
-        {{ getStatusLabel(cliente.status) | titlecase }}
+        {{ cliente.status }}
       </div>
 
 
@@ -56,7 +58,6 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         background: #0c02c1;
         box-shadow: 0 10px 10px rgba(0, 0, 0, 0.8);
         position: fixed;
-        //border: 1px solid yellow;
         bottom: 20px;
         width: 240px;
         right: 20px;
@@ -115,21 +116,41 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         animation: infiniteZoom 0.5s infinite;
       }
 
+      .loading-icon {
+        animation: rotation 1.5s infinite linear;
+        color: #ffff00;
+      }
+
+      @keyframes rotation {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
       .status-badge.pendente {
         border: 2px solid black;
         background-color: #eedf22;
         color: black;
       }
 
-      .status-badge.ativo {
+      .status-badge.servido {
         border: 2px solid black;
         background-color: #0fce22;
         color: black;
       }
 
-      .status-badge.inativo {
+      .status-badge.cancelado {
         border: 2px solid black;
         background-color: #ea1e0d;
+        color: black;
+      }
+
+      .status-badge.andando {
+        border: 2px solid black;
+        background-color: #006595;
         color: black;
       }
 
@@ -171,7 +192,7 @@ export default class ClienteToastComponent implements OnInit, OnDestroy {
     this.clearDismissTimer();
   }
 
-  getStatusLabel(status: string): string {
+  /*getStatusLabel(status: string): string {
     switch (status) {
       case 'ativo':
         return 'servido';
@@ -182,7 +203,7 @@ export default class ClienteToastComponent implements OnInit, OnDestroy {
       default:
         return status;
     }
-  }
+  }*/
 
 
   // Inicia o temporizador para ocultar a toast

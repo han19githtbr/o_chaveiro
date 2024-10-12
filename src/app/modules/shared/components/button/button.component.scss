@@ -11,17 +11,19 @@
   font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
   font-size: 18px;
-  background-color: #0202e6;
+  border: 2px solid #0000ff;
+  background-color: #000000;
   //background-color: $primary;
-  color: #fff;
+  color: #1111ff;
   padding: 0 16px;
 
   &:hover,
   &.outline {
-    color: #0000ff;
-    background-color: transparent;
+    color: #0080ff;
+    //background-color: transparent;
+    font-size: 19px;
     //border: 1px solid $primary;
-    border: 2px solid #0000ff;
+    border: 3px solid #0000ff;
   }
 
   &.error {

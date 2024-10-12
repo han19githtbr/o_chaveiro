@@ -24,8 +24,8 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
 
         <h2>Detalhes do Cliente</h2>
         <div class="detail-item">
-          <mat-icon>image</mat-icon>
-          <span>Foto:</span>
+          <!--<mat-icon>image</mat-icon>
+          <span>Foto:</span>-->
           <img [src]="data.imageUrl" alt="Foto do Cliente" class="client-image"/>
         </div>
         <div class="detail-item">
@@ -51,7 +51,7 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
 
         <div class="detail-item">
           <mat-icon>build</mat-icon>
-          <span>Serviço:</span>
+          <span>Pedido:</span>
           <span class="service">{{ data.service }}</span>
         </div>
         <button mat-button (click)="closeModal()" class="close-button">Fechar</button>
@@ -87,7 +87,7 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
       background: rgb(225, 223, 223);
       padding: 20px;
       border-radius: 8px;
-      max-width: 90%; /* Limita a largura máxima do modal */
+      max-width: 100%; /* Limita a largura máxima do modal */
       max-height: 90%; /* Limita a altura máxima do modal */
       overflow-y: auto; /* Adiciona rolagem para conteúdo excedente */
       position: relative;
@@ -98,6 +98,7 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
       align-items: center;
       margin: 10px 0;
       font-size: 16px;
+      text-wrap: nowrap;
       width: 100%;
     }
 
@@ -132,20 +133,22 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
     }
 
     .client-image {
-      width: 270px;
+      width: 260px;
       height: 250px;
       max-width: 300px;
       max-height: 200px;
       margin-left: 8px;
-      border-radius: 10%;
+      border-radius: 2%;
     }
 
     .close-button {
       margin-top: 20px;
-      background-color: #ea172d;
+      background-color: #f00000;
       width: 100%;
-      border-radius: 4px;
-      border: 1px solid black;
+      border-radius: 3px;
+      border: 3px solid black;
+      font-size: 18px;
+      font-weight: bold;
       color: black;
     }
 

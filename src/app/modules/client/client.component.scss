@@ -1,0 +1,99 @@
+@import '../../modules/shared/styles/variables.scss';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 175vh;
+}
+
+.search-bar {
+  margin-top: 80px;
+  width: 100px;
+}
+
+/* Menu superior fixo */
+app-menu-side-nav {
+  flex: 0 0 auto;
+  width: 100%;
+  background-color: #000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.hamburger mat-icon {
+  color: #fff;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-bottom: 32px;
+    padding: 16px;
+  }
+
+  .main-content {
+    flex: 1;
+    overflow: auto;
+    padding: 24px;
+  }
+
+  .main-content.blur {
+    filter: blur(2px);
+  }
+}
+
+
+@media (max-width: 1100px) {
+  :host {
+    height: 180vh;
+  }
+}
+
+
+@media (max-width: 768px) {
+  :host {
+    height: 175vh;
+  }
+
+  .search-bar {
+    width: 100%; /* Faz a barra de pesquisa ocupar toda a largura */
+  }
+
+  .header {
+    flex-direction: column; /* Empilha os elementos verticalmente */
+    align-items: flex-start; /* Alinha itens ao início */
+  }
+
+  .main-content {
+    padding: 16px; /* Reduz o padding */
+  }
+
+  .content {
+    margin-left: 0;
+  }
+
+}
+
+
+/* Mostrar o menu quando o estado isMenuOpen é verdadeiro */
+.app-menu-side-nav.menu-open {
+  display: block;
+}

@@ -31,12 +31,14 @@ export default class ListComponent {
   }
 
 
-  private mapStatus(status: string): 'ativo' | 'inativo' | 'pendente' | 'novo' {
+  private mapStatus(status: string): 'servido' | 'cancelado' | 'andando' | 'pendente' | 'novo' {
     switch (status) {
-      case 'ativo':
-        return 'ativo';
-      case 'inativo':
-        return 'inativo';
+      case 'servido':
+        return 'servido';
+      case 'cancelado':
+        return 'cancelado';
+      case 'andando':
+        return 'andando';
       case 'pendente':
         return 'pendente';
       case 'novo':

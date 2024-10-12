@@ -54,15 +54,14 @@ export class ClienteModalComponent {
     if (this.cliente && this.cliente.id) {
       let newStatus: string;
 
-      // Alterna ciclicamente entre 'pendente', 'ativo' e 'inativo'
       switch (this.cliente.status) {
         case 'pendente':
-          newStatus = 'ativo';
+          newStatus = 'servido';
           break;
-        case 'ativo':
-          newStatus = 'inativo';
+        case 'servido':
+          newStatus = 'cancelado';
           break;
-        case 'inativo':
+        case 'cancelado':
         default:
           newStatus = 'pendente';
           break;
@@ -105,7 +104,7 @@ export class ClienteModalComponent {
   }
 
 
-  getStatusLabel(status: string): string {
+  /*getStatusLabel(status: string): string {
     switch (status) {
       case 'ativo':
         return 'servido';
@@ -116,6 +115,6 @@ export class ClienteModalComponent {
       default:
         return status;
     }
-  }
+  }*/
 
 }

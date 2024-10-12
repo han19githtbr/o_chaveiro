@@ -57,6 +57,7 @@ export class EditClientModalComponent implements OnInit {
       endereco: ['', Validators.required],
       imageUrl: ['', [Validators.required, Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/)]],
       phone: ['', Validators.required],
+      service: ['', Validators.required],
       status: ['', Validators.required],
     });
   }
@@ -71,6 +72,7 @@ export class EditClientModalComponent implements OnInit {
         endereco: this.data.cliente.endereco || '',
         imageUrl: this.data.cliente.imageUrl || '',
         phone: this.data.cliente.phone || '',
+        service: this.data.cliente.service || '',
         status: this.data.cliente.status || ''
       });
 
@@ -103,6 +105,7 @@ export class EditClientModalComponent implements OnInit {
         endereco: formValues.endereco || this.data.cliente.endereco,
         imageUrl: formValues.imageUrl || this.data.cliente.imageUrl,
         phone: formValues.phone || this.data.cliente.phone,
+        service: formValues.service || this.data.cliente.service,
         status: formValues.status || this.data.cliente.status,
       };
 

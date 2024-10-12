@@ -63,7 +63,6 @@ export default class DetailsComponent implements OnInit {
       this.chaveiro = data;
     });
 
-
   }
 
 
@@ -161,6 +160,7 @@ export default class DetailsComponent implements OnInit {
       },
     });
   }
+
 
   closeModal() {
     this.close.emit();
