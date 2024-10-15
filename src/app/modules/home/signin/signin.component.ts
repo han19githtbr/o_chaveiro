@@ -40,7 +40,6 @@ import HomeComponent from '../home.component';
 })
 export default class SigninComponent implements AfterContentInit {
 
-
   isFormDisabled(): boolean {
     return this.selectedRole === 'User';
   }
@@ -55,7 +54,6 @@ export default class SigninComponent implements AfterContentInit {
     password: new FormControl('', [Validators.required]),
   });
 
-
   constructor(
     private authService: AuthService,
     private storageService: StorageService,
@@ -66,17 +64,7 @@ export default class SigninComponent implements AfterContentInit {
   public hide: boolean = true;
   public router: Router = inject(Router);
 
-  /*public sideImageService: SideImageControllerService = inject(
-    SideImageControllerService
-  );*/
-
-  public ngAfterContentInit(): void {
-    /*this.image$ = this.sideImageService.image$.pipe(
-      takeUntilDestroyed(this.destroy)
-    );
-    this.sideImageService.setImage();*/
-
-  }
+  public ngAfterContentInit(): void {}
 
 
   public submit(): void {
@@ -110,11 +98,7 @@ export default class SigninComponent implements AfterContentInit {
             this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
           }, delay);
         }
-        /*this.authService.fetchUserData(auth.account.id).subscribe((user: UpdateRegisterDto )=> {
-          this.storageService.saveUserDetails(user);
-
-          this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
-        },(err) => this.snackBar.open(err.error.error, '', { duration: 2000 }));*/
+        
       },
       error: (err) => {
         this.loadingService.hideLoading();

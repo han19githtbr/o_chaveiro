@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
-//import { NotificationService } from 'src/app/modules/shared/services/notification.service';
 import { SettingsService } from '../settings/settings.service';
 import EditAdminModalComponent from 'src/app/modules/shared/components/toolbar/edit-admin-modal/edit-admin-modal.component';
 import { StorageService } from 'src/app/modules/core/auth/storage.service';
@@ -73,7 +72,6 @@ import { StorageService } from 'src/app/modules/core/auth/storage.service';
       left: 0;
       width: 100%;
       height: 100%;
-      //background-color: rgb(255, 255, 255);
       background-color: rgba(0, 0, 0, 0.5);
       display: flex;
       align-items: center;
@@ -85,9 +83,9 @@ import { StorageService } from 'src/app/modules/core/auth/storage.service';
       background: rgb(225, 223, 223);
       padding: 20px;
       border-radius: 8px;
-      max-width: 90%; /* Limita a largura máxima do modal */
-      max-height: 90%; /* Limita a altura máxima do modal */
-      overflow-y: auto; /* Adiciona rolagem para conteúdo excedente */
+      max-width: 90%;
+      max-height: 90%;
+      overflow-y: auto;
       position: relative;
     }
 
