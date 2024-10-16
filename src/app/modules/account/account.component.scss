@@ -1,5 +1,5 @@
 .title_register {
-  margin-top: 40px;
+  height: 55px;
   text-align: center;
   color: #0101f6;
   background-color: #d4ddff;
@@ -45,11 +45,11 @@ mat-label {
 
 button {
   align-self: flex-end;
-  border: 2px solid blue;
-  width: 220px;
+  border: 3px solid blue;
+  width: 240px;
   border-radius: 4px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 17px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 

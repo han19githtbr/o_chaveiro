@@ -98,7 +98,7 @@ export default class SigninComponent implements AfterContentInit {
             this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
           }, delay);
         }
-        
+
       },
       error: (err) => {
         this.loadingService.hideLoading();
