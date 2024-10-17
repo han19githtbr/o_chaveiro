@@ -69,46 +69,38 @@ export default class SigninComponent implements AfterContentInit {
 
   public submit(): void {
     if (this.signinForm.invalid) {
-      this.snackBar.open('Por favor, preencha todos os campos corretamente.', '', { duration: 3000 });
-      return;
+        this.snackBar.open('Por favor, preencha todos os campos corretamente.', '', { duration: 3000 });
+        return;
+    }
+
+    if (!this.selectedRole) {
+        this.snackBar.open('Por favor, selecione um papel válido.', '', { duration: 3000 });
+        return;
     }
 
     this.loadingService.showLoading();
 
-    const signin : SigninCredentials = this.signinForm.value as SigninCredentials;
+    const signin: SigninCredentials = this.signinForm.value as SigninCredentials;
 
-    this.authService.login(signin).subscribe({
-      next: (auth) => {
-        this.storageService.saveToken(auth.token)
+    this.authService.login(signin, this.selectedRole).subscribe({
+        next: (auth) => {
+            this.storageService.saveToken(auth.token);
 
-        if (auth.account.role === 'admin') {
-          const delay = Math.random() * (5000 - 1000) + 1000;
+            const delay = Math.random() * (5000 - 1000) + 1000;
 
-          setTimeout(() => {
+            setTimeout(() => {
+                this.loadingService.hideLoading();
+                const redirectPath = auth.account.role === 'admin' ? 'gerencial/dashboard' : 'client/pedidos';
+                this.router.navigate([redirectPath]);
+                this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
+            }, delay);
+        },
+        error: (err) => {
             this.loadingService.hideLoading();
-            this.router.navigate(['gerencial/dashboard']);
-            this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
-          }, delay);
-        } else {
-          const delay = Math.random() * (5000 - 1000) + 1000;
-
-          setTimeout(() => {
-            this.loadingService.hideLoading();
-            this.router.navigate(['customer/pedidos']);
-            this.snackBar.open('Logado com sucesso.', '', { duration: 3000 });
-          }, delay);
+            console.error('Erro ao fazer login:', err); // Mensagem de depuração
+            this.snackBar.open(err.error.error || 'Erro ao fazer login.', '', { duration: 2000 });
         }
-
-      },
-      error: (err) => {
-        this.loadingService.hideLoading();
-        this.snackBar.open(err.error.error, '', { duration: 2000 });
-      }
     });
   }
 
-
-  /*isFormDisabled(): boolean {
-    return this.signinForm.invalid;
-  }*/
 }

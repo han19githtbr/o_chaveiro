@@ -122,7 +122,7 @@ import { FileUploadService } from 'src/app/modules/shared/components/file-upload
 
       .cancel-button {
         background-color: #909090;
-        border: 1px solid black;
+        border: 3px solid black;
         margin-bottom: 10px;
         margin-left: 10px;
         width: 200px;
@@ -136,7 +136,7 @@ import { FileUploadService } from 'src/app/modules/shared/components/file-upload
         background-color: #0000ff;
         color: white;
         width: 200px;
-        border: 1px solid black;
+        border: 3px solid black;
         margin-right: 10px;
         margin-bottom: 10px;
       }

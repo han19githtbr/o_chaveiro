@@ -28,7 +28,7 @@ export class AuthService {
     return this.http.post(`${environment.api}/auth/login/adm`, credentials);
   }*/
 
-  public login(credentials: any): Observable<any> {
+  /*public login(credentials: any): Observable<any> {
     const headers = { 'Content-Type': 'application/json' };
     return this.http.post<LoginResponse>(`${environment.api}/auth/login/adm`, credentials, { headers }).pipe(
       tap(response => {
@@ -37,7 +37,26 @@ export class AuthService {
         this.fetchAdminData(response.account.id);
       })
     )
+  }*/
+
+  public login(credentials: any, role: 'User' | 'Admin'): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    const loginUrl = role === 'Admin' ? `${environment.api}/auth/login/adm` : `${environment.api}/auth/login`;
+
+    return this.http.post<LoginResponse>(loginUrl, credentials, { headers }).pipe(
+      tap(response => {
+        this.storageService.saveToken(response.token);
+        console.log(response);
+        if (role === 'Admin') {
+          this.fetchAdminData(response.account.id);
+        } else {
+          this.fetchUserData(response.userId);
+        }
+      })
+    );
+
   }
+
 
   public forgotPassword(credentials: { credential: string }): Observable<any> {
     return this.http.post<any>(`${environment.api}/auth/forgot-password/adm`, credentials);

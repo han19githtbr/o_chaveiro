@@ -1,7 +1,7 @@
-@mixin flex{
+@mixin flex {
   display: flex;
 }
-@mixin flex-column{
+@mixin flex-column {
   @include flex;
   flex-direction: column;
 }
@@ -27,27 +27,27 @@
   .icone_images {
     margin-top: 110px;
   }
-  > .preview-image-upload{
+  > .preview-image-upload {
     @include flex-column;
     align-items: center;
-    border: 2px dashed #0000ff;
+    border: 3px solid #0000ff;
     padding: 30px;
     cursor: pointer;
     position: relative;
     gap: 8px;
     border-radius: 5px;
 
-    > img{
+    > img {
       width: 140px;
     }
 
-    > span{
+    > span {
       font: normal normal 300 18px/20px 'Poppins', 'sans-serif';
       text-align: center;
       font-weight: bold;
     }
 
-    > p{
+    > p {
       text-align: center;
     }
 
@@ -107,7 +107,7 @@
         border-radius: 50%;
       }
     }
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
     @media (max-width: 768px) {
