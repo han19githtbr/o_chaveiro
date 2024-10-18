@@ -1,6 +1,5 @@
 @import '../../modules/shared/styles/shared.scss';
 
-
 .home{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -141,11 +140,11 @@
     font-family: 'Times New Roman', Times, serif;
     font-size: 18px;
     background-color: #000000;
-    border: 2px solid #001eff;
+    border: 3px solid #86f9f0;
   }
 
   .register_button:hover {
-    border: 2px solid #86f9f0;
+    border: 3px solid #001eff;
     cursor: pointer;
     transition: 0.2s;
   }

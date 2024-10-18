@@ -47,10 +47,23 @@ export class AuthService {
       tap(response => {
         this.storageService.saveToken(response.token);
         console.log(response);
-        if (role === 'Admin') {
+        /*if (role === 'Admin') {
           this.fetchAdminData(response.account.id);
         } else {
           this.fetchUserData(response.userId);
+        }*/
+        if (role === 'Admin') {
+          this.fetchAdminData(response.account.id).subscribe({
+            error: (err) => {
+              console.error('Erro ao buscar dados do admin:', err);
+            }
+          });
+        } else {
+          this.fetchUserData(response.userId).subscribe({
+            error: (err) => {
+              console.error('Erro ao buscar dados do usuário:', err);
+            }
+          });
         }
       })
     );

@@ -12,7 +12,7 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
   selector: 'app-cliente-toast',
   standalone: true,
   template: `
-    <div class="cliente-toast" (click)="openModal()"> <!-- Adicionado evento de clique -->
+    <div class="cliente-toast" [ngClass]="{ 'cliente-toast-exit': isExiting }" (click)="openModal()"> <!-- Adicionado evento de clique -->
       <!-- Adicionando o aviso de status -->
       <!--'pendente': cliente.status === 'pendente',-->
       <div class="status-badge" [ngClass]="{
@@ -46,12 +46,37 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
   `,
   styles: [
     `
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideOut {
+        from {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+      }
+
+
       .container-cliente {
         display: flex;
         flex-direction: column;
       }
 
       .cliente-toast {
+        animation: slideIn 0.8s forwards;
         display: flex;
         align-items: center;
         padding: 10px;
@@ -65,6 +90,10 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         z-index: 1000;
         border-radius: 5px;
         cursor: pointer;
+      }
+
+      .cliente-toast-exit {
+        animation: slideOut 0.6s forwards;
       }
 
       .cliente-image {
@@ -166,6 +195,7 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
 export default class ClienteToastComponent implements OnInit, OnDestroy {
   @Input() cliente: any;
   isModalOpen: boolean = false;
+  isExiting: boolean = false;
   @Output() remove = new EventEmitter<void>();
 
   private notificationSubscription: Subscription | undefined;

@@ -121,7 +121,7 @@ import { FileUploadService } from 'src/app/modules/shared/components/file-upload
       }
 
       .cancel-button {
-        background-color: #909090;
+        background-color: #fbfbfb;
         border: 3px solid black;
         margin-bottom: 10px;
         margin-left: 10px;
@@ -129,12 +129,11 @@ import { FileUploadService } from 'src/app/modules/shared/components/file-upload
       }
 
       .cancel-button:hover {
-        background-color: #d5d5d5;
+        border: 1px solid black;
       }
 
       .save-button {
-        background-color: #0000ff;
-        color: white;
+        background-color: #4d4dff;
         width: 200px;
         border: 3px solid black;
         margin-right: 10px;
@@ -142,7 +141,7 @@ import { FileUploadService } from 'src/app/modules/shared/components/file-upload
       }
 
       .save-button:hover {
-        background-color: #303f9f;
+        border: 1px solid black;
       }
 
       .loading {

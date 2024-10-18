@@ -75,8 +75,6 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
       left: 0;
       width: 100%;
       height: 100%;
-      //background-color: rgb(255, 255, 255);
-      background-color: rgba(0, 0, 0, 0.5);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -84,7 +82,7 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
     }
 
     .modal-content {
-      background: rgb(225, 223, 223);
+      background: white;
       padding: 20px;
       border-radius: 8px;
       max-width: 100%; /* Limita a largura máxima do modal */
