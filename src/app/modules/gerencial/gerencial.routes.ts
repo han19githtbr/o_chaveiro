@@ -37,11 +37,11 @@ export default [
     loadComponent: () => import('./components/chaveiros-admin/chaveiros-admin.component'),
     data: { useBreadcrumb: true },
   },
-  {
+  /*{
     path: 'admin-modal',
     loadComponent: () => import('./components/admin-modal/admin-modal.component'),
     data: { useBreadcrumb: true },
-  },
+  },*/
   {
     path: 'settings',
     loadChildren: () => import('./components/settings/settings.routes'),

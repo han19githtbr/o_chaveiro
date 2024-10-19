@@ -7,7 +7,7 @@ import { StorageService } from 'src/app/modules/core/auth/storage.service';
 import { UserAdmin } from '../../models/userAdmin';
 import { MatDialog } from '@angular/material/dialog';
 import { SettingsService } from 'src/app/modules/gerencial/components/settings/settings.service';
-import  AdminModalComponent from 'src/app/modules/gerencial/components/admin-modal/admin-modal.component';
+//import  AdminModalComponent from 'src/app/modules/gerencial/components/admin-modal/admin-modal.component';
 import { MatIconModule } from '@angular/material/icon';
 
 
@@ -56,7 +56,7 @@ export class ToolbarComponent implements OnInit {
   }
 
 
-  openAdminModal(): void {
+  /*openAdminModal(): void {
     if (this.admin) {
       const dialogRef = this.dialog.open(AdminModalComponent, {
         data: { admin: this.admin },
@@ -65,12 +65,12 @@ export class ToolbarComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          // Recarregue os dados da empresa após a edição, se necessário
+
           this.ngOnInit();
         }
       });
     }
-  }
+  }*/
 
 
   /*public goToDetails(admin: any): void {

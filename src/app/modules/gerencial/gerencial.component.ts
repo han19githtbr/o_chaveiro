@@ -70,11 +70,11 @@ export default class GerencialComponent implements OnInit {
       icon: 'notifications',
       router: 'notifications',
     },
-    {
+    /*{
       label: 'Admins',
       icon: 'person',
       router: 'admin-chaveiros',
-    },
+    },*/
     {
       label: 'Acesso',
       icon: 'door_front',

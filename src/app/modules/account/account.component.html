@@ -14,15 +14,18 @@
   <mat-form-field appearance="outline">
     <mat-label>Nome</mat-label>
     <input matInput formControlName="name" required />
+    <mat-icon class="icon-person" matPrefix>person_outline</mat-icon>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>E-mail</mat-label>
     <input matInput formControlName="email" type="email" required />
+    <mat-icon class="icon-mail" matPrefix>mail</mat-icon>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Senha</mat-label>
+    <mat-icon class="icon-password" matPrefix>lock</mat-icon>
     <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" type="password" required />
     <mat-icon matSuffix (click)="hide = !hide">{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
   </mat-form-field>
@@ -32,6 +35,7 @@
     <mat-select formControlName="role">
       <mat-option value="user">Usuário</mat-option>
     </mat-select>
+    <mat-icon class="icon-role" matPrefix>verified_user</mat-icon>
   </mat-form-field>
 
   <!--<mat-form-field appearance="outline">
@@ -46,11 +50,20 @@
   <mat-form-field appearance="outline">
     <mat-label>URL da Imagem</mat-label>
     <input matInput formControlName="imageUrl" />
+    <mat-icon class="icon-image" matPrefix>image</mat-icon>
   </mat-form-field>
+
+  <app-file-uploader
+    [textDescription]="'Carregue a foto'"
+    [fileLength]="1"
+    [typeFile]="TypeFile.Imagem"
+    (fileChange)="onFileChange($event)"
+  ></app-file-uploader>
 
   <mat-form-field appearance="outline">
     <mat-label>Telefone</mat-label>
     <input matInput formControlName="phone" required />
+    <mat-icon class="icon-phone" matPrefix>phone</mat-icon>
   </mat-form-field>
 
   <button

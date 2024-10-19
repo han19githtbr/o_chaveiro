@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+/*import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -149,10 +149,7 @@ import { StorageService } from 'src/app/modules/core/auth/storage.service';
     MatDialogModule,
     CommonModule
   ],
-  /*providers: [
-    { provide: MatDialogRef, useValue: {} },
-    { provide: MAT_DIALOG_DATA, useValue: {} }
-  ]*/
+
 })
 
 export default class AdminModalComponent {
@@ -174,11 +171,7 @@ export default class AdminModalComponent {
 
 
   ngOnInit(): void {
-    /*const userId = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.settingsService.findById(userId).subscribe((data) => {
-      this.admin = data;
-    })*/
     const adminId = 1; // Você deve substituir por onde está obtendo o ID real.
     console.log(`Buscando detalhes para o administrador com ID: ${adminId}`);
     this.storageService.getAdminDetails(adminId).subscribe({
@@ -214,8 +207,4 @@ export default class AdminModalComponent {
   closeModal(): void {
     this.dialogRef.close();
   }
-
-  /*closeModal() {
-    this.close.emit();
-  }*/
-}
+}*/

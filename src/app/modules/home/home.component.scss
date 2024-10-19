@@ -16,9 +16,10 @@
   }
 
   .field-description {
-    margin-top: 20px;
+    top: 20px;
     width: 93%;
     display: flex;
+    position: fixed;
     justify-content: space-between;
     margin-left: 20px;
   }
@@ -38,7 +39,7 @@
   }
 
   .custom-snackbar {
-    background-color: #001eff;
+    background-color: hsl(233, 100%, 50%);
     color: #fff;
   }
 
@@ -50,7 +51,7 @@
     height: 100%;
 
     .content img {
-      margin-top: -100px;
+      margin-top: 40px;
       margin-bottom: -20px;
     }
 

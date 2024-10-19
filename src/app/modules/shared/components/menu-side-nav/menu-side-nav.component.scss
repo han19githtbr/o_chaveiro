@@ -9,6 +9,8 @@ span {
 .menu {
   background-color: #99ccff;
   color: white;
+  position: fixed;
+  z-index: 500;
 
   > .container {
     display: flex;
@@ -66,7 +68,7 @@ button.mat-button {
 }
 
 .router-link-active {
-  color: #ffcc00; // cor de destaque para o item ativo
+  color: #33ff00; // cor de destaque para o item ativo
 }
 
 @media (max-width: 1250px) {

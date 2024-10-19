@@ -32,8 +32,8 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
 
       <img [src]="cliente.imageUrl" alt="Cliente Image" class="cliente-image" />
       <div class="container-cliente">
-        <span class="cliente-name">{{ cliente.name }}</span>
-        <span class="cliente-phone">{{ cliente.phone }}</span>
+        <span class="cliente-name">Nome:  {{ cliente.name }}</span>
+        <span class="cliente-phone">Telefone:  {{ cliente.phone }}</span>
       </div>
     </div>
 
@@ -76,7 +76,7 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
       }
 
       .cliente-toast {
-        animation: slideIn 0.8s forwards;
+        animation: slideIn 1s forwards;
         display: flex;
         align-items: center;
         padding: 10px;
@@ -84,8 +84,8 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         box-shadow: 0 10px 10px rgba(0, 0, 0, 0.8);
         position: fixed;
         bottom: 20px;
-        width: 240px;
-        right: 20px;
+        width: 270px;
+        right: 80px;
         margin-right: 300px;
         z-index: 1000;
         border-radius: 5px;
@@ -97,8 +97,8 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
       }
 
       .cliente-image {
-        width: 50px;
-        height: 50px;
+        width: 52px;
+        height: 52px;
         border-radius: 50%;
         margin-right: 10px;
       }
