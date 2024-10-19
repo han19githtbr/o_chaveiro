@@ -11,7 +11,6 @@
   animation: infiniteZoom 0.4s infinite;
 }
 
-
 @keyframes infiniteZoom {
   70% {
     transform: scale(1);
@@ -51,7 +50,7 @@
     font-size: 18px;
   }
 
-  .form{
+  .form {
     font-size: $font-size;
     color: #2222f6;
     margin-bottom: 36px;
@@ -95,6 +94,7 @@
 
   .primary {
     color: #59a0fc;
+    font-size: large;
   }
 
   @keyframes shake {
@@ -111,4 +111,43 @@
       transform: rotate(5deg);
     }
   }
+
+  @media (max-width: $--mq-desktop){
+    .sign-in {
+      width: 100%;
+    }
+
+    .welcome {
+      margin-top: -20px;
+      text-wrap: nowrap;
+      font-size: 12px;
+    }
+
+  }
+
+  @media (max-width: $--mq-tablet){
+    .sign-in {
+      width: 100%;
+    }
+
+    .welcome {
+      margin-top: -20px;
+      text-wrap: nowrap;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: $--mq-phone){
+    .sign-in {
+      width: 100%;
+    }
+
+    .welcome {
+      margin-top: -20px;
+      text-wrap: nowrap;
+      font-size: 12px;
+    }
+  }
+
+
 }

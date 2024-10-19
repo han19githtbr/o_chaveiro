@@ -15,6 +15,16 @@
     gap: 16px;
   }
 
+  @media (max-width: $--mq-tablet){
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: $--mq-phone){
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+  }
+
   .field-description {
     top: 20px;
     width: 93%;
@@ -121,7 +131,6 @@
     }
   }
 
-
   .cadastro {
     margin-top: 15px;
   }
@@ -153,4 +162,42 @@
   .link_cadastro {
     list-style: none;
   }
+
+  @media (max-width: $--mq-desktop){
+    .content img {
+      z-index: 1000;
+      width: 120px;
+    }
+
+    .container-logomarca {
+      padding-top: -20px;
+      padding-bottom: -40px;
+    }
+  }
+
+  @media (max-width: $--mq-tablet){
+    .content img {
+      z-index: 1000;
+      width: 120px;
+    }
+
+    .container-logomarca {
+      padding-top: -20px;
+      padding-bottom: -40px;
+    }
+  }
+
+  @media (max-width: $--mq-phone){
+    .content img {
+      z-index: 1000;
+      width: 120px;
+    }
+
+    .container-logomarca {
+      padding-top: -20px;
+      padding-bottom: -40px;
+    }
+  }
+
+
 }
