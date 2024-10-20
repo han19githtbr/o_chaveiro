@@ -7,7 +7,7 @@
   background-color: $color-black;
   //color: $primary;
   color: #59a0fc;
-  height: 116vh;
+  height: 166vh;
   overflow: hidden;
 
   @media (max-width: $--mq-desktop){
@@ -32,6 +32,10 @@
     position: fixed;
     justify-content: space-between;
     margin-left: 20px;
+  }
+
+  .pedido {
+    width: 270px;
   }
 
   .select-role {
@@ -138,12 +142,12 @@
   .cadastro h4 {
     color: white;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 20px;
+    font-size: 25px;
     margin-bottom: 10px;
   }
 
   .register_button {
-    width: 160px;
+    width: 260px;
     height: 35px;
     border-radius: 5px;
     color: #fff;
@@ -163,41 +167,118 @@
     list-style: none;
   }
 
-  @media (max-width: $--mq-desktop){
-    .content img {
-      z-index: 1000;
-      width: 120px;
+  // Media query para telas menores
+  @media (max-width: $--mq-desktop) {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+
+    .field-description {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      padding: 20px;
+      margin: 0 auto;
+      top: 10%;
     }
 
-    .container-logomarca {
-      padding-top: -20px;
-      padding-bottom: -40px;
+    .pedido {
+      width: 100%;
+      max-width: 300px;
+      margin-top: -40px;
+    }
+
+    .home-components {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+
+      .content {
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 36px;
+
+        img {
+          margin-top: 40px;
+          margin-bottom: -20px;
+          width: 170px;
+        }
+
+        .container-logomarca {
+          margin-left: 0;
+          margin-bottom: 15px;
+          text-align: center;
+
+          .dynamic_text {
+            font-size: 24px;
+            margin-top: 10px;
+            margin-left: 40px;
+            position: relative;
+          }
+
+          .logo_marca {
+            font-size: x-large;
+            font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
+          }
+        }
+      }
+    }
+
+    .cadastro {
+      text-align: center;
+      margin-right: 0;
+
+      h4 {
+        font-size: 25px;
+      }
+
+      .register_button {
+        width: 290px;
+        height: 35px;
+        margin-bottom: 70px;
+      }
     }
   }
 
-  @media (max-width: $--mq-tablet){
-    .content img {
-      z-index: 1000;
-      width: 120px;
+  @media (max-width: $--mq-tablet) {
+    .field-description {
+      position: static;
+      text-align: center;
     }
 
-    .container-logomarca {
-      padding-top: -20px;
-      padding-bottom: -40px;
+    .pedido,
+    .register_button {
+      width: 100%;
+    }
+
+    .home-components img {
+      width: 120px;
     }
   }
 
-  @media (max-width: $--mq-phone){
-    .content img {
-      z-index: 1000;
+  @media (max-width: $--mq-phone) {
+    .field-description {
+      top: auto;
+    }
+
+    .pedido,
+    .register_button {
+      width: 100%;
+    }
+
+    .home-components img {
       width: 120px;
     }
-
-    .container-logomarca {
-      padding-top: -20px;
-      padding-bottom: -40px;
-    }
   }
-
-
 }
