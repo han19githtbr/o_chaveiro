@@ -33,17 +33,17 @@ import { FileUploadService } from 'src/app/modules/shared/components/file-upload
           <input matInput formControlName="endereco" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="custom-form-field">
+        <!--<mat-form-field appearance="outline" class="custom-form-field">
           <mat-icon matPrefix>image</mat-icon>
           <mat-label>Coloque o link da imagem</mat-label>
           <input matInput formControlName="imageUrl" />
-        </mat-form-field>
+        </mat-form-field>-->
 
-        <!--<mat-form-field appearance="outline" class="custom-form-field">
+        <mat-form-field appearance="outline" class="custom-form-field">
           <mat-icon matPrefix>image</mat-icon>
           <mat-label>Foto do cliente</mat-label>
           <input matInput formControlName="imageUrl" [value]="clienteForm.get('imageUrl')?.value" readonly />
-        </mat-form-field>-->
+        </mat-form-field>
 
         <app-file-uploader
           [textDescription]="'Carregue a foto'"

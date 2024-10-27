@@ -37,7 +37,6 @@ const components = [
 })
 export default class GerencialComponent implements OnInit {
 
-
   isMenuOpen = false;
 
   toggleMenu() {

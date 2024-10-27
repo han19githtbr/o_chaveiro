@@ -7,7 +7,6 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
 import { Subscription } from 'rxjs';
 import { ClienteModalNotificationComponent } from '../cliente-modal-notification/cliente-modal-notification.component';
 
-
 @Component({
   selector: 'app-cliente-toast',
   standalone: true,

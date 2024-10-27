@@ -19,6 +19,7 @@ import { ToolbarComponent } from '../toolbar/toolbar.component';
 })
 export default class MenuSideNavComponent{
   @Input() public menusToShow: Menu[] = [];
+  //@Input() public isMenuOpen: boolean = false;
 
   public showSubmenu = false;
 
