@@ -14,7 +14,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 
-
 const angularModules = [CommonModule, RouterModule];
 const components = [
   BreadCrumbComponent,
@@ -27,7 +26,6 @@ const components = [
   ToolbarComponent,
 ];
 
-
 @Component({
   selector: 'app-gerencial',
   standalone: true,
@@ -36,7 +34,6 @@ const components = [
   styleUrls: ['./gerencial.component.scss'],
 })
 export default class GerencialComponent implements OnInit {
-
   isMenuOpen = false;
 
   toggleMenu() {
@@ -60,7 +57,7 @@ export default class GerencialComponent implements OnInit {
       router: 'keys',
     },
     {
-      label: 'Clientes',
+      label: 'Clientes cadastrados',
       icon: 'person_outline',
       router: 'clientes',
     },
@@ -74,13 +71,12 @@ export default class GerencialComponent implements OnInit {
       icon: 'person',
       router: 'admin-chaveiros',
     },*/
-    {
+    /*{
       label: 'Acesso',
       icon: 'door_front',
       router: 'settings',
-    },
+    },*/
   ];
-
 
   public isMobile$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
@@ -119,5 +115,4 @@ export default class GerencialComponent implements OnInit {
       this.activatedRoute?.firstChild?.snapshot.data
     );
   }
-
 }

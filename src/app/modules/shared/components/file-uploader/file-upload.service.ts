@@ -16,9 +16,10 @@ export class FileUploadService {
 
   public uploadFile(file: File): Observable<any> {
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('images', file); // Altere "file" para "images"
 
-    return this.http.post(this.uploadUrl, formData);
+    //return this.http.post(this.uploadUrl, formData);
+    return this.http.post<{ url: string }>(this.uploadUrl, formData);
   }
 
 }

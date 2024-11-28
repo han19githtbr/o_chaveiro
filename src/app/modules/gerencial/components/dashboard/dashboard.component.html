@@ -1,5 +1,4 @@
 <div class="dashboard">
-
   <div class="search">
     <app-search
       [(textSearch)]="searchText"
@@ -12,7 +11,6 @@
     </app-search>
   </div>
 
-
   <app-cliente-modal
     *ngIf="isModalOpen && selectedCliente"
     [cliente]="selectedCliente"
@@ -21,7 +19,11 @@
 
   <mat-form-field appearance="outline" class="custom-select">
     <mat-icon matPrefix class="key_service">key</mat-icon>
-    <mat-select [(ngModel)]="selectedServices" multiple (selectionChange)="onSelectionChange($event)">
+    <mat-select
+      [(ngModel)]="selectedServices"
+      multiple
+      (selectionChange)="onSelectionChange($event)"
+    >
       <mat-option *ngFor="let service of services" [value]="service">
         {{ service.service }}
       </mat-option>
@@ -39,7 +41,7 @@
     </app-dashboard-card>
     <app-dashboard-card
       [number]="formatNumber(totalClientes)"
-      [description]="'Clientes encontrados'"
+      [description]="'Clientes cadastrados'"
       [icon]="'person_outline'"
       [iconContainerColor]="'#000000'"
     >
@@ -52,7 +54,7 @@
     >
     </app-dashboard-card>
     <app-dashboard-card
-      [number]="(totalRecebido | currency:'BRL') ?? ''"
+      [number]="(totalRecebido | currency : 'BRL') ?? ''"
       [description]="'Preço por serviço'"
       [icon]="'attach_money'"
       [iconContainerColor]="'#000000'"
@@ -60,16 +62,21 @@
     </app-dashboard-card>
   </div>
 
-
-  <div class="client-toast-container" *ngFor="let clienteToast of clientesToasts">
-    <app-cliente-toast [cliente]="clienteToast" (remove)="removeCliente(clienteToast)"></app-cliente-toast>
+  <div
+    class="client-toast-container"
+    *ngFor="let clienteToast of clientesToasts"
+  >
+    <app-cliente-toast
+      [cliente]="clienteToast"
+      (remove)="removeCliente(clienteToast)"
+    ></app-cliente-toast>
   </div>
-
 
   <div class="notification-container">
     <ng-container *ngFor="let notificationToast of notificationToasts">
-      <app-notification-toast [notification]="notificationToast"></app-notification-toast>
+      <app-notification-toast
+        [notification]="notificationToast"
+      ></app-notification-toast>
     </ng-container>
   </div>
-
 </div>

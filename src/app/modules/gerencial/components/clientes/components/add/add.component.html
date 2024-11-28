@@ -39,6 +39,12 @@
             <mat-icon matPrefix>phone</mat-icon>
             <input matInput formControlName="phone" type="text" required />
           </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Serviço</mat-label>
+            <mat-icon matPrefix>key</mat-icon>
+            <input matInput formControlName="service" type="text" required />
+          </mat-form-field>
         </div>
       </section>
     </app-card-section>
@@ -46,17 +52,16 @@
     <div class="buttons">
       <!--<app-form-actions (clickSaveEvent)="onSubmit()"></app-form-actions>-->
       <div class="actions">
-        <app-button
-          type="outline"
-          (click)="back()"
-        >Cancelar
-        </app-button>
-        <app-button
+        <app-button type="outline" (click)="back()">Cancelar </app-button>
+        <!--<app-button
           type="fill"
           (click)="clickSaveEvent.emit($event)"
           *ngIf="showSaveButton"
           (clickSaveEvent)="onSubmit()"
         >Salvar
+        </app-button>-->
+        <app-button type="fill" (click)="onSubmit()" *ngIf="showSaveButton"
+          >Salvar
         </app-button>
       </div>
     </div>

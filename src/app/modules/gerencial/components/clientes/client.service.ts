@@ -1,18 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cliente, CreateCliente, UpdateCliente } from 'src/app/modules/shared/models/cliente';
+import { Cliente, UpdateCliente } from 'src/app/modules/shared/models/cliente';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClientService {
-
   private apiUrlCliente = 'http://localhost:3000/clientes';
   //private apiUrlCliente = 'https://api-ochaveiro.vercel.app/clientes'
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient) {}
 
   getAllClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(`${this.apiUrlCliente}`);
@@ -40,5 +38,4 @@ export class ClientService {
     const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
     return this.http.patch<Cliente>(url, body);
   }
-
 }

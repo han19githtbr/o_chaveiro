@@ -6,11 +6,14 @@
     />
   </div>-->
   <div class="field-description">
-
     <div class="cadastro">
       <h4>Você é cliente ?</h4>
       <li class="link_cadastro">
-        <a><button [routerLink]="['../account']" class="register_button">Cadastre-se</button></a>
+        <a
+          ><button [routerLink]="['../account']" class="register_button">
+            Cadastre-se
+          </button></a
+        >
       </li>
     </div>
 
@@ -18,7 +21,11 @@
       <h2 class="select-role">Faça o seu pedido . . .</h2>
       <mat-form-field appearance="fill">
         <mat-icon class="custom-select" matPrefix>key</mat-icon>
-        <mat-select [(ngModel)]="selectedService" multiple (selectionChange)="onServiceChange($event)">
+        <mat-select
+          [(ngModel)]="selectedService"
+          multiple
+          (selectionChange)="onServiceChange($event)"
+        >
           <mat-option *ngFor="let service of services" [value]="service">
             {{ service }}
           </mat-option>
@@ -26,13 +33,12 @@
         <mat-label>{{ selectedService }}</mat-label>
       </mat-form-field>
     </div>
-
   </div>
   <div class="home-components">
     <div class="content">
-      <img src="assets/images/keys_logo_2.png" width="170" />
+      <img src="assets/images/keys_logo_2.png" width="150" />
       <p class="container-logomarca">
-        <span class="logo_marca">KEY +</span><br>
+        <span class="logo_marca">KEY +</span><br />
         <span class="dynamic_text">{{ displayedText }}</span>
       </p>
       <router-outlet></router-outlet>

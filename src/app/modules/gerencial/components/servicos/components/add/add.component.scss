@@ -1,10 +1,10 @@
-@import '../../../../../shared/styles/shared.scss';
+@import "../../../../../shared/styles/shared.scss";
 
 .buttons {
   margin-top: 50px;
 }
 
-.actions{
+.actions {
   display: flex;
   justify-content: flex-end;
   height: 20px;
@@ -24,21 +24,45 @@
   }
 }
 
-.details{
+.details {
   display: grid;
   gap: 28px;
-
-  .wrapper{
-    .row{
+  margin-top: 100px;
+  .wrapper {
+    .row {
       display: flex;
       gap: 16px;
     }
 
-    p{
+    p {
       font-size: 14px;
       line-height: 24px;
       font-weight: bold;
       color: #0f0f0f;
     }
+  }
+}
+
+.readonly-field {
+  //background-color: #d7d5d5; /* Fundo cinza-escuro */
+  border-radius: 4px; /* Bordas arredondadas */
+  color: #949191; /* Cor do texto */
+
+  mat-form-field-wrapper {
+    background-color: inherit; /* Aplica o fundo ao contêiner do campo */
+    border-radius: inherit;
+    padding: 8px;
+  }
+
+  .mat-form-field-flex {
+    pointer-events: none; /* Desativa interação no campo */
+  }
+
+  .mat-icon {
+    color: #6b6b6b; /* Ícone em cinza claro */
+  }
+
+  mat-label {
+    color: #6d6d6d; /* Texto do rótulo em cinza claro */
   }
 }

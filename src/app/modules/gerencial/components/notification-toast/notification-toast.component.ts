@@ -1,5 +1,12 @@
 // cliente-toast.component.ts
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,40 +14,60 @@ import { NotificationService } from 'src/app/modules/shared/services/notificatio
 import { Subscription } from 'rxjs';
 import { ClienteModalNotificationComponent } from '../cliente-modal-notification/cliente-modal-notification.component';
 
-
 @Component({
   selector: 'app-notification-toast',
   standalone: true,
   template: `
-    <div class="notification-toast" [ngClass]="{ 'notification-toast-exit': isExiting }" (click)="openModal()"> <!-- Adicionado evento de clique -->
+    <div
+      class="notification-toast"
+      [ngClass]="{ 'notification-toast-exit': isExiting }"
+      (click)="openModal()"
+    >
+      <!-- Adicionado evento de clique -->
       <!-- Adicionando o aviso de status -->
-      <img [src]="notification.imageUrl" alt="Cliente Image" class="cliente-image" />
-      <div class="status-badge" [ngClass]="{
-        'novo': notification.status === 'novo',
-        'pendente': notification.status === 'pendente',
-        'servido': notification.status === 'servido',
-        'andando': notification.status === 'andando',
-        'cancelado': notification.status === 'cancelado'
-      }">
-        <mat-icon class="fiber_new" *ngIf="notification.status === 'novo'">fiber_new</mat-icon>
-        <mat-icon class="error" *ngIf="notification.status === 'pendente'">error</mat-icon>
-        <mat-icon class="check_circle" *ngIf="notification.status === 'servido'">check_circle</mat-icon>
-        <mat-icon class="loading-icon" *ngIf="notification.status === 'andando'">loop</mat-icon>
-        <mat-icon class="cancel" *ngIf="notification.status === 'cancelado'">cancel</mat-icon>
+      <img
+        [src]="notification.imageUrl"
+        alt="Cliente Image"
+        class="cliente-image"
+      />
+      <div
+        class="status-badge"
+        [ngClass]="{
+          novo: notification.status === 'novo',
+          pendente: notification.status === 'pendente',
+          servido: notification.status === 'servido',
+          andando: notification.status === 'andando',
+          cancelado: notification.status === 'cancelado'
+        }"
+      >
+        <mat-icon class="fiber_new" *ngIf="notification.status === 'novo'"
+          >fiber_new</mat-icon
+        >
+        <mat-icon class="error" *ngIf="notification.status === 'pendente'"
+          >error</mat-icon
+        >
+        <mat-icon class="check_circle" *ngIf="notification.status === 'servido'"
+          >check_circle</mat-icon
+        >
+        <mat-icon class="loading-icon" *ngIf="notification.status === 'andando'"
+          >loop</mat-icon
+        >
+        <mat-icon class="cancel" *ngIf="notification.status === 'cancelado'"
+          >cancel</mat-icon
+        >
 
         {{ notification.status }}
       </div>
 
       <div class="container-cliente">
-        <span class="cliente-name">Nome:  {{ notification.name }}</span>
-        <span class="cliente-phone">Telefone:  {{ notification.phone }}</span>
+        <span class="cliente-name">Nome: {{ notification.name }}</span>
+        <span class="cliente-phone">Telefone: {{ notification.phone }}</span>
       </div>
     </div>
-
   `,
   styles: [
     `
-  @keyframes slideIn {
+      @keyframes slideIn {
         from {
           transform: translateY(100%);
           opacity: 0;
@@ -188,11 +215,7 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
       }
     `,
   ],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    ClienteModalNotificationComponent
-  ],
+  imports: [CommonModule, MatIconModule, ClienteModalNotificationComponent],
 })
 export default class NotificationToastComponent implements OnInit, OnDestroy {
   @Input() notification: any;
@@ -209,9 +232,9 @@ export default class NotificationToastComponent implements OnInit, OnDestroy {
     private dialog: MatDialog
   ) {}
 
-
   ngOnInit() {
-    this.notificationSubscription = this.notificationService.getNotifications()
+    this.notificationSubscription = this.notificationService
+      .getNotifications()
       .subscribe((notification: string | { message: string; data?: any }) => {
         if (typeof notification !== 'string' && notification.data) {
           this.notification.status = notification.data.status;
@@ -224,13 +247,11 @@ export default class NotificationToastComponent implements OnInit, OnDestroy {
     }, 5000);
   }
 
-
   ngOnDestroy() {
     if (this.notificationSubscription) {
       this.notificationSubscription.unsubscribe();
     }
   }
-
 
   /*getStatusLabel(status: string): string {
     switch (status) {
@@ -245,7 +266,6 @@ export default class NotificationToastComponent implements OnInit, OnDestroy {
     }
   }*/
 
-
   dismiss() {
     this.remove.emit();
   }
@@ -253,7 +273,7 @@ export default class NotificationToastComponent implements OnInit, OnDestroy {
   openModal() {
     this.dialog.open(ClienteModalNotificationComponent, {
       width: '400px',
-      data: this.notification
+      data: this.notification,
     });
   }
 

@@ -8,8 +8,6 @@ import { CommonModule } from '@angular/common';
 import { TypeFile } from '../../enums/type-file.enum';
 import { FileUploadService } from './file-upload.service';
 
-
-
 @Component({
   selector: 'app-file-uploader',
   templateUrl: './file-uploader.component.html',
@@ -41,7 +39,6 @@ export default class FileUploaderComponent implements OnInit {
     }
   }
 
-
   private mapPreviewFiles(suffix: string): void{
     this.previewFiles = this.filesModel?.map((file: any) => {
       return {
@@ -51,10 +48,8 @@ export default class FileUploaderComponent implements OnInit {
     });
   }
 
-
   public addImage(event: Event): void {
     const file: File = (event.target as HTMLInputElement).files![0];
-
     if (file) {
       this.fileUploadService.uploadFile(file).subscribe(
         (response) => {
@@ -66,7 +61,8 @@ export default class FileUploaderComponent implements OnInit {
           this.fileChange.emit(this.previewFiles);
         },
         (error) => {
-          this.openSnackbar('Erro ao fazer upload do arquivo.');
+          const errorMessage = error.error?.message || 'Erro ao fazer upload do arquivo.';
+          this.openSnackbar(errorMessage);
         }
       );
     }
@@ -77,7 +73,6 @@ export default class FileUploaderComponent implements OnInit {
       data: previewFile?.source,
     });
   }
-
 
   public deleteImage(previewFile: PreviewFiles): void{
     const index: number = this.previewFiles.indexOf(previewFile);

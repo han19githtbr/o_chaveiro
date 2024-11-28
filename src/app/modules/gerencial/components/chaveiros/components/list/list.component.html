@@ -1,8 +1,11 @@
 <app-list-table
   [listTable]="filteredChaveiros"
+  [useButton]="true"
+  buttonLabel="Adicionar chaveiro"
   [displayedColumns]="headers"
   [routerLinkAction]="'/gerencial/chaveiros/new'"
-  (clickRowEvent)="goToDetails($event)">
+  (clickRowEvent)="goToDetails($event)"
+>
 </app-list-table>
 
 <!-- [useButton]="true" -->
