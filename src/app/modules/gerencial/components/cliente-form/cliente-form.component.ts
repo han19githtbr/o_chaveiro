@@ -81,10 +81,10 @@ import { FileUploadService } from 'src/app/modules/shared/components/file-upload
       <button mat-button (click)="onSave()" class="save-button">Salvar</button>
     </div>
     <div *ngIf="isLoading" class="loading">
+      <span>Carregando</span>
       <div class="dot"></div>
       <div class="dot"></div>
       <div class="dot"></div>
-      <span>Carregando...</span>
     </div>
   `,
   standalone: true,
@@ -167,23 +167,25 @@ import { FileUploadService } from 'src/app/modules/shared/components/file-upload
 
       .loading span {
         font-weight: bold;
-        margin-left: 8px;
+        margin-left: 12px;
       }
 
       .dot {
         width: 8px;
         height: 8px;
-        background-color: #0000ff;
+        background-color: #00ffff;
         border-radius: 50%;
         animation: blink 1.1s infinite both;
         margin: 0 4px;
       }
 
       .dot:nth-child(2) {
+        background-color: #0000ff;
         animation-delay: 0.2s;
       }
 
       .dot:nth-child(3) {
+        background-color: #ff0080;
         animation-delay: 0.4s;
       }
 
