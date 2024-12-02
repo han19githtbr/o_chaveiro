@@ -1,5 +1,12 @@
 // cliente-toast.component.ts
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  OnDestroy,
+} from '@angular/core';
 import { ClienteModalComponent } from '../cliente-modal/cliente-modal.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,28 +18,39 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
   selector: 'app-cliente-toast',
   standalone: true,
   template: `
-    <div class="cliente-toast" [ngClass]="{ 'cliente-toast-exit': isExiting }" (click)="openModal()"> <!-- Adicionado evento de clique -->
+    <div
+      class="cliente-toast"
+      [ngClass]="{ 'cliente-toast-exit': isExiting }"
+      (click)="openModal()"
+    >
+      <!-- Adicionado evento de clique -->
       <!-- Adicionando o aviso de status -->
       <!--'pendente': cliente.status === 'pendente',-->
-      <div class="status-badge" [ngClass]="{
+      <div
+        class="status-badge"
+        [ngClass]="{
         'servido': cliente.status === 'servido',
         'pendente': cliente.status === 'pendente',
         'andando': cliente.status === 'andando',
         'cancelado': cliente.status === 'cancelado',
-      }">
-        <mat-icon class="error" *ngIf="cliente.status === 'pendente'">error</mat-icon>
+      }"
+      >
+        <mat-icon class="error" *ngIf="cliente.status === 'pendente'"
+          >error</mat-icon
+        >
         <mat-icon *ngIf="cliente.status === 'servido'">check_circle</mat-icon>
         <mat-icon *ngIf="cliente.status === 'cancelado'">cancel</mat-icon>
-        <mat-icon class="loading-icon" *ngIf="cliente.status === 'andando'">loop</mat-icon>
+        <mat-icon class="loading-icon" *ngIf="cliente.status === 'andando'"
+          >loop</mat-icon
+        >
 
         {{ cliente.status }}
       </div>
 
-
       <img [src]="cliente.imageUrl" alt="Cliente Image" class="cliente-image" />
       <div class="container-cliente">
-        <span class="cliente-name">Nome:  {{ cliente.name }}</span>
-        <span class="cliente-phone">Telefone:  {{ cliente.phone }}</span>
+        <span class="cliente-name">Nome: {{ cliente.name }}</span>
+        <span class="cliente-phone">Telefone: {{ cliente.phone }}</span>
       </div>
     </div>
 
@@ -45,7 +63,6 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
   `,
   styles: [
     `
-
       @keyframes slideIn {
         from {
           transform: translateY(100%);
@@ -68,7 +85,6 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         }
       }
 
-
       .container-cliente {
         display: flex;
         flex-direction: column;
@@ -83,7 +99,7 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         box-shadow: 0 10px 10px rgba(0, 0, 0, 0.8);
         position: fixed;
         bottom: 20px;
-        width: 270px;
+        width: 278px;
         right: 80px;
         margin-right: 300px;
         z-index: 1000;
@@ -181,14 +197,13 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
         background-color: #006595;
         color: black;
       }
-
     `,
   ],
   imports: [
     ClienteModalComponent,
     CommonModule,
     MatIconModule,
-    ClienteModalNotificationComponent
+    ClienteModalNotificationComponent,
   ],
 })
 export default class ClienteToastComponent implements OnInit, OnDestroy {
@@ -202,9 +217,9 @@ export default class ClienteToastComponent implements OnInit, OnDestroy {
 
   constructor(private notificationService: NotificationService) {}
 
-
   ngOnInit() {
-    this.notificationSubscription = this.notificationService.getNotifications()
+    this.notificationSubscription = this.notificationService
+      .getNotifications()
       .subscribe((notification: string | { message: string; data?: any }) => {
         if (typeof notification !== 'string' && notification.data) {
           this.cliente.status = notification.data.status;
@@ -234,7 +249,6 @@ export default class ClienteToastComponent implements OnInit, OnDestroy {
     }
   }*/
 
-
   // Inicia o temporizador para ocultar a toast
   startDismissTimer() {
     this.dismissTimeout = setTimeout(() => {
@@ -262,5 +276,4 @@ export default class ClienteToastComponent implements OnInit, OnDestroy {
   closeModal() {
     this.isModalOpen = false;
   }
-
 }
