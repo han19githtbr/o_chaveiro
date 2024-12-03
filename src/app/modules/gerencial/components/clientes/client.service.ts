@@ -7,8 +7,8 @@ import { Cliente, UpdateCliente } from 'src/app/modules/shared/models/cliente';
   providedIn: 'root',
 })
 export class ClientService {
-  //private apiUrlCliente = 'http://localhost:3000/clientes';
-  private apiUrlCliente = 'https://ochaveiro.netlify.app/clientes';
+  private apiUrlCliente = 'http://localhost:3000/clientes';
+  //private apiUrlCliente = 'https://ochaveiro.netlify.app/clientes';
 
   constructor(private http: HttpClient) {}
 

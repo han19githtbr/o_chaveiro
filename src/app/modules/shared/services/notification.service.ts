@@ -15,8 +15,8 @@ import { NewNotification } from '../models/notification';
   providedIn: 'root',
 })
 export class NotificationService {
-  //private apiUrl = 'http://localhost:3000/notifications';
-  private apiUrl = `${environment.api}/notifications`;
+  private apiUrl = 'http://localhost:3000/notifications';
+  //private apiUrl = `${environment.api}/notifications`;
   //private socketUrl = environment.api;
   private socketUrl = 'http://localhost:4200';
   private socket: Socket;

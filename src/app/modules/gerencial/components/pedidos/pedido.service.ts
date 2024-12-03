@@ -10,8 +10,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PedidoService {
-  //private apiUrlPedido = 'http://localhost:3000/notifications';
-  private apiUrlPedido = 'https://ochaveiro.netlify.app/notifications';
+  private apiUrlPedido = 'http://localhost:3000/notifications';
+  //private apiUrlPedido = 'https://ochaveiro.netlify.app/notifications';
 
   constructor(private http: HttpClient) {}
 

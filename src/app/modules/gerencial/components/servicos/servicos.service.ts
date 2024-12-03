@@ -11,8 +11,8 @@ import {
   providedIn: 'root',
 })
 export class ServicosService {
-  //private apiUrlServico = 'http://localhost:3000/servico';
-  private apiUrlServico = 'https://ochaveiro.netlify.app/servico';
+  private apiUrlServico = 'http://localhost:3000/servico';
+  //private apiUrlServico = 'https://ochaveiro.netlify.app/servico';
 
   constructor(private http: HttpClient) {}
 

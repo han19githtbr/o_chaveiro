@@ -11,8 +11,8 @@ import {
   providedIn: 'root',
 })
 export class ChaveiroService {
-  //private apiUrlChaveiro = 'http://localhost:3000/chaveiro';
-  private apiUrlChaveiro = 'https://ochaveiro.netlify.app/chaveiro';
+  private apiUrlChaveiro = 'http://localhost:3000/chaveiro';
+  //private apiUrlChaveiro = 'https://ochaveiro.netlify.app/chaveiro';
 
   constructor(private http: HttpClient) {}
 
