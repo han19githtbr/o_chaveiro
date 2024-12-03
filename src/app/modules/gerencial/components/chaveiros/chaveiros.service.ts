@@ -1,19 +1,20 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Chaveiro, CreateChaveiro, UpdateChaveiro } from 'src/app/modules/shared/models/chaveiro';
+import {
+  Chaveiro,
+  CreateChaveiro,
+  UpdateChaveiro,
+} from 'src/app/modules/shared/models/chaveiro';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChaveiroService {
+  //private apiUrlChaveiro = 'http://localhost:3000/chaveiro';
+  private apiUrlChaveiro = 'https://ochaveiro.netlify.app/chaveiro';
 
-  private apiUrlChaveiro = 'http://localhost:3000/chaveiro';
-  //private apiUrlChaveiro = 'https://api-ochaveiro.vercel.app/chaveiro';
-
-
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient) {}
 
   getAllChaveiros(): Observable<Chaveiro[]> {
     return this.http.get<Chaveiro[]>(`${this.apiUrlChaveiro}`);
@@ -31,15 +32,23 @@ export class ChaveiroService {
     return this.http.post<Chaveiro>(`${this.apiUrlChaveiro}`, chaveiroData);
   }
 
-  updateChaveiro(id: number, chaveiroData: UpdateChaveiro): Observable<Chaveiro> {
-    return this.http.put<Chaveiro>(`${this.apiUrlChaveiro}/${id}`, chaveiroData);
+  updateChaveiro(
+    id: number,
+    chaveiroData: UpdateChaveiro
+  ): Observable<Chaveiro> {
+    return this.http.put<Chaveiro>(
+      `${this.apiUrlChaveiro}/${id}`,
+      chaveiroData
+    );
   }
 
-  updateChaveiroStatus(chaveiroId: number, newStatus: string): Observable<Chaveiro> {
+  updateChaveiroStatus(
+    chaveiroId: number,
+    newStatus: string
+  ): Observable<Chaveiro> {
     const url = `http://localhost:3000/chaveiro/${chaveiroId}/update-status`;
     //const url = `https://api-ochaveiro.vercel.app/chaveiro/${chaveiroId}/update-status`;
     const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
     return this.http.patch<Chaveiro>(url, body);
   }
-
 }
