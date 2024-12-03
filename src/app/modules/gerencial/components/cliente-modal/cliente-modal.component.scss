@@ -46,7 +46,7 @@
   font-weight: bold;
   height: 25px;
   font-size: 18px;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .close-button:hover {
@@ -62,25 +62,25 @@
   &.servido {
     background-color: #28f42e; /* Verde para ativo */
     color: black;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Times New Roman", Times, serif;
   }
 
   &.cancelado {
     background-color: #f44336; /* Vermelho para inativo */
     color: black;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Times New Roman", Times, serif;
   }
 
   &.andando {
     background-color: #36e1f4; /* Vermelho para inativo */
     color: black;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Times New Roman", Times, serif;
   }
 
   &.pendente {
     background-color: #ff9800; /* Laranja para pendente */
     color: black;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Times New Roman", Times, serif;
   }
 
   &:hover {

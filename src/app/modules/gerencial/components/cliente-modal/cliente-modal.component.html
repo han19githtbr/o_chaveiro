@@ -2,26 +2,20 @@
   <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="card-section">
       <div class="row items-center">
-
         <ng-container>
-
           <button
             mat-button
             (click)="toggleClientStatus()"
-            matTooltip="Alterar status"
             [ngClass]="{
               'button-status': true,
-              'servido': cliente?.status === 'servido',
-              'cancelado': cliente?.status === 'cancelado',
-              'andando': cliente?.status === 'andando',
-              'pendente': cliente?.status === 'pendente'
+              servido: cliente?.status === 'servido',
+              cancelado: cliente?.status === 'cancelado',
+              andando: cliente?.status === 'andando',
+              pendente: cliente?.status === 'pendente'
             }"
           >
             {{ cliente?.status }}
           </button>
-        </ng-container>
-        <ng-container>
-          <mat-icon>delete_outline</mat-icon>
         </ng-container>
       </div>
     </div>
@@ -29,20 +23,18 @@
       <h2>CLIENTE</h2>
 
       <img [src]="cliente?.imageUrl" alt="Cliente Image" class="modal-image" />
-      <h2>{{ cliente?.name }}</h2>
-      <p>
-        <strong>Status:</strong> {{ cliente?.status }}
-      </p>
-      <p>
-        <strong>Telefone:</strong> {{ cliente?.phone }}
-      </p>
-      <p>
-        <strong>Endereço:</strong> {{ cliente?.endereco }}
-      </p>
-      <p class="servico_solicitado">
-        <strong>Serviço solicitado:</strong> {{ cliente?.service }}
-      </p>
+      <div>
+        <h2>{{ cliente?.name }}</h2>
+        <p><strong>Status:</strong> {{ cliente?.status }}</p>
+        <p><strong>Telefone:</strong> {{ cliente?.phone }}</p>
+        <p><strong>Endereço:</strong> {{ cliente?.endereco }}</p>
+        <p class="servico_solicitado">
+          <strong>Serviço solicitado:</strong> {{ cliente?.service }}
+        </p>
+      </div>
+      <button mat-button (click)="closeModal()" class="close-button">
+        Fechar
+      </button>
     </div>
-    <button mat-button (click)="closeModal()" class="close-button">Fechar</button>
   </div>
 </div>
