@@ -11,47 +11,61 @@ import { environment } from '../../../../environments/environment';
 import { Notification } from '../models/notification';
 import { NewNotification } from '../models/notification';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationService {
   //private apiUrl = 'http://localhost:3000/notifications';
   private apiUrl = `${environment.api}/notifications`;
   //private socketUrl = environment.api;
-  private socketUrl = 'http://localhost:4200'
+  private socketUrl = 'http://localhost:4200';
   private socket: Socket;
-  private notificationsSubject = new Subject<string | { message: string; data?: any }>();
+  private notificationsSubject = new Subject<
+    string | { message: string; data?: any }
+  >();
   //notifications$ = this.notificationsSubject.asObservable();
 
-
-  constructor(private http: HttpClient, private snackBar: MatSnackBar, private dialog: MatDialog) {
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) {
     this.socket = io(this.socketUrl, {
       withCredentials: true,
     });
 
-    this.socket.on('notification', (notification: { message: string; data?: any }) => {
-      this.notificationsSubject.next(notification);
-      this.showNotification(notification.message, 'Ver detalhes', notification.data);
-    });
+    this.socket.on(
+      'notification',
+      (notification: { message: string; data?: any }) => {
+        this.notificationsSubject.next(notification);
+        this.showNotification(
+          notification.message,
+          'Ver detalhes',
+          notification.data
+        );
+      }
+    );
   }
 
   sendNotification(message: string): Observable<any> {
     return this.http.post(this.apiUrl, { message });
   }
 
-  getNotifications(): Observable<string | { message: string; data?: any; }> {
+  getNotifications(): Observable<string | { message: string; data?: any }> {
     return this.notificationsSubject.asObservable();
   }
 
   showNotification(message: string, action: string, data: any) {
-    const snackBarRef = this.snackBar.openFromComponent(CustomNotificationComponent, {
-      data: { message, cliente: data },
-      duration: undefined,
-      verticalPosition: 'bottom',
-      horizontalPosition: 'right',
-      panelClass: ['custom-snackbar-dashboard']
-    });
+    const snackBarRef = this.snackBar.openFromComponent(
+      CustomNotificationComponent,
+      {
+        data: { message, cliente: data },
+        duration: undefined,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'right',
+        panelClass: ['custom-snackbar-dashboard'],
+      }
+    );
 
     snackBarRef.onAction().subscribe(() => {
       this.openOrderDetailsModal(data);
@@ -61,13 +75,16 @@ export class NotificationService {
   }
 
   showNewNotification(message: string, action: string, data: any) {
-    const snackBarRef = this.snackBar.openFromComponent(CustomNotificationComponent, {
-      data: { message, cliente: data },
-      duration: undefined,
-      verticalPosition: 'bottom',
-      horizontalPosition: 'left',
-      panelClass: ['custom-snackbar-dashboard']
-    });
+    const snackBarRef = this.snackBar.openFromComponent(
+      CustomNotificationComponent,
+      {
+        data: { message, cliente: data },
+        duration: undefined,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'left',
+        panelClass: ['custom-snackbar-dashboard'],
+      }
+    );
 
     snackBarRef.onAction().subscribe(() => {
       this.openOrderDetailsModal(data);
@@ -76,9 +93,12 @@ export class NotificationService {
     this.notificationsSubject.next({ message, data });
   }
 
-  updateNotificationStatus(notificationId: number, newStatus: string): Observable<Notification> {
-    const url = `http://localhost:3000/notifications/${notificationId}/update-status`;
-    //const url = `https://api-ochaveiro.vercel.app/notifications/${notificationId}/update-status`;
+  updateNotificationStatus(
+    notificationId: number,
+    newStatus: string
+  ): Observable<Notification> {
+    //const url = `http://localhost:3000/notifications/${notificationId}/update-status`;
+    const url = `https://ochaveiro.netlify.app/notifications/${notificationId}/update-status`;
     const body = { status: newStatus }; // Enviar o novo status no corpo da requisição
     return this.http.patch<Notification>(url, body);
   }
@@ -86,25 +106,32 @@ export class NotificationService {
   createNotification(notification: any): Observable<any> {
     console.log('Enviando notificação:', notification); // Adicione este log
     return this.http.post<any>(this.apiUrl, notification).pipe(
-      tap(response => {
+      tap((response) => {
         console.log('Resposta da API ao criar notificação:', response);
       })
     );
   }
-
 
   getAllNotifications(): Observable<NewNotification[]> {
     return this.http.get<NewNotification[]>(`${this.apiUrl}`);
   }
 
   fetchNotifications(): void {
-    this.http.get<{ message: string; data?: any }[]>(`${this.apiUrl}`).subscribe(notifications => {
-      notifications.forEach(notification => this.sendNotification(notification.message));
-    });
+    this.http
+      .get<{ message: string; data?: any }[]>(`${this.apiUrl}`)
+      .subscribe((notifications) => {
+        notifications.forEach((notification) =>
+          this.sendNotification(notification.message)
+        );
+      });
   }
 
-  fetchNotificationById(id: number): Observable<{ message: string; data?: any }> {
-    return this.http.get<{ message: string; data?: any }>(`${this.apiUrl}/${id}`);
+  fetchNotificationById(
+    id: number
+  ): Observable<{ message: string; data?: any }> {
+    return this.http.get<{ message: string; data?: any }>(
+      `${this.apiUrl}/${id}`
+    );
   }
 
   disconnect() {
@@ -114,7 +141,7 @@ export class NotificationService {
   openOrderDetailsModal(data: any): void {
     this.dialog.open(ClienteFormComponent, {
       width: '400px',
-      data: data
+      data: data,
     });
   }
 }
