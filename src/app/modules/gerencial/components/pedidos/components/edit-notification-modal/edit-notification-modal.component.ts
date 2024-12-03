@@ -1,7 +1,12 @@
 import { Location } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -9,7 +14,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PedidoService } from '../../pedido.service';
 //import { Cliente, CreateCliente, UpdateCliente } from 'src/app/modules/shared/models/cliente';
-import { Notification, UpdateNotification } from 'src/app/modules/shared/models/notification';
+import {
+  Notification,
+  UpdateNotification,
+} from 'src/app/modules/shared/models/notification';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { CardSectionComponent } from 'src/app/modules/shared/components/card-section/card-section.component';
@@ -17,7 +25,6 @@ import FileUploaderComponent from 'src/app/modules/shared/components/file-upload
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FileUploadService } from 'src/app/modules/shared/components/file-uploader/file-upload.service';
-
 
 @Component({
   selector: 'app-edit-notification-modal',
@@ -34,7 +41,7 @@ import { FileUploadService } from 'src/app/modules/shared/components/file-upload
     MatIconModule,
     CardSectionComponent,
     MatSlideToggleModule,
-    FileUploaderComponent
+    FileUploaderComponent,
   ],
 })
 export class EditNotificationModalComponent implements OnInit {
@@ -56,12 +63,18 @@ export class EditNotificationModalComponent implements OnInit {
     this.notificationForm = this.fb.group({
       name: ['', Validators.required],
       endereco: ['', Validators.required],
-      imageUrl: ['', [Validators.required, Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/)]],
+      imageUrl: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/),
+        ],
+      ],
+      service: ['', Validators.required],
       phone: ['', Validators.required],
       status: ['', Validators.required],
     });
   }
-
 
   ngOnInit(): void {
     if (this.data?.notification?.id) {
@@ -72,12 +85,11 @@ export class EditNotificationModalComponent implements OnInit {
         endereco: this.data.notification.endereco || '',
         imageUrl: this.data.notification.imageUrl || '',
         phone: this.data.notification.phone || '',
-        status: this.data.notification.status || ''
+        service: this.data.notification.service || '',
+        status: this.data.notification.status || '',
       });
-
     }
   }
-
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
@@ -87,13 +99,14 @@ export class EditNotificationModalComponent implements OnInit {
           this.notificationForm.patchValue({ imageUrl: response.filePath });
         },
         error: (err) => {
-          this.snackBar.open('Erro ao fazer upload da imagem.', 'Fechar', { duration: 3000 });
+          this.snackBar.open('Erro ao fazer upload da imagem.', 'Fechar', {
+            duration: 3000,
+          });
           console.error('Erro ao fazer upload da imagem:', err);
-        }
+        },
       });
     }
   }
-
 
   onSubmit(): void {
     if (this.notificationForm.valid) {
@@ -109,23 +122,34 @@ export class EditNotificationModalComponent implements OnInit {
         message: '',
         createdAt: '',
         updatedAt: '',
-        service: ''
+        service: formValues.service || this.data.notification.service,
       };
 
-      this.pedidoService.updateNotification(this.notificationId, notificationData).subscribe(
-        (response) => {
-          this.snackBar.open('Pedido atualizado com sucesso!', 'Fechar', { duration: 3000 });
-        },
-        (error) => {
-          this.snackBar.open('Erro ao atualizar o pedido. Tente novamente.', 'Fechar', { duration: 3000 });
-          console.error('Erro ao atualizar o pedido:', error);
-        }
-      );
+      this.pedidoService
+        .updateNotification(this.notificationId, notificationData)
+        .subscribe(
+          (response) => {
+            this.snackBar.open('Pedido atualizado com sucesso!', 'Fechar', {
+              duration: 3000,
+            });
+          },
+          (error) => {
+            this.snackBar.open(
+              'Erro ao atualizar o pedido. Tente novamente.',
+              'Fechar',
+              { duration: 3000 }
+            );
+            console.error('Erro ao atualizar o pedido:', error);
+          }
+        );
     } else {
-      this.snackBar.open('Por favor, preencha todos os campos obrigatórios.', 'Fechar', { duration: 3000 });
+      this.snackBar.open(
+        'Por favor, preencha todos os campos obrigatórios.',
+        'Fechar',
+        { duration: 3000 }
+      );
     }
   }
-
 
   onCancel(): void {
     this.dialogRef.close();

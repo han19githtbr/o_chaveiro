@@ -1,4 +1,4 @@
-@import '../../shared/styles/shared.scss';
+@import "../../shared/styles/shared.scss";
 
 .restriction {
   color: red;
@@ -7,7 +7,7 @@
   font-size: 30px;
   margin-bottom: 30px;
   margin-top: 20px;
-  font-family:'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   animation: infiniteZoom 0.4s infinite;
 }
 
@@ -20,32 +20,32 @@
   }
 }
 
-.sign-in{
-  .header{
+.sign-in {
+  .header {
     display: flex;
     flex-flow: column;
     gap: 8px;
     margin-bottom: 24px;
-    .welcome{
+    .welcome {
       font-size: calc($font-size + 10px);
       //color: $primary;
       color: #59a0fc;
       font-weight: bold;
     }
 
-    .description{
+    .description {
       font-size: 18px;
       color: #d6d6d6;
       margin-top: 10px;
       margin-bottom: -12px;
-      font-family: 'Times New Roman', Times, serif;
+      font-family: "Times New Roman", Times, serif;
     }
   }
 
   .font {
     color: blue;
     font-style: italic;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Times New Roman", Times, serif;
     font-weight: bold;
     font-size: 18px;
   }
@@ -104,7 +104,8 @@
   }
 
   @keyframes shake {
-    0%, 100% {
+    0%,
+    100% {
       transform: rotate(0);
     }
     25% {
@@ -118,20 +119,7 @@
     }
   }
 
-  @media (max-width: $--mq-desktop){
-    .sign-in {
-      width: 100%;
-    }
-
-    .welcome {
-      margin-top: -20px;
-      text-wrap: nowrap;
-      font-size: 12px;
-    }
-
-  }
-
-  @media (max-width: $--mq-tablet){
+  @media (max-width: $--mq-desktop) {
     .sign-in {
       width: 100%;
     }
@@ -143,7 +131,7 @@
     }
   }
 
-  @media (max-width: $--mq-phone){
+  @media (max-width: $--mq-tablet) {
     .sign-in {
       width: 100%;
     }
@@ -155,5 +143,100 @@
     }
   }
 
+  @media (max-width: $--mq-phone) {
+    .sign-in {
+      width: 100%;
+    }
 
+    .welcome {
+      margin-top: -20px;
+      text-wrap: nowrap;
+      font-size: 12px;
+    }
+  }
+
+  .word {
+    color: white;
+    animation: color-change 2s infinite;
+    animation-delay: calc(var(--delay, 0) * 0.5s);
+    display: inline-block;
+    transition: color 0.5s ease-in-out;
+  }
+
+  .contact-us-title {
+    display: flex;
+    gap: 6px;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    margin-top: 6rem;
+  }
+
+  @keyframes color-change {
+    0% {
+      color: blue;
+    }
+    25% {
+      color: white;
+    }
+    50% {
+      color: blue;
+    }
+    75% {
+      color: rgb(0, 255, 247);
+    }
+    100% {
+      color: rgb(33, 167, 229);
+    }
+  }
+
+  /* Aplicar atraso baseado na posição da letra */
+  .word:nth-child(1) {
+    --delay: 0;
+  }
+  .word:nth-child(2) {
+    --delay: 1;
+  }
+  .word:nth-child(3) {
+    --delay: 2;
+  }
+  .word:nth-child(4) {
+    --delay: 3;
+  }
+
+  .send-icone {
+    color: white;
+  }
+
+  .container-contact {
+    float: right;
+    margin-top: 6rem;
+    position: relative;
+    margin-right: -350px;
+  }
+
+  .data-contact {
+    margin-top: 1.5rem;
+    display: flex;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    flex-direction: column;
+  }
+
+  @media (max-width: $--mq-tablet) {
+    .container-contact {
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: $--mq-phone) {
+    .container-contact {
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .container-contact {
+      margin: 0 auto;
+    }
+  }
 }

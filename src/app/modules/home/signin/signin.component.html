@@ -4,19 +4,16 @@
     <p class="welcome">
       <mat-icon
         class="animated-icon"
-        style="vertical-align: middle; margin-right: 8px;"
+        style="vertical-align: middle; margin-right: 8px"
       >
         waving_hand
       </mat-icon>
       Bem-vindo(a)!
     </p>
-    <p class="description">
-      Faça aqui o login no sistema
-    </p>
+    <p class="description">Faça aqui o login no sistema</p>
   </article>
 
-
-  <form class="form" [formGroup]="signinForm" >
+  <form class="form" [formGroup]="signinForm">
     <mat-form-field appearance="fill">
       <mat-label class="font">E-mail</mat-label>
       <mat-icon class="icon-mail" matPrefix>email</mat-icon>
@@ -26,14 +23,20 @@
     <mat-form-field appearance="fill">
       <mat-label class="font">Senha</mat-label>
       <mat-icon class="icon-password" matPrefix>lock</mat-icon>
-      <input matInput [type]="hide ? 'password' : 'text'"  formControlName="password"/>
-      <mat-icon matSuffix (click)="hide = !hide">{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="password"
+      />
+      <mat-icon matSuffix (click)="hide = !hide">{{
+        hide ? "visibility_off" : "visibility"
+      }}</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label class="font">Papel</mat-label>
       <mat-select [(value)]="selectedRole" required>
-        <mat-option value="User">Usuário</mat-option>
+        <!--<mat-option value="User">Usuário</mat-option>-->
         <mat-option value="Admin">Administrador</mat-option>
       </mat-select>
       <mat-icon class="icon-person" matPrefix>person_outline</mat-icon>
@@ -42,7 +45,7 @@
     <p class="primary">
       <mat-icon
         class="animated-icon"
-        style="vertical-align: middle; margin-right: 8px;"
+        style="vertical-align: middle; margin-right: 8px"
       >
         help_outline
       </mat-icon>
@@ -57,10 +60,23 @@
     (click)="submit()"
     [disabled]="signinForm.invalid || isFormDisabled()"
   >
-
     ENTRAR
   </app-button>
 
   <app-loading-effect></app-loading-effect>
 
+  <div class="container-contact">
+    <div class="contact-us-title">
+      <mat-icon class="send-icone">send</mat-icon>
+      <span class="word">Entre</span>
+      <span class="word">em</span>
+      <span class="word">contato</span>
+      <span class="word">conosco</span>
+    </div>
+
+    <div class="data-contact">
+      <span class="contact">E-mail: milliance23&#64;gmail.com</span>
+      <span class="contact mt-3">Telefone: +55(21)972141165</span>
+    </div>
+  </div>
 </section>

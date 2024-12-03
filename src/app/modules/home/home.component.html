@@ -6,7 +6,7 @@
     />
   </div>-->
   <div class="field-description">
-    <div class="cadastro">
+    <!--<div class="cadastro">
       <h4>Você é cliente ?</h4>
       <li class="link_cadastro">
         <a
@@ -15,6 +15,87 @@
           </button></a
         >
       </li>
+    </div>-->
+
+    <div class="pedido">
+      <h2 class="select-role">Ver status do pedido</h2>
+      <mat-form-field>
+        <mat-icon class="custom-select" matPrefix>key</mat-icon>
+        <input
+          matInput
+          [formControl]="searchText"
+          placeholder="Digite o nome ..."
+        />
+      </mat-form-field>
+
+      <!-- Exibir notificações filtradas -->
+      <div *ngIf="filteredNotifications | async as notifications">
+        <div *ngIf="notifications.length > 0">
+          <div
+            class="notification-container"
+            *ngFor="let notification of notifications"
+          >
+            <mat-card class="notification-card" [ngClass]="notification.status">
+              <mat-card-header>
+                <mat-card-title>
+                  {{ notification.name }}
+                  <!--<mat-icon *ngIf="notification.status" class="status-icon">
+                    {{ statusIcons[notification.status] }}
+                  </mat-icon>-->
+                  <div
+                    class="status-badge"
+                    [ngClass]="{
+                      novo: notification.status === 'novo',
+                      pendente: notification.status === 'pendente',
+                      servido: notification.status === 'servido',
+                      andando: notification.status === 'andando',
+                      cancelado: notification.status === 'cancelado'
+                    }"
+                  >
+                    <mat-icon
+                      class="fiber_new"
+                      *ngIf="notification.status === 'novo'"
+                    >
+                      fiber_new
+                    </mat-icon>
+                    <mat-icon
+                      class="error"
+                      *ngIf="notification.status === 'pendente'"
+                    >
+                      error
+                    </mat-icon>
+                    <mat-icon
+                      class="check_circle"
+                      *ngIf="notification.status === 'servido'"
+                    >
+                      check_circle
+                    </mat-icon>
+                    <mat-icon
+                      class="loading-icon"
+                      *ngIf="notification.status === 'andando'"
+                    >
+                      loop
+                    </mat-icon>
+                    <mat-icon
+                      class="cancel"
+                      *ngIf="notification.status === 'cancelado'"
+                    >
+                      cancel
+                    </mat-icon>
+                    {{ notification.status }}
+                  </div>
+                </mat-card-title>
+                <mat-card-subtitle>
+                  Status: {{ notification.status }}
+                </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p>Pedido: {{ notification.service }}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="pedido">

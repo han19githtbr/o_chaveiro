@@ -1,7 +1,14 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MaterialModule } from 'src/app/material.module';
-import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormArray,
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
 import { CardSectionComponent } from 'src/app/modules/shared/components/card-section/card-section.component';
 import FormActionsComponent from 'src/app/modules/shared/components/form-actions/form-actions.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,7 +22,6 @@ import { HttpClient } from '@angular/common/http';
 import { LoadingEffectComponent } from 'src/app/modules/shared/components/loading-effect/loading-effect.component';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import ButtonComponent from 'src/app/modules/shared/components/button/button.component';
-
 
 @Component({
   selector: 'app-add',
@@ -39,15 +45,13 @@ export default class AddComponent {
 
   chaveiroId: number | null = null;
 
-
-  location = inject(Location)
+  location = inject(Location);
 
   @Input() tooltipTextInvalid: string = '';
   @Input() showSaveButton: boolean = true;
   @Output() clickSaveEvent: EventEmitter<any> = new EventEmitter<any>();
 
-
-  public back(): void{
+  public back(): void {
     this.location.back();
   }
 
@@ -58,8 +62,8 @@ export default class AddComponent {
     private snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute,
-    private http: HttpClient,
-  ){
+    private http: HttpClient
+  ) {
     this.chaveiroForm = this.fb.group({
       name: ['', Validators.required],
       endereco: ['', Validators.required],
@@ -69,16 +73,16 @@ export default class AddComponent {
     });
   }
 
-
   ngOnInit(): void {
-    this.chaveiroId = this.route.snapshot.paramMap.get('id') ? +this.route.snapshot.paramMap.get('id')! : null;
+    this.chaveiroId = this.route.snapshot.paramMap.get('id')
+      ? +this.route.snapshot.paramMap.get('id')!
+      : null;
 
     if (this.chaveiroId) {
       this.fetchChaveiroDetails();
       console.log('ID do chaveiro:', this.chaveiroId);
     }
   }
-
 
   fetchChaveiroDetails(): void {
     if (this.chaveiroId) {
@@ -93,7 +97,6 @@ export default class AddComponent {
     }
   }
 
-
   onSubmit(): void {
     if (this.chaveiroForm.valid) {
       const formData: CreateChaveiro = this.chaveiroForm.value;
@@ -101,33 +104,39 @@ export default class AddComponent {
       // Mostra o efeito de loading
       this.loadingService.showLoading();
 
-
       if (this.chaveiroId) {
         // Atualização
-        this.chaveiroService.updateChaveiro(this.chaveiroId, formData).subscribe(
-          () => {
-            // Define um delay aleatório entre 1 e 5 segundos
-            const delay = Math.random() * (5000 - 1000) + 1000;
 
-            setTimeout(() => {
-              // Esconde o efeito de loading
-              this.loadingService.hideLoading();
-              this.router.navigate(['/gerencial/chaveiros']);
-              this.snackBar.open('Chaveiro atualizado com sucesso.', '', { duration: 3000 });
-            }, delay);
-          },
-          (error) => {
-            // Define um delay aleatório entre 1 e 5 segundos
-            const delay = Math.random() * (5000 - 1000) + 1000;
+        this.chaveiroService
+          .updateChaveiro(this.chaveiroId, formData)
+          .subscribe(
+            () => {
+              // Define um delay aleatório entre 1 e 5 segundos
+              const delay = Math.random() * (5000 - 1000) + 1000;
 
-            setTimeout(() => {
-              // Esconde o efeito de loading
-              this.loadingService.hideLoading();
-              console.error('Erro ao atualizar chaveiro:', error);
-              this.snackBar.open('Erro ao atualizar chaveiro.', '', { duration: 3000 });
-            }, delay);
-          }
-        );
+              setTimeout(() => {
+                // Esconde o efeito de loading
+                this.loadingService.hideLoading();
+                this.router.navigate(['/gerencial/chaveiros']);
+                this.snackBar.open('Chaveiro atualizado com sucesso.', '', {
+                  duration: 3000,
+                });
+              }, delay);
+            },
+            (error) => {
+              // Define um delay aleatório entre 1 e 5 segundos
+              const delay = Math.random() * (5000 - 1000) + 1000;
+
+              setTimeout(() => {
+                // Esconde o efeito de loading
+                this.loadingService.hideLoading();
+                console.error('Erro ao atualizar chaveiro:', error);
+                this.snackBar.open('Erro ao atualizar chaveiro.', '', {
+                  duration: 3000,
+                });
+              }, delay);
+            }
+          );
       } else {
         // Criação
         this.chaveiroService.createChaveiro(formData).subscribe(
@@ -139,7 +148,9 @@ export default class AddComponent {
               // Esconde o efeito de loading
               this.loadingService.hideLoading();
               this.router.navigate(['/gerencial/chaveiros']);
-              this.snackBar.open('Chaveiro criado com sucesso.', '', { duration: 3000 });
+              this.snackBar.open('Chaveiro criado com sucesso.', '', {
+                duration: 3000,
+              });
             }, delay);
           },
           (error) => {
@@ -150,14 +161,19 @@ export default class AddComponent {
               // Esconde o efeito de loading
               this.loadingService.hideLoading();
               console.error('Erro ao criar chaveiro:', error);
-              this.snackBar.open('Erro ao criar chaveiro.', '', { duration: 3000 });
+              this.snackBar.open('Erro ao criar chaveiro.', '', {
+                duration: 3000,
+              });
             }, delay);
           }
         );
       }
     } else {
-      this.snackBar.open('Por favor, preencha todos os campos obrigatórios.', 'Fechar', { duration: 3000 });
+      this.snackBar.open(
+        'Por favor, preencha todos os campos obrigatórios.',
+        'Fechar',
+        { duration: 3000 }
+      );
     }
   }
-
 }

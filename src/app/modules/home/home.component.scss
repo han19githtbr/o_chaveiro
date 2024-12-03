@@ -1,6 +1,6 @@
-@import '../../modules/shared/styles/shared.scss';
+@import "../../modules/shared/styles/shared.scss";
 
-.home{
+.home {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   align-items: center;
@@ -10,17 +10,17 @@
   height: 166vh;
   overflow: hidden;
 
-  @media (max-width: $--mq-desktop){
+  @media (max-width: $--mq-desktop) {
     grid-template-columns: repeat(1, 1fr);
     gap: 16px;
   }
 
-  @media (max-width: $--mq-tablet){
+  @media (max-width: $--mq-tablet) {
     grid-template-columns: repeat(1, 1fr);
     gap: 16px;
   }
 
-  @media (max-width: $--mq-phone){
+  @media (max-width: $--mq-phone) {
     grid-template-columns: repeat(1, 1fr);
     gap: 16px;
   }
@@ -40,8 +40,8 @@
 
   .select-role {
     margin-bottom: 12px;
-    color:#c2c2c2;
-    font-family: 'Times New Roman', Times, serif;
+    color: #c2c2c2;
+    font-family: "Times New Roman", Times, serif;
   }
 
   .custom-select {
@@ -57,7 +57,7 @@
     color: #fff;
   }
 
-  .home-components{
+  .home-components {
     display: grid;
     padding: 0 32px;
     justify-items: center;
@@ -69,7 +69,7 @@
       margin-bottom: -20px;
     }
 
-    .content{
+    .content {
       width: 50%;
       display: flex;
       flex-direction: column;
@@ -77,17 +77,17 @@
       justify-content: center;
       gap: 36px;
 
-      ::ng-deep app-signin{
+      ::ng-deep app-signin {
         width: 100%;
         margin-bottom: 12px;
       }
 
-      ::ng-deep app-forgot-password{
+      ::ng-deep app-forgot-password {
         width: 100%;
         margin-bottom: 12px;
       }
 
-      ::ng-deep app-reset-password{
+      ::ng-deep app-reset-password {
         width: 100%;
         margin-bottom: 12px;
       }
@@ -109,12 +109,11 @@
         font-size: x-large;
         margin-left: 70px;
         font-weight: bold;
-        font-family:'Times New Roman', Times, serif;
+        font-family: "Times New Roman", Times, serif;
       }
-
     }
 
-    ul{
+    ul {
       display: flex;
       width: 100%;
       justify-content: space-between;
@@ -124,11 +123,11 @@
     }
   }
 
-  .side-image{
+  .side-image {
     height: 116vh;
     background-color: gray;
 
-    img{
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -141,7 +140,7 @@
 
   .cadastro h4 {
     color: white;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Times New Roman", Times, serif;
     font-size: 25px;
     margin-bottom: 10px;
   }
@@ -151,7 +150,7 @@
     height: 35px;
     border-radius: 5px;
     color: #fff;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Times New Roman", Times, serif;
     font-size: 18px;
     background-color: #000000;
     border: 3px solid #86f9f0;
@@ -165,6 +164,140 @@
 
   .link_cadastro {
     list-style: none;
+  }
+
+  .select-role {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+
+    input {
+      font-size: 1rem;
+    }
+  }
+
+  .notification-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+  }
+
+  .loading-icon {
+    animation: rotation 1.5s infinite linear;
+    color: #ffff00;
+  }
+
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .status-badge {
+    display: flex;
+    align-items: center;
+    padding: 1px 4px;
+    border-radius: 4px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-weight: bold;
+    color: white;
+    gap: 3px;
+    height: fit-content;
+    width: fit-content;
+    font-size: 0.85rem;
+  }
+
+  .fiber_new {
+    margin: 0 auto;
+    animation: infiniteZoom 0.5s infinite;
+  }
+
+  @keyframes infiniteZoom {
+    70% {
+      transform: scale(1);
+    }
+    70% {
+      transform: scale(1.17);
+    }
+  }
+
+  .error {
+    animation: infiniteZoom 0.5s infinite;
+  }
+
+  .status-badge.novo {
+    background-color: #edb116;
+    border: 1px solid black;
+    color: black;
+  }
+
+  .status-badge.pendente {
+    background-color: #eedf22;
+    border: 1px solid black;
+    color: black;
+  }
+
+  .status-badge.servido {
+    background-color: #0fce22;
+    border: 1px solid black;
+    color: black;
+  }
+
+  .status-badge.cancelado {
+    background-color: #ea1e0d;
+    border: 1px solid black;
+    color: black;
+  }
+
+  .status-badge.andando {
+    background-color: #005b88;
+    border: 1px solid black;
+    color: black;
+  }
+
+  .notification-card {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to bottom, #ffffff, #f0f0f5);
+
+    mat-card-header {
+      background-color: #3f51b5;
+      color: white;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+
+      mat-card-title {
+        margin-top: -10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      mat-card-subtitle {
+        font-size: 1rem;
+        font-weight: bold;
+        color: black;
+        font-style: italic;
+      }
+    }
+
+    mat-card-content {
+      font-size: 1rem;
+      color: #000000;
+    }
   }
 
   // Media query para telas menores
@@ -229,7 +362,7 @@
           .logo_marca {
             font-size: x-large;
             font-weight: bold;
-            font-family: 'Times New Roman', Times, serif;
+            font-family: "Times New Roman", Times, serif;
           }
         }
       }
@@ -257,13 +390,19 @@
       text-align: center;
     }
 
+    .notification-container {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
     .pedido,
     .register_button {
       width: 100%;
     }
 
     .pedido {
-      margin-top: 40px;
+      margin-top: 70px;
       margin-bottom: -60px;
     }
 
@@ -277,13 +416,19 @@
       top: auto;
     }
 
+    .notification-container {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
     .pedido,
     .register_button {
       width: 100%;
     }
 
     .pedido {
-      margin-top: 40px;
+      margin-top: 70px;
       margin-bottom: -110px;
     }
 
@@ -294,10 +439,14 @@
 
   @media (max-width: 576px) {
     .pedido {
-      margin-top: 40px;
+      margin-top: 120px;
       margin-bottom: -110px;
     }
+
+    .notification-container {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+    }
   }
-
-
 }
