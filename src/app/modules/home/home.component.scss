@@ -134,6 +134,22 @@
     }
   }
 
+  .button-chaveiros {
+    width: 272px;
+    height: 30px;
+    background: transparent;
+    border: 1px solid blue;
+    color: white;
+    border-radius: 3px;
+  }
+
+  .button-chaveiros:hover {
+    border: 1px solid white;
+    transition: 0.4s;
+    color: blue;
+    cursor: pointer;
+  }
+
   .cadastro {
     margin-top: 15px;
   }
@@ -267,6 +283,161 @@
     color: black;
   }
 
+  .container-show-chaveiros {
+    display: flex;
+    flex-direction: column; /* Posiciona os elementos verticalmente */
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    padding-top: 20px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .button-chaveiros {
+    padding: 10px 20px;
+    background-color: none;
+    color: white;
+
+    border: 1px solid blue;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .text-chaveiros-disponiveis {
+    bottom: 7px;
+    position: relative;
+  }
+
+  .button-chaveiros:hover {
+    border: 1px solid white;
+  }
+
+  .container-caixa {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 80%;
+    justify-content: center;
+    max-height: 400px; /* Limita a altura */
+    overflow-y: auto; /* Habilita rolagem vertical */
+    margin-top: 20px; /* Espaço entre o botão e a caixa */
+  }
+
+  .container-caixa::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .container-caixa {
+    scrollbar-width: none; /* Oculta a barra no Firefox */
+  }
+
+  .chaveiro-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    width: 150px;
+    position: relative;
+    background-color: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .chaveiro-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .exibir-mais-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    //background-color: #007bff;
+    color: black;
+    font-weight: bold;
+    border: 2px solid blue;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .exibir-mais-button:hover {
+    background-color: #0056b3;
+  }
+
+  .chaveiro-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: black;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .status-icon {
+    font-size: 18px;
+    color: white;
+  }
+
+  .ativo-icon {
+    margin-top: -37px;
+    font-size: 60px;
+    color: #4caf50;
+    animation: zoomInOut 1s infinite;
+    text-shadow: 0 0 10px #44ea49, 0 0 20px #44ea49, 0 0 30px #44ea49;
+  }
+
+  @keyframes zoomInOut {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+      text-shadow: 0 0 22px #44ea49, 0 0 44px #44ea49, 0 0 66px #44ea49;
+    }
+    100% {
+      transform: scale(1);
+      text-shadow: 0 0 10px #44ea49, 0 0 20px #44ea49, 0 0 30px #44ea49;
+    }
+  }
+
+  .inativo-icon {
+    color: #ff1744;
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  .blurred {
+    filter: blur(3px);
+  }
+
+  .chaveiro-info h3 {
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+  }
+
   .notification-card {
     width: 100%;
     max-width: 600px;
@@ -277,6 +448,7 @@
     mat-card-header {
       background-color: #3f51b5;
       color: white;
+      font-family: "Times New Roman", Times, serif;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
 
@@ -296,6 +468,9 @@
 
     mat-card-content {
       font-size: 1rem;
+      font-weight: bold;
+      font-style: italic;
+      padding-top: 8px;
       color: #000000;
     }
   }

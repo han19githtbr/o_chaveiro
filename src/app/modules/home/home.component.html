@@ -24,7 +24,7 @@
         <input
           matInput
           [formControl]="searchText"
-          placeholder="Digite o nome ..."
+          placeholder="Digite o nome . . ."
         />
       </mat-form-field>
 
@@ -39,9 +39,7 @@
               <mat-card-header>
                 <mat-card-title>
                   {{ notification.name }}
-                  <!--<mat-icon *ngIf="notification.status" class="status-icon">
-                    {{ statusIcons[notification.status] }}
-                  </mat-icon>-->
+
                   <div
                     class="status-badge"
                     [ngClass]="{
@@ -94,6 +92,56 @@
               </mat-card-content>
             </mat-card>
           </div>
+        </div>
+      </div>
+
+      <div class="container-show-chaveiros">
+        <button class="button-chaveiros" (click)="toggleChaveiros()">
+          <span class="text-chaveiros-disponiveis"
+            >Ver chaveiros disponíveis</span
+          >
+        </button>
+
+        <div *ngIf="mostrarChaveiros" class="container-caixa">
+          <!--<button class="ocultar-button" (click)="toggleChaveiros()">
+            <mat-icon>visibility</mat-icon>
+          </button>-->
+          <div class="chaveiro-card" *ngFor="let chaveiro of chaveirosVisiveis">
+            <div
+              class="chaveiro-status"
+              [ngClass]="{
+                'status-ativo': chaveiro.status === 'ativo',
+                'status-inativo': chaveiro.status === 'inativo'
+              }"
+            >
+              <span
+                class="status-icon"
+                [ngClass]="{
+                  'ativo-icon': chaveiro.status === 'ativo',
+                  'inativo-icon': chaveiro.status === 'inativo'
+                }"
+                >{{ chaveiro.status === "ativo" ? "." : "x" }}</span
+              >
+            </div>
+            <img
+              [src]="chaveiro.imageUrl"
+              [alt]="chaveiro.name"
+              [alt]="chaveiro.phone"
+              [class.blurred]="chaveiro.status === 'inativo'"
+            />
+            <div class="chaveiro-info">
+              <h3>{{ chaveiro.name }}</h3>
+              <h3>{{ chaveiro.phone }}</h3>
+            </div>
+          </div>
+
+          <button
+            *ngIf="chaveirosVisiveis.length < chaveiros.length"
+            class="exibir-mais-button"
+            (click)="exibirMais()"
+          >
+            Exibir mais
+          </button>
         </div>
       </div>
     </div>

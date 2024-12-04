@@ -18,6 +18,7 @@ import { ClienteFormComponent } from '../gerencial/components/cliente-form/clien
 import { Chaveiro } from '../shared/models/chaveiro';
 import { Notification } from '../shared/models/notification';
 import { PedidoService } from '../gerencial/components/pedidos/pedido.service';
+import { ChaveiroService } from '../gerencial/components/chaveiros/chaveiros.service';
 
 @Component({
   selector: 'app-home',
@@ -47,6 +48,11 @@ export default class HomeComponent implements OnInit {
   //searchText: string = '';
   filteredNotifications: Observable<Notification[]> | undefined;
   notifications: Notification[] = [];
+  chaveiros: Chaveiro[] = [];
+  chaveirosVisiveis: Chaveiro[] = [];
+  mostrarChaveiros = false;
+  incremento = 2;
+  inicioExibicao = 2;
 
   services: string[] = ['Cópia', 'Conserto'];
   selectedService: string | null = null;
@@ -56,18 +62,19 @@ export default class HomeComponent implements OnInit {
     private sideImageService: SideImageControllerService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    private chaveiroService: ChaveiroService
   ) {}
 
   public router: Router = inject(Router);
 
-  readonly statusIcons = {
+  /*readonly statusIcons = {
     novo: 'add_circle_outline',
     pendente: 'access_time',
     servido: 'check_circle',
     cancelado: 'cancel',
     andando: 'directions_walk',
-  };
+  };*/
 
   ngOnInit(): void {
     this.sideImageService.setImage();
@@ -84,6 +91,8 @@ export default class HomeComponent implements OnInit {
         )
       );
     });
+
+    this.carregarChaveiros();
   }
 
   private _filterNotifications(value: string): Notification[] {
@@ -91,6 +100,22 @@ export default class HomeComponent implements OnInit {
     return this.notifications.filter((notification) =>
       notification.name.toLowerCase().includes(filterValue)
     );
+  }
+
+  carregarChaveiros(): void {
+    this.chaveiroService.getAllChaveiros().subscribe((data) => {
+      this.chaveiros = data;
+      this.chaveirosVisiveis = this.chaveiros.slice(0, this.inicioExibicao);
+    });
+  }
+
+  toggleChaveiros(): void {
+    this.mostrarChaveiros = !this.mostrarChaveiros;
+  }
+
+  exibirMais(): void {
+    const proximoIndice = this.chaveirosVisiveis.length + this.incremento;
+    this.chaveirosVisiveis = this.chaveiros.slice(0, proximoIndice);
   }
 
   onSelectionChange(event: any): void {
