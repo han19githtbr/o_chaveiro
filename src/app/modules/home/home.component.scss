@@ -323,9 +323,9 @@
     flex-wrap: wrap;
     gap: 15px;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #150adf;
     border-radius: 10px;
-    background-color: #f9f9f9;
+    background-color: transparent;
     width: 100%;
     justify-content: center;
     max-height: 400px; /* Limita a altura */
@@ -346,12 +346,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10px;
     width: 180px;
     position: relative;
-    background-color: white;
+    background-color: blue;
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
@@ -365,15 +364,18 @@
     padding: 10px 20px;
     background-color: black;
     color: white;
-    font-weight: bold;
+    font-weight: lighter;
     border: 2px solid blue;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 180px;
   }
 
   .exibir-mais-button:hover {
-    background-color: #0056b3;
+    border: 1px solid white;
+    color: blue;
+    transition: 0.4s;
   }
 
   .chaveiro-status {
@@ -435,6 +437,8 @@
   .chaveiro-info h3 {
     font-size: 16px;
     text-align: center;
+    font-weight: lighter;
+    color: white;
     margin: 0;
   }
 
@@ -583,6 +587,7 @@
 
     .home-components img {
       width: 120px;
+      margin-top: 40px;
     }
   }
 
@@ -608,6 +613,7 @@
     }
 
     .home-components img {
+      margin-top: 40px;
       width: 120px;
     }
   }
@@ -618,10 +624,19 @@
       margin-bottom: -110px;
     }
 
+    .content img {
+      position: relative;
+      top: 40px;
+    }
+
     .notification-container {
       display: flex;
       justify-content: center;
       margin: 10px 0;
+    }
+
+    .container-logomarca {
+      margin-top: 40px;
     }
   }
 }
