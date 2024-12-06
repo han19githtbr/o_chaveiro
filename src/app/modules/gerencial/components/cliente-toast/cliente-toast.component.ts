@@ -1,5 +1,4 @@
-// cliente-toast.component.ts
-import {
+/*import {
   Component,
   EventEmitter,
   Input,
@@ -23,9 +22,6 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
       [ngClass]="{ 'cliente-toast-exit': isExiting }"
       (click)="openModal()"
     >
-      <!-- Adicionado evento de clique -->
-      <!-- Adicionando o aviso de status -->
-      <!--'pendente': cliente.status === 'pendente',-->
       <div
         class="status-badge"
         [ngClass]="{
@@ -54,7 +50,6 @@ import { ClienteModalNotificationComponent } from '../cliente-modal-notification
       </div>
     </div>
 
-    <!-- Adiciona o componente modal e controla sua visibilidade com isModalOpen -->
     <app-cliente-modal
       *ngIf="isModalOpen"
       [cliente]="cliente"
@@ -236,27 +231,12 @@ export default class ClienteToastComponent implements OnInit, OnDestroy {
     this.clearDismissTimer();
   }
 
-  /*getStatusLabel(status: string): string {
-    switch (status) {
-      case 'ativo':
-        return 'servido';
-      case 'inativo':
-        return 'cancelado';
-      case 'pendente':
-        return 'pendente';
-      default:
-        return status;
-    }
-  }*/
-
-  // Inicia o temporizador para ocultar a toast
   startDismissTimer() {
     this.dismissTimeout = setTimeout(() => {
       this.dismiss();
     }, 8000);
   }
 
-  // Limpa o temporizador
   clearDismissTimer() {
     if (this.dismissTimeout) {
       clearTimeout(this.dismissTimeout);
@@ -270,10 +250,10 @@ export default class ClienteToastComponent implements OnInit, OnDestroy {
 
   openModal() {
     this.isModalOpen = true;
-    this.clearDismissTimer(); // Cancela o temporizador quando o modal é aberto
+    this.clearDismissTimer();
   }
 
   closeModal() {
     this.isModalOpen = false;
   }
-}
+}*/

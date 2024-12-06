@@ -77,7 +77,7 @@ export default class AddComponent implements OnInit {
     private http: HttpClient
   ) {
     this.serviceForm = this.fb.group({
-      cliente: ['', Validators.required],
+      cliente: [''],
       value: [{ value: '', disabled: true }, Validators.required],
       service: ['copia', Validators.required],
       imageUrl: [''],

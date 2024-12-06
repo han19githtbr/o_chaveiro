@@ -1,27 +1,28 @@
-.card{
+.card {
   display: grid;
   grid-template-columns: 1fr auto;
   max-height: 164px;
   position: relative;
   align-items: center;
   justify-content: center;
-  width: 350px;
+  width: 473px;
   padding: 30px;
-  box-shadow: rgba(14, 14, 39, 0) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -12px;
+  box-shadow: rgba(14, 14, 39, 0) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -12px;
   border-radius: 12px;
 
-  .value{
+  .value {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     font-size: 24px;
     color: #000000;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-style: oblique;
     font-weight: bold;
   }
 
-  .icon-wrapper{
+  .icon-wrapper {
     border-radius: 50%;
     width: 64px;
     height: 64px;
@@ -31,11 +32,11 @@
     justify-content: center;
   }
 
-  .description{
+  .description {
     color: #000000;
     font-size: 15px;
     font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-style: oblique;
   }
 }

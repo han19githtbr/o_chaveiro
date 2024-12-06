@@ -11,11 +11,11 @@
     </app-search>
   </div>
 
-  <app-cliente-modal
+  <!--<app-cliente-modal
     *ngIf="isModalOpen && selectedCliente"
     [cliente]="selectedCliente"
     (close)="closeModal()"
-  ></app-cliente-modal>
+  ></app-cliente-modal>-->
 
   <mat-form-field appearance="outline" class="custom-select">
     <mat-icon matPrefix class="key_service">key</mat-icon>
@@ -39,13 +39,13 @@
       [iconContainerColor]="'#000000'"
     >
     </app-dashboard-card>
-    <app-dashboard-card
+    <!--<app-dashboard-card
       [number]="formatNumber(totalClientes)"
       [description]="'Clientes cadastrados'"
       [icon]="'person_outline'"
       [iconContainerColor]="'#000000'"
     >
-    </app-dashboard-card>
+    </app-dashboard-card>-->
     <app-dashboard-card
       [number]="formatNumber(totalNotifications)"
       [description]="'Pedidos recebidos'"
@@ -66,10 +66,10 @@
     class="client-toast-container"
     *ngFor="let clienteToast of clientesToasts"
   >
-    <app-cliente-toast
+    <!--<app-cliente-toast
       [cliente]="clienteToast"
       (remove)="removeCliente(clienteToast)"
-    ></app-cliente-toast>
+    ></app-cliente-toast>-->
   </div>
 
   <div class="notification-container">

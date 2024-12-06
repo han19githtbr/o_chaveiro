@@ -9,7 +9,13 @@
             <mat-form-field class="w-full">
               <mat-label>Nome do cliente</mat-label>
               <mat-icon matPrefix>person</mat-icon>
-              <input id="cliente" formControlName="cliente" type="text" matInput autocomplete="name" />
+              <input
+                id="cliente"
+                formControlName="cliente"
+                type="text"
+                matInput
+                autocomplete="name"
+              />
             </mat-form-field>
 
             <mat-form-field class="field-image" appearance="outline">
@@ -25,7 +31,13 @@
           <mat-form-field class="w-full">
             <mat-label>Serviço</mat-label>
             <mat-icon matPrefix>work</mat-icon>
-            <input id="service" formControlName="service" type="text" matInput autocomplete="work" />
+            <input
+              id="service"
+              formControlName="service"
+              type="text"
+              matInput
+              autocomplete="work"
+            />
           </mat-form-field>
         </div>
 
@@ -33,7 +45,13 @@
           <mat-form-field class="w-full">
             <mat-label>Valor</mat-label>
             <mat-icon matPrefix>money</mat-icon>
-            <input id="value" formControlName="value" type="text" matInput autocomplete="value" />
+            <input
+              id="value"
+              formControlName="value"
+              type="text"
+              matInput
+              autocomplete="value"
+            />
           </mat-form-field>
 
           <mat-form-field class="w-full">
@@ -41,12 +59,11 @@
             <mat-icon matPrefix>info</mat-icon>
             <!--<input id="status" formControlName="status" type="text" matInput autocomplete="status" />-->
             <mat-select formControlName="status">
-              <mat-option value="ativo">Ativo</mat-option>
-              <mat-option value="inativo">Inativo</mat-option>
+              <mat-option value="ativo">Disponível</mat-option>
+              <mat-option value="inativo">Indisponível</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-
       </app-card-section>
 
       <button class="save_button" type="submit">Salvar</button>

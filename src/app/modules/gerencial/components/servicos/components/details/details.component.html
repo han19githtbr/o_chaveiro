@@ -5,7 +5,12 @@
       <div class="card-section">
         <div class="row items-center">
           <ng-container>
-            <mat-icon class="edit_button" matTooltip="Editar" (click)="openEditModal()">edit</mat-icon>
+            <mat-icon
+              class="edit_button"
+              matTooltip="Editar"
+              (click)="openEditModal()"
+              >edit</mat-icon
+            >
           </ng-container>
           <ng-container>
             <mat-slide-toggle
@@ -14,15 +19,11 @@
               [checked]="service?.status === 'ativo'"
               (change)="toggleServiceStatus()"
             >
-
             </mat-slide-toggle>
           </ng-container>
           <ng-container *ngIf="service">
-            <mat-icon
-              (click)="confirmDelete(service)"
-              class="delete_button"
-            >
-            delete_outline
+            <mat-icon (click)="confirmDelete(service)" class="delete_button">
+              delete_outline
             </mat-icon>
           </ng-container>
         </div>

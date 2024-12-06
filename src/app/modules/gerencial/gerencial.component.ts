@@ -56,11 +56,11 @@ export default class GerencialComponent implements OnInit {
       icon: 'person_outline',
       router: 'keys',
     },
-    {
+    /*{
       label: 'Clientes cadastrados',
       icon: 'person_outline',
       router: 'clientes',
-    },
+    },*/
     {
       label: 'Pedidos',
       icon: 'notifications',

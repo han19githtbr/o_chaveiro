@@ -6,14 +6,14 @@ import { CardSectionComponent } from 'src/app/modules/shared/components/card-sec
 import { MaterialModule } from 'src/app/material.module';
 import { DashboardService } from './dashboard.service';
 import { SearchComponent } from 'src/app/modules/shared/components/search/search.component';
-import ClienteToastComponent from '../cliente-toast/cliente-toast.component';
+//import ClienteToastComponent from '../cliente-toast/cliente-toast.component';
 import { MatMenuModule, MatMenuPanel } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { Chaveiro } from 'src/app/modules/shared/models/chaveiro';
 import { Service } from 'src/app/modules/shared/models/service';
-import { ClienteModalComponent } from '../cliente-modal/cliente-modal.component';
+//import { ClienteModalComponent } from '../cliente-modal/cliente-modal.component';
 import { ClienteModalNotificationComponent } from '../cliente-modal-notification/cliente-modal-notification.component';
 import { NotificationService } from 'src/app/modules/shared/services/notification.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -26,7 +26,6 @@ import { ChatService } from 'src/app/modules/shared/services/chat.service';
 import NotificationToastComponent from '../notification-toast/notification-toast.component';
 import ListComponent from '../chaveiros/components/list/list.component';
 import { NewNotification } from 'src/app/modules/shared/models/notification';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -42,13 +41,13 @@ import { NewNotification } from 'src/app/modules/shared/models/notification';
     MatFormFieldModule,
     CardSectionComponent,
     ListComponent,
-    ClienteToastComponent,
+    //ClienteToastComponent,
     ClienteModalNotificationComponent,
-    ClienteModalComponent,
+    //ClienteModalComponent,
     NotificationToastComponent,
     ClienteFormComponent,
     SearchComponent,
-    MaterialModule
+    MaterialModule,
   ],
 })
 export default class DashboardComponent implements OnDestroy {
@@ -72,7 +71,12 @@ export default class DashboardComponent implements OnDestroy {
 
   selectedServices: Service[] = [];
 
-  notifications: Array<{ message: string; data?: any; status: string; loading: boolean }> = [];
+  notifications: Array<{
+    message: string;
+    data?: any;
+    status: string;
+    loading: boolean;
+  }> = [];
   private socket: Socket;
   newMessageNotification: boolean = false;
   isChatOpen: boolean = false;
@@ -98,7 +102,6 @@ export default class DashboardComponent implements OnDestroy {
     this.socket = io(environment.api);
   }
 
-
   ngOnInit() {
     this.loadChaveiros();
     this.updateTotalClientes();
@@ -114,45 +117,56 @@ export default class DashboardComponent implements OnDestroy {
     });
   }
 
-
   // Função de busca que abre o modal se o cliente for encontrado
   onSearchChange(searchValue: string): void {
     this.searchText = searchValue;
   }
 
-
   private listenToNotificationUpdates() {
+    this.subscription = this.notificationService
+      .getNotifications()
+      .subscribe((notification: string | { message: string; data?: any }) => {
+        console.log('Notificação Recebida:', notification);
 
-    this.subscription = this.notificationService.getNotifications().subscribe((notification: string | { message: string; data?: any }) => {
-      console.log('Notificação Recebida:', notification);
+        if (typeof notification === 'string') {
+          this.notifications.push({
+            message: notification,
+            status: 'novo',
+            loading: false,
+          });
+          this.notificationService.showNotification(
+            notification,
+            'Ver detalhes',
+            null
+          );
+        } else if (notification && notification.data) {
+          const fullData = {
+            message: notification.message || '',
+            status: 'novo',
+            loading: false,
+            name: notification.data.name || '',
+            endereco: notification.data.endereco || '',
+            phone: notification.data.phone || '',
+            imageUrl: notification.data.imageUrl || '',
+            //service: notification.data.service || '',
+            service: Array.isArray(notification.data.service)
+              ? notification.data.service
+              : [notification.data.service || ''],
+          };
 
-      if (typeof notification === 'string') {
-        this.notifications.push({ message: notification, status: 'novo', loading: false });
-        this.notificationService.showNotification(notification, 'Ver detalhes', null);
-      } else if (notification && notification.data) {
-        const fullData = {
-          message: notification.message || '',
-          status: 'novo',
-          loading: false,
-          name: notification.data.name || '',
-          endereco: notification.data.endereco || '',
-          phone: notification.data.phone || '',
-          imageUrl: notification.data.imageUrl || '',
-          //service: notification.data.service || '',
-          service: Array.isArray(notification.data.service) ? notification.data.service : [notification.data.service || '']
-        };
-
-        this.notifications.push(fullData);
-        this.notificationService.showNotification(fullData.message, 'Ver detalhes', fullData);
-      }
-    });
+          this.notifications.push(fullData);
+          this.notificationService.showNotification(
+            fullData.message,
+            'Ver detalhes',
+            fullData
+          );
+        }
+      });
   }
-
 
   ngOnDestroy() {
     this.notificationService.disconnect();
   }
-
 
   // Método para atualizar o status da notificação
   public updateNotificationStatus(index: number, newStatus: string) {
@@ -169,22 +183,20 @@ export default class DashboardComponent implements OnDestroy {
     }, randomTime);
   }
 
-
   public loadNewNotifications() {
     this.notificationService.getAllNotifications().subscribe(
       (newNotifications: NewNotification[]) => {
-        this.totalNotifications = newNotifications.length;;
+        this.totalNotifications = newNotifications.length;
       },
       (error) => {
         console.error('Erro ao carregar o total de pedidos:', error);
       }
-    )
+    );
   }
-
 
   // Acrescentei essa nova função
   private updateTotalNotifications() {
-    this.notificationService.getNotifications().subscribe(notifications => {
+    this.notificationService.getNotifications().subscribe((notifications) => {
       if (Array.isArray(notifications)) {
         // Se as notificações são recebidas como um array
         this.totalNotifications = notifications.length;
@@ -195,45 +207,52 @@ export default class DashboardComponent implements OnDestroy {
     });
   }
 
-
   private showRandomNotification() {
     setInterval(() => {
       // Gera um ID aleatório para buscar uma notificação (ajuste conforme necessário)
       const randomId = Number(this.generateRandomId());
-      this.notificationService.fetchNotificationById(randomId).subscribe(notification => {
-        this.notificationToasts.push(notification);
-        setTimeout(() => {
-          this.notificationToasts = this.notificationToasts.filter(c => c !== notification);
-        }, 12000);
-      });
+      this.notificationService
+        .fetchNotificationById(randomId)
+        .subscribe((notification) => {
+          this.notificationToasts.push(notification);
+          setTimeout(() => {
+            this.notificationToasts = this.notificationToasts.filter(
+              (c) => c !== notification
+            );
+          }, 12000);
+        });
     }, 6000);
   }
-
 
   // Função auxiliar para gerar um ID aleatório (ajuste conforme necessário)
   private generateRandomId(): string {
     const min = 1;
-    const max = 30;
-    const randomId = Math.floor((Math.random() * (max - min + 1)) + min).toString();
+    const max = 40;
+    const randomId = Math.floor(
+      Math.random() * (max - min + 1) + min
+    ).toString();
     return randomId;
   }
-
 
   openOrderDetailsModal(data: any) {
     const modalData = {
       ...data,
       service: data?.service,
       selectedServices: this.selectedServices,
-    }
+    };
 
     this.dialog.open(ClienteModalNotificationComponent, {
       width: '400px',
-      data: modalData
+      data: modalData,
     });
   }
 
   notifyNewOrder(orderData: any) {
-    this.notificationService.showNotification('Novo pedido', 'Ver detalhes', orderData);
+    this.notificationService.showNotification(
+      'Novo pedido',
+      'Ver detalhes',
+      orderData
+    );
   }
 
   simulateNewOrder() {
@@ -242,12 +261,11 @@ export default class DashboardComponent implements OnDestroy {
       endereco: 'Rua ABC, 123',
       imageUrl: 'https://example.com/photo.jpg',
       phone: '912345678',
-      service: 'Cópia'
+      service: 'Cópia',
     };
 
     this.notifyNewOrder(exampleOrderData);
   }
-
 
   private loadServices() {
     this.dashboardService.getAllServices().subscribe(
@@ -260,11 +278,10 @@ export default class DashboardComponent implements OnDestroy {
     );
   }
 
-
   private getUniqueServices(services: Service[]): Service[] {
     const uniqueServicesMap = new Map<string, Service>();
 
-    services.forEach(service => {
+    services.forEach((service) => {
       if (!uniqueServicesMap.has(service.service)) {
         uniqueServicesMap.set(service.service, service);
       }
@@ -272,7 +289,6 @@ export default class DashboardComponent implements OnDestroy {
 
     return Array.from(uniqueServicesMap.values());
   }
-
 
   public loadChaveiros() {
     this.dashboardService.getTotalChaveiros().subscribe(
@@ -286,26 +302,29 @@ export default class DashboardComponent implements OnDestroy {
   }
 
   private updateTotalClientes() {
-    this.dashboardService.getTotalClientes().subscribe(data => {
+    this.dashboardService.getTotalClientes().subscribe((data) => {
       this.totalClientes = data.total;
     });
   }
 
   private showRandomCliente() {
     setInterval(() => {
-      this.dashboardService.getRandomCliente().subscribe(cliente => {
+      this.dashboardService.getRandomCliente().subscribe((cliente) => {
         this.clientesToasts.push(cliente);
         setTimeout(() => {
-          this.clientesToasts = this.clientesToasts.filter(c => c !== cliente);
+          this.clientesToasts = this.clientesToasts.filter(
+            (c) => c !== cliente
+          );
         }, 10000);
         this.updateTotalClientes();
       });
     }, 10000);
   }
 
-
   onFilterClick(): void {
-    const foundCliente = this.clientes.find(cliente => cliente.name.toLowerCase() === this.searchText.toLowerCase());
+    const foundCliente = this.clientes.find(
+      (cliente) => cliente.name.toLowerCase() === this.searchText.toLowerCase()
+    );
 
     if (foundCliente) {
       this.selectedCliente = foundCliente;
@@ -335,11 +354,13 @@ export default class DashboardComponent implements OnDestroy {
   }
 
   private updateTotalRecebido() {
-    this.totalRecebido = this.selectedServices.reduce((total, service) => total + service.value, 0);
+    this.totalRecebido = this.selectedServices.reduce(
+      (total, service) => total + service.value,
+      0
+    );
   }
 
   public formatNumber(value: number): string {
     return value !== undefined ? value.toLocaleString('pt-BR') : '0';
   }
-
 }
