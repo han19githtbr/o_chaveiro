@@ -1,22 +1,5 @@
 <section class="home">
-  <!--<div class="side-image">
-    <img
-      [src]="(image$ | async)"
-      alt="Login"
-    />
-  </div>-->
   <div class="field-description">
-    <!--<div class="cadastro">
-      <h4>Você é cliente ?</h4>
-      <li class="link_cadastro">
-        <a
-          ><button [routerLink]="['../account']" class="register_button">
-            Cadastre-se
-          </button></a
-        >
-      </li>
-    </div>-->
-
     <div class="pedido">
       <h2 class="select-role">Ver status do pedido</h2>
       <mat-form-field>
@@ -166,10 +149,13 @@
   </div>
   <div class="home-components">
     <div class="content">
-      <img src="assets/images/keys_logo_2.png" width="150" />
+      <!--<img src="assets/images/keys_logo_2.png" width="150" />-->
       <p class="container-logomarca">
-        <span class="logo_marca">KEY +</span><br />
-        <span class="dynamic_text">{{ displayedText }}</span>
+        <!--<span class="logo_marca">KEY +</span><br />-->
+        <span class="dynamic_text">
+          <mat-icon class="your-key-icone">key</mat-icon>
+          {{ displayedText }}
+        </span>
       </p>
       <router-outlet></router-outlet>
     </div>

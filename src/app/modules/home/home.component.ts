@@ -40,9 +40,9 @@ import { ChaveiroService } from '../gerencial/components/chaveiros/chaveiros.ser
   ],
 })
 export default class HomeComponent implements OnInit {
-  displayedText: string = 'Faça a sua chave conosco';
   currentPhraseIndex: number = 0;
   selectedUser: UserAdmin[] = [];
+  displayedText: string = 'Sua chave está na mão';
   searchText = new FormControl('');
 
   //searchText: string = '';
