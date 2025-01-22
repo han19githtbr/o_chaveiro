@@ -5,7 +5,6 @@
   grid-template-columns: repeat(1, 1fr);
   align-items: center;
   background-color: $color-black;
-  //color: $primary;
   color: #59a0fc;
   height: 166vh;
   overflow: hidden;
@@ -101,7 +100,6 @@
 
       .container-logomarca {
         margin-left: -40px;
-        //position: relative;
         margin-bottom: 15px;
 
         .dynamic_text {
@@ -143,15 +141,15 @@
 
   .button-chaveiros {
     width: 272px;
-    height: 30px;
+    height: 32px;
     background: transparent;
-    border: 1px solid blue;
+    border: 2px solid blue;
     color: white;
     border-radius: 3px;
   }
 
   .button-chaveiros:hover {
-    border: 1px solid white;
+    border: 2px solid white;
     transition: 0.4s;
     color: blue;
     cursor: pointer;
@@ -308,7 +306,6 @@
     padding: 10px 20px;
     background-color: none;
     color: white;
-
     border: 1px solid blue;
     border-radius: 3px;
     font-size: 16px;
@@ -404,29 +401,15 @@
   }
 
   .ativo-icon {
-    margin-top: -37px;
+    margin-top: -35px;
     font-size: 60px;
     color: #4caf50;
-    animation: zoomInOut 1s infinite;
     text-shadow: 0 0 10px #44ea49, 0 0 20px #44ea49, 0 0 30px #44ea49;
-  }
-
-  @keyframes zoomInOut {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.05);
-      text-shadow: 0 0 22px #44ea49, 0 0 44px #44ea49, 0 0 66px #44ea49;
-    }
-    100% {
-      transform: scale(1);
-      text-shadow: 0 0 10px #44ea49, 0 0 20px #44ea49, 0 0 30px #44ea49;
-    }
   }
 
   .inativo-icon {
     color: #ff1744;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
   }
 
   img {
@@ -485,6 +468,75 @@
       color: #000000;
     }
   }
+
+
+  /**** toggle ****/
+
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: flex-start; /* Alinha o toggle à esquerda */
+  }
+
+  .toggle-label {
+    margin-left: 10px;
+  }
+
+  /* Estilos do toggle (sem alterações importantes, mas incluo para referência) */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 20px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 19px;
+    width: 19px;
+    left: 6px;
+    bottom: 0.40px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
 
   // Media query para telas menores
   @media (max-width: $--mq-desktop) {

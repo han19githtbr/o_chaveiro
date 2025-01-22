@@ -49,8 +49,11 @@ export default class HomeComponent implements OnInit {
   filteredNotifications: Observable<Notification[]> | undefined;
   notifications: Notification[] = [];
   chaveiros: Chaveiro[] = [];
-  chaveirosVisiveis: Chaveiro[] = [];
+  chaveirosAtivos: Chaveiro[] = [];
+  chaveirosInativos: Chaveiro[] = [];
+  chaveirosFiltrados: Chaveiro[] = [];
   mostrarChaveiros = false;
+  mostrarApenasDisponiveis = true;
   incremento = 2;
   inicioExibicao = 2;
 
@@ -68,13 +71,6 @@ export default class HomeComponent implements OnInit {
 
   public router: Router = inject(Router);
 
-  /*readonly statusIcons = {
-    novo: 'add_circle_outline',
-    pendente: 'access_time',
-    servido: 'check_circle',
-    cancelado: 'cancel',
-    andando: 'directions_walk',
-  };*/
 
   ngOnInit(): void {
     this.sideImageService.setImage();
@@ -105,17 +101,35 @@ export default class HomeComponent implements OnInit {
   carregarChaveiros(): void {
     this.chaveiroService.getAllChaveiros().subscribe((data) => {
       this.chaveiros = data;
-      this.chaveirosVisiveis = this.chaveiros.slice(0, this.inicioExibicao);
+      this.separarChaveiros();
+      this.chaveirosFiltrados = this.chaveiros.slice(0, this.inicioExibicao); // Inicializa com todos
     });
+  }
+
+  separarChaveiros(): void {
+    this.chaveirosAtivos = this.chaveiros.filter(chaveiro => chaveiro.status === 'ativo');
+    this.chaveirosInativos = this.chaveiros.filter(chaveiro => chaveiro.status === 'inativo');
   }
 
   toggleChaveiros(): void {
     this.mostrarChaveiros = !this.mostrarChaveiros;
+    if(this.mostrarChaveiros){
+        this.filtrarChaveiros()
+    }
+  }
+
+  filtrarChaveiros(): void {
+    if(this.mostrarChaveiros){
+        this.chaveirosFiltrados = this.mostrarApenasDisponiveis ? this.chaveirosAtivos.slice(0, this.inicioExibicao) : this.chaveiros.slice(0, this.inicioExibicao);
+    }
   }
 
   exibirMais(): void {
-    const proximoIndice = this.chaveirosVisiveis.length + this.incremento;
-    this.chaveirosVisiveis = this.chaveiros.slice(0, proximoIndice);
+    if(this.mostrarChaveiros){
+        const listaParaExibir = this.mostrarApenasDisponiveis ? this.chaveirosAtivos : this.chaveiros;
+        const proximoIndice = this.chaveirosFiltrados.length + this.incremento;
+        this.chaveirosFiltrados = listaParaExibir.slice(0, proximoIndice);
+    }
   }
 
   onSelectionChange(event: any): void {

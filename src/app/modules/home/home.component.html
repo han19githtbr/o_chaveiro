@@ -80,16 +80,19 @@
 
       <div class="container-show-chaveiros">
         <button class="button-chaveiros" (click)="toggleChaveiros()">
-          <span class="text-chaveiros-disponiveis"
-            >Ver chaveiros disponíveis</span
-          >
+          <span class="text-chaveiros-disponiveis">Ver chaveiros disponíveis</span>
         </button>
 
         <div *ngIf="mostrarChaveiros" class="container-caixa">
-          <!--<button class="ocultar-button" (click)="toggleChaveiros()">
-            <mat-icon>visibility</mat-icon>
-          </button>-->
-          <div class="chaveiro-card" *ngFor="let chaveiro of chaveirosVisiveis">
+          <div class="toggle-container">
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="mostrarApenasDisponiveis" (change)="filtrarChaveiros()">
+              <span class="slider round"></span>
+            </label>
+            <span class="toggle-label">{{ mostrarApenasDisponiveis ? 'Ativos' : 'Todos' }}</span>
+          </div>
+
+          <div class="chaveiro-card" *ngFor="let chaveiro of chaveirosFiltrados">
             <div
               class="chaveiro-status"
               [ngClass]="{
@@ -118,11 +121,7 @@
             </div>
           </div>
 
-          <button
-            *ngIf="chaveirosVisiveis.length < chaveiros.length"
-            class="exibir-mais-button"
-            (click)="exibirMais()"
-          >
+          <button *ngIf="chaveirosFiltrados.length < (mostrarApenasDisponiveis ? chaveirosAtivos.length : chaveiros.length)" class="exibir-mais-button" (click)="exibirMais()">
             Carregar mais ...
           </button>
         </div>

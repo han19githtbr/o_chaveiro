@@ -24,20 +24,6 @@ interface LoginResponse {
 export class AuthService {
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
-  /*public login(credentials: any): Observable<any> {
-    return this.http.post(`${environment.api}/auth/login/adm`, credentials);
-  }*/
-
-  /*public login(credentials: any): Observable<any> {
-    const headers = { 'Content-Type': 'application/json' };
-    return this.http.post<LoginResponse>(`${environment.api}/auth/login/adm`, credentials, { headers }).pipe(
-      tap(response => {
-        this.storageService.saveToken(response.token);
-        console.log(response);
-        this.fetchAdminData(response.account.id);
-      })
-    )
-  }*/
 
   public login(credentials: any, role: 'User' | 'Admin'): Observable<any> {
     const headers = { 'Content-Type': 'application/json' };
@@ -47,11 +33,7 @@ export class AuthService {
       tap(response => {
         this.storageService.saveToken(response.token);
         console.log(response);
-        /*if (role === 'Admin') {
-          this.fetchAdminData(response.account.id);
-        } else {
-          this.fetchUserData(response.userId);
-        }*/
+
         if (role === 'Admin') {
           this.fetchAdminData(response.account.id).subscribe({
             error: (err) => {
